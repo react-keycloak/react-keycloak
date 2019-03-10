@@ -110,6 +110,10 @@ export default () => {
 };
 ```
 
+## Demo
+
+See inside `src/demo` for a demo implementing this library main features.
+
 ## Credits
 
 Library bootstrapped using [DimiMikadze/create-react-library](https://github.com/DimiMikadze/create-react-library) and inspired by [react-redux](https://github.com/reduxjs/react-redux)
