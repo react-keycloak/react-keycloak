@@ -9,7 +9,7 @@
     "build": "node scripts/build.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js --env=jsdom",
-    "prepublish": "node scripts/build.js"
+    "prepublishOnly": "node scripts/build.js"
   },
   "repository": {
     "type": "git",
