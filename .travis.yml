@@ -6,6 +6,14 @@ node_js:
 script:
   - npm run lint
 
+deploy:
+  provider: npm
+  email: $NPM_EMAIL
+  api_key: $NPM_TOKEN
+  skip_cleanup: true
+  on:
+    tags: true
+
 notifications:
   email: false
   webhooks:
