@@ -5,7 +5,7 @@ import ReactKeycloakContext from './Context';
 
 const initialState = {
   initialized: false,
-  token: undefined
+  token: undefined,
 };
 
 class KeycloakProvider extends Component {
@@ -77,7 +77,7 @@ class KeycloakProvider extends Component {
     if (!prevInitialized || newToken !== prevToken) {
       this.setState({
         initialized: true,
-        token: newToken
+        token: newToken,
       });
     }
 
@@ -96,11 +96,15 @@ class KeycloakProvider extends Component {
     const { children, keycloak, LoadingComponent } = this.props;
     const { initialized } = this.state;
 
-    if (!initialized) {
+    if (!initialized && !!LoadingComponent) {
       return LoadingComponent;
     }
 
-    return <ReactKeycloakContext.Provider value={keycloak}>{children}</ReactKeycloakContext.Provider>;
+    return (
+      <ReactKeycloakContext.Provider value={{ initialized, keycloak }}>
+        {children}
+      </ReactKeycloakContext.Provider>
+    );
   }
 }
 
@@ -108,21 +112,21 @@ KeycloakProvider.propTypes = {
   children: PropTypes.element.isRequired,
   keycloak: PropTypes.shape({
     init: PropTypes.func.isRequired,
-    updateToken: PropTypes.func.isRequired
+    updateToken: PropTypes.func.isRequired,
   }).isRequired,
   initConfig: PropTypes.shape({}),
   LoadingComponent: PropTypes.element,
   onError: PropTypes.func,
-  onToken: PropTypes.func
+  onToken: PropTypes.func,
 };
 
 KeycloakProvider.defaultProps = {
   initConfig: {
-    onLoad: 'check-sso'
+    onLoad: 'check-sso',
   },
   LoadingComponent: null,
   onError: null,
-  onToken: null
+  onToken: null,
 };
 
 export default KeycloakProvider;

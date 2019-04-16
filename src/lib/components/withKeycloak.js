@@ -10,7 +10,9 @@ function withKeycloak(WrappedComponent) {
   const displayName = getDisplayName(WrappedComponent.displayName || WrappedComponent.name || 'Component');
 
   class WithKeycloakComponent extends Component {
-    renderWrappedComponent = keycloak => <WrappedComponent {...this.props} keycloak={keycloak} />;
+    renderWrappedComponent = ({ initialized, keycloak }) => (
+      <WrappedComponent {...this.props} keycloak={keycloak} keycloakInitialized={initialized} />
+    );
 
     render() {
       return <Context.Consumer>{this.renderWrappedComponent}</Context.Consumer>;
