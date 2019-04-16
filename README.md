@@ -57,7 +57,7 @@ const App = () => {
 
   for more options see [Keycloak docs](https://www.keycloak.org/docs/latest/securing_apps/index.html#init-options).
 
-- `LoadingComponent`, a component to be displayed while `keycloak` is being initialized, defaults to `null`.
+- `LoadingComponent`, a component to be displayed while `keycloak` is being initialized, if not provided child components will be rendered immediately. Defaults to `null`
 
 - `onError`, an handler function that receives errors launched by `keycloak`, defaults to `null`.
 
@@ -70,7 +70,7 @@ When a component requires access to `Keycloak`, wrap it inside the `withKeycloak
 ```js
 import { withKeycloak } from 'react-keycloak';
 
-const LoginPage = ({ keycloak }) => {
+const LoginPage = ({ keycloak, keycloakInitialized }) => {
   // Here you can access all of keycloak methods and variables.
   // See https://www.keycloak.org/docs/latest/securing_apps/index.html#javascript-adapter-reference
   return (
@@ -89,11 +89,19 @@ export default withKeycloak(LoginPage);
 
 Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
 
+`useKeycloak` accepts the following options (passed as an object):
+
+- `awaitInit`, specify if the hooks should return an uninitialized Keycloak client or wait.
+  If `keycloak` is not yet ready and `awaitInit` is set to `true`, the hook will return `null`.
+
+  Defaults to `false`.
+
 ```js
 import { useKeycloak } from 'react-keycloak';
 
 export default () => {
-  const keycloak = useKeycloak();
+  const keycloak = useKeycloak(); // useKeycloak({ awaitInit: true })
+
   // Here you can access all of keycloak methods and variables.
   // See https://www.keycloak.org/docs/latest/securing_apps/index.html#javascript-adapter-reference
 
