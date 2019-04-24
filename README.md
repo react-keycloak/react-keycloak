@@ -13,7 +13,7 @@
 
 React Keycloak requires:
 
-- React **16.8** or later
+- React **16.0** or later
 - a version of `keycloak-js` matching the major version (e.g. `"react-keycloak": "5.x.y"` => `"keycloak-js": "5.x.y"`)
 
 ```
@@ -85,22 +85,18 @@ const LoginPage = ({ keycloak, keycloakInitialized }) => {
 export default withKeycloak(LoginPage);
 ```
 
-### Hook Usage
+### Hook Usage (React >=16.8 required)
 
 Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
-
-`useKeycloak` accepts the following options (passed as an object):
-
-- `awaitInit`, specify if the hooks should return an uninitialized Keycloak client or wait.
-  If `keycloak` is not yet ready and `awaitInit` is set to `true`, the hook will return `null`.
-
-  Defaults to `false`.
 
 ```js
 import { useKeycloak } from 'react-keycloak';
 
 export default () => {
-  const keycloak = useKeycloak(); // useKeycloak({ awaitInit: true })
+  // Using array destructuring
+  const [keycloak, initialized] = useKeycloak();
+  // or Object destructuring
+  const { keycloak, initialized } = useKeycloak();
 
   // Here you can access all of keycloak methods and variables.
   // See https://www.keycloak.org/docs/latest/securing_apps/index.html#javascript-adapter-reference
