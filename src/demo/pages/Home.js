@@ -3,7 +3,7 @@ import React from 'react';
 import { useKeycloak } from '../../lib';
 
 export default () => {
-  const keycloak = useKeycloak();
+  const { keycloak } = useKeycloak();
 
   return (
     <div>
