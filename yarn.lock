@@ -5528,10 +5528,10 @@ jsx-ast-utils@^2.0.1:
   dependencies:
     array-includes "^3.0.3"
 
-keycloak-js@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-5.0.0.tgz#ed7f640d7a1748135ae8ad1750f8925005d4895f"
-  integrity sha512-zJRgb9E1IV3GLXTMow2cpvRK1PEx9shVDx96uac7zO+uTG2ptLvrYxs1umemjGqDPmy5LJiaUgF30fc9MS3ykQ==
+keycloak-js@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/keycloak-js/-/keycloak-js-6.0.1.tgz#329a5e77210dfc4a7d4acf96f95dd0132455bea3"
+  integrity sha512-p02dBCA9pSH1xvTmRIEMdeMz00eCGKmZF+rjMeqrkiQD4xhXkzu50J9sQjaANolMlLhazOtfql70+N5QWm8Upg==
 
 killable@^1.0.0:
   version "1.0.1"
@@ -6076,10 +6076,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=
 
-navi@^0.11.6:
-  version "0.11.6"
-  resolved "https://registry.yarnpkg.com/navi/-/navi-0.11.6.tgz#1996c5f8111f8313d6413bc491069283bfb0ceff"
-  integrity sha512-dVqw2vSMlXabJsw9ojQozdTDlBr+/ov13zU8dO4nRNwYLHExi6V1K46eY/mOKnsKqNWPorA+WyRx7jpsjhyT4g==
+navi@^0.12.6:
+  version "0.12.6"
+  resolved "https://registry.yarnpkg.com/navi/-/navi-0.12.6.tgz#fa740b999e850932a8920bef8c87ac55322c32a3"
+  integrity sha512-QJq10DSKiTqsC3ROMSNyMM25ObM5nP/1A6ZpEJR/aWtktQQqAUBSye5w1FC7eoYtAMBM215ogmzR0lKiKorGmQ==
   dependencies:
     history "^4.7.2"
 
@@ -7727,10 +7727,10 @@ react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
   integrity sha512-aUk3bHfZ2bRSVFFbbeVS4i+lNPZr3/WM5jT2J5omUVV1zzcs1nAaf3l51ctA5FFvCRbhrH0bdAsRRQddFJZPtA==
 
-react-navi@^0.11.7:
-  version "0.11.7"
-  resolved "https://registry.yarnpkg.com/react-navi/-/react-navi-0.11.7.tgz#77bac96f1a2db095822781e1b3b813045784db1b"
-  integrity sha512-DZ0U/lNA0EKveYvsG2mDfrkMHouSKB9RPVOz7THdxtI109oaSsjWzycw8RUwGuEKsTwaAueXDssz/Bku1Sz89g==
+react-navi@^0.12.6:
+  version "0.12.6"
+  resolved "https://registry.yarnpkg.com/react-navi/-/react-navi-0.12.6.tgz#332653c180e054cdbde8022f251bdbba1866daf6"
+  integrity sha512-9GoFeZestHaFoL6doHgTIcD7RDvOWmhx6Ch0BJFy32PUBwzq2DnOKqNKJRQvLJ0RvoucUa2nBzhupkeilmDi4A==
   dependencies:
     "@types/history" "^4.6.2"
     react-helmet "^5.2.0"
