@@ -1,10 +1,17 @@
 # Changelog
 
+## 6.0.0 ( April 26, 2019 )
+
+### Feature
+
+- Bump required `keycloak-js` version to `6.0.0`
+
 ## 5.1.0 ( April 24, 2019 )
 
 ### Breaking
 
 - Changed `LoadingComponent` behaviour: when not specified children will render while Keycloak is being initialized.
+- `useKeycloak` Hook now returns an Array/Object instead of Keycloak instance.
 
 ### Feature
 
