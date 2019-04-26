@@ -1,15 +1,16 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
 /node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
 
 # production
 /build
 /demo
-
-# testing
-/public/keycloak.json
-/coverage
 
 # misc
 .DS_Store
@@ -19,7 +20,8 @@
 .env.production.local
 
 npm-debug.log*
-package-lock.json
 yarn-debug.log*
 yarn-error.log*
-yarn.lock
+
+# custom
+/public/keycloak.json
