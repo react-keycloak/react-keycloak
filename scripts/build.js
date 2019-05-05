@@ -61,6 +61,7 @@ checkBrowsers(paths.appPath, isInteractive)
     fs.emptyDirSync(paths.appBuild);
     // Merge with the public folder
     // copyPublicFolder();  // CRL: No need to copy PublicFolder, it's a library after all ;)
+    copyTSDefinitions();
     // Start the webpack build
     return build(previousFileSizes);
   })
@@ -190,3 +191,9 @@ function build(previousFileSizes) {
 //     filter: file => file !== paths.appHtml,
 //   });
 // }
+
+function copyTSDefinitions() {
+  fs.copySync(paths.appLibSrc, paths.appBuild, {
+    filter: file => file === paths.appLibSrc || /.*\.d\.ts$/g.test(file),
+  });
+}
