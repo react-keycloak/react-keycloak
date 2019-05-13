@@ -22,12 +22,32 @@ export interface ProviderProps {
    * The single Keycloak instance to be used by your application.
    */
   keycloak: KeycloakInstance;
+
+  /**
+   * The KeycloakJS config to be used when initializing Keycloak instance.
+   */
+  initConfig?: Keycloak.KeycloakInitOptions;
+
+  /**
+   * An optional component to display while Keycloak instance is being initialized.
+   */
+  LoadingComponent?: ComponentType,
+
+  /**
+   * A optional function to receive Keycloak error as they happens.
+   */
+  onError?: Error => void,
+
+  /**
+   * A optional function to receive Keycloak token when it changes.
+   */
+  onToken?: string => void,
 }
 
 /**
  * Makes the Keycloak instance available to the withKeycloak() and useKeycloak() calls in the component hierarchy below.
  */
-export class KeycloakProvider extends Component<ProviderProps> {}
+export class KeycloakProvider extends Component<ProviderProps> { }
 
 /**
  * Props injected by withKeycloak HOC
@@ -44,9 +64,7 @@ export interface ReactKeycloakInjectedProps {
   keycloakInitialized: boolean;
 }
 
-interface TOriginalProps {
-  [string]: any;
-}
+interface TOriginalProps { }
 
 /**
  * Makes the Keycloak instance and initialization state available to the wrapped component.
