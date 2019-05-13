@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.0.2 ( May 13, 2019 )
+
+### Feature
+
+- Improve Typescript definitions.
+
 ## 6.0.1 ( May 5, 2019 )
 
 ### Feature
