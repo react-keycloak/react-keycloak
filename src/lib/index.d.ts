@@ -65,16 +65,12 @@ export interface ReactKeycloakInjectedProps {
   keycloakInitialized: boolean;
 }
 
-interface TOriginalProps {
-  [key: string]: any;
-}
-
 /**
  * Makes the Keycloak instance and initialization state available to the wrapped component.
  */
 export function withKeycloak(
-  component: ComponentType<TOriginalProps & ReactKeycloakInjectedProps>,
-): ComponentType<TOriginalProps>;
+  component: ComponentType<ReactKeycloakInjectedProps>,
+): JSX.Element;
 
 /**
  *
