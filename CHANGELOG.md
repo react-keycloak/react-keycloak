@@ -1,5 +1,17 @@
 # Changelog
 
+## 6.0.3 ( May 15, 2019 )
+
+### Feature
+
+- Add `onTokens` handler (will replace `onToken`).
+- Deprecate `onToken` handler.
+- Improve Typescript definitions.
+
+### Chore
+
+- Add validate Typescript task to Travis CI pipeline.
+
 ## 6.0.2 ( May 13, 2019 )
 
 ### Feature
