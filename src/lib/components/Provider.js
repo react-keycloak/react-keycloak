@@ -69,9 +69,9 @@ class KeycloakProvider extends Component {
   };
 
   updateState = () => {
-    const { keycloak, onToken } = this.props;
+    const { keycloak, onToken, onTokens } = this.props;
     const { initialized: prevInitialized, token: prevToken } = this.state;
-    const { token: newToken } = keycloak;
+    const { idToken, refreshToken, token: newToken } = keycloak;
 
     // Avoid double-refresh if state hasn't changed
     if (!prevInitialized || newToken !== prevToken) {
@@ -83,7 +83,14 @@ class KeycloakProvider extends Component {
 
     // Notify token listener, if any
     if (newToken !== prevToken) {
+      // @Deprecated: Remove on next major
       onToken && onToken(newToken);
+
+      onTokens && onTokens({
+        idToken,
+        refreshToken,
+        token: newToken,
+      });
     }
   };
 
