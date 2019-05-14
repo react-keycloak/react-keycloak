@@ -1,6 +1,6 @@
 {
   "name": "react-keycloak",
-  "version": "6.0.2",
+  "version": "6.0.3",
   "description": "React bindings for Keycloak javascript adapter",
   "main": "build/index.js",
   "types": "build/index.d.ts",
