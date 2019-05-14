@@ -61,7 +61,15 @@ const App = () => {
 
 - `onError`, an handler function that receives errors launched by `keycloak`, defaults to `null`.
 
-- `onToken`, an handler function that receives `keycloak` token every time it changes, defaults to `null`.
+- `onTokens`, an handler function that receives `keycloak` tokens as an object every time they change, defaults to `null`.
+  Keycloak tokens are returned as follow
+  ```json
+  {
+    "idToken": string,
+    "refreshToken": string,
+    "token": string,
+  }
+  ```
 
 ### HOC Usage
 
