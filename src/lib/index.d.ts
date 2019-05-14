@@ -2,8 +2,8 @@
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
-import {Component, ComponentType} from 'react';
-import {KeycloakInitOptions, KeycloakInstance} from 'keycloak-js';
+import { Component, ComponentType } from 'react';
+import { KeycloakInitOptions, KeycloakInstance } from 'keycloak-js';
 
 export interface ReactKeycloakContextValue {
   /**
@@ -15,6 +15,23 @@ export interface ReactKeycloakContextValue {
    * Boolean indicating whenever the Keycloak instance has been initialized by KeycloakProvider
    */
   initialized: boolean;
+}
+
+export interface KeycloakTokens {
+  /**
+   * Current idToken returned by Keycloak.
+   */
+  idToken: string;
+
+  /**
+   * Current refreshToken returned by Keycloak.
+   */
+  refreshToken: string;
+
+  /**
+   * Current JWT token returned by Keycloak.
+   */
+  token: string;
 }
 
 export interface ProviderProps {
@@ -31,17 +48,23 @@ export interface ProviderProps {
   /**
    * An optional component to display while Keycloak instance is being initialized.
    */
-  LoadingComponent?: JSX.Element;
+  LoadingComponent?: ComponentType;
 
   /**
-   * A optional function to receive Keycloak error as they happens.
+   * An optional function to receive Keycloak error as they happens.
    */
   onError?: (error: Error) => void;
 
   /**
-   * A optional function to receive Keycloak token when it changes.
+   * An optional function to receive Keycloak token when it changes.
+   * @deprecated migrate to onTokens
    */
   onToken?: (token: string) => void;
+
+  /**
+   * An optional function to receive Keycloak tokens when changed.
+   */
+  onTokens?: (tokens: KeycloakTokens) => void;
 }
 
 /**
@@ -70,7 +93,7 @@ export interface ReactKeycloakInjectedProps {
  */
 export function withKeycloak(
   component: ComponentType<ReactKeycloakInjectedProps>,
-): JSX.Element;
+): ComponentType;
 
 /**
  *
