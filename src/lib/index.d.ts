@@ -2,8 +2,8 @@
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
-import { Component, ComponentClass, ComponentType, StatelessComponent, Context } from 'react';
-import { KeycloakInstance } from 'keycloak-js';
+import {Component, ComponentType} from 'react';
+import {KeycloakInitOptions, KeycloakInstance} from 'keycloak-js';
 
 export interface ReactKeycloakContextValue {
   /**
@@ -26,28 +26,29 @@ export interface ProviderProps {
   /**
    * The KeycloakJS config to be used when initializing Keycloak instance.
    */
-  initConfig?: Keycloak.KeycloakInitOptions;
+  initConfig?: KeycloakInitOptions;
 
   /**
    * An optional component to display while Keycloak instance is being initialized.
    */
-  LoadingComponent?: ComponentType,
+  LoadingComponent?: JSX.Element;
 
   /**
    * A optional function to receive Keycloak error as they happens.
    */
-  onError?: Error => void,
+  onError?: (error: Error) => void;
 
   /**
    * A optional function to receive Keycloak token when it changes.
    */
-  onToken?: string => void,
+  onToken?: (token: string) => void;
 }
 
 /**
  * Makes the Keycloak instance available to the withKeycloak() and useKeycloak() calls in the component hierarchy below.
  */
-export class KeycloakProvider extends Component<ProviderProps> { }
+export class KeycloakProvider extends Component<ProviderProps> {
+}
 
 /**
  * Props injected by withKeycloak HOC
@@ -64,14 +65,12 @@ export interface ReactKeycloakInjectedProps {
   keycloakInitialized: boolean;
 }
 
-interface TOriginalProps { }
-
 /**
  * Makes the Keycloak instance and initialization state available to the wrapped component.
  */
 export function withKeycloak(
-  component: ComponentType<TOriginalProps & ReactKeycloakInjectedProps>,
-): ComponentType<TOriginalProps>;
+  component: ComponentType<ReactKeycloakInjectedProps>,
+): JSX.Element;
 
 /**
  *
