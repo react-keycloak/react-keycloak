@@ -31,7 +31,7 @@ export interface ProviderProps {
   /**
    * An optional component to display while Keycloak instance is being initialized.
    */
-  LoadingComponent?: JSX.Element,
+  LoadingComponent?: JSX.Element;
 
   /**
    * A optional function to receive Keycloak error as they happens.
