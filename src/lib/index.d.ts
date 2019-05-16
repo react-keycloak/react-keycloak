@@ -34,6 +34,8 @@ export interface KeycloakTokens {
   token: string;
 }
 
+export type KeycloakEvent = "onReady" | "onAuthSuccess" | "onAuthError" | "onAuthRefreshSuccess" | "onAuthRefreshError" | "onAuthLogout" | "onTokenExpired";
+
 export interface ProviderProps {
   /**
    * The single Keycloak instance to be used by your application.
@@ -51,9 +53,15 @@ export interface ProviderProps {
   LoadingComponent?: ComponentType;
 
   /**
-   * An optional function to receive Keycloak error as they happens.
+   * An optional function to receive Keycloak errors as they happen.
+   * @deprecated migrate to onEvent
    */
   onError?: (error: Error) => void;
+
+  /**
+   * An optional function to receive Keycloak events as they happen.
+   */
+  onEvent?: (eventType: KeycloakEvent, error?: Error) => void;
 
   /**
    * An optional function to receive Keycloak token when it changes.
