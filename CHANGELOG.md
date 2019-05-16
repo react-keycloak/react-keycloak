@@ -1,5 +1,13 @@
 # Changelog
 
+## 6.0.4 ( May 17, 2019 )
+
+### Feature
+
+- Add `onEvent` handler (will replace `onError`).
+- Deprecate `onError` handler.
+- Update Typescript definitions.
+
 ## 6.0.3 ( May 15, 2019 )
 
 ### Feature
