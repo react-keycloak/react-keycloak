@@ -51,27 +51,33 @@ class KeycloakProvider extends Component {
     const { initConfig, keycloak } = this.props;
 
     // Attach Keycloak listeners
-    keycloak.onReady = this.updateState;
-    keycloak.onAuthSuccess = this.updateState;
-    keycloak.onAuthError = this.onKeycloakError;
-    keycloak.onAuthRefreshSuccess = this.updateState;
-    keycloak.onAuthRefreshError = this.onKeycloakError;
-    keycloak.onAuthLogout = this.updateState;
-    keycloak.onTokenExpired = this.refreshKeycloakToken;
+    keycloak.onReady = this.updateState('onReady');
+    keycloak.onAuthSuccess = this.updateState('onAuthSuccess');
+    keycloak.onAuthError = this.onKeycloakError('onAuthError');
+    keycloak.onAuthRefreshSuccess = this.updateState('onAuthRefreshSuccess');
+    keycloak.onAuthRefreshError = this.onKeycloakError('onAuthRefreshError');
+    keycloak.onAuthLogout = this.updateState('onAuthLogout');
+    keycloak.onTokenExpired = this.refreshKeycloakToken('onTokenExpired');
 
     keycloak.init({ ...initConfig });
   }
 
-  onKeycloakError = error => {
-    console.error('KeycloakProvider error:', error);
-    const { onError } = this.props;
+  onKeycloakError = event => error => {
+    const { onError, onEvent } = this.props;
+    // @Deprecated: Remove on next major
     onError && onError(error);
+
+    // Notify Events listener
+    onEvent && onEvent(event, error);
   };
 
-  updateState = () => {
-    const { keycloak, onToken, onTokens } = this.props;
+  updateState = event => () => {
+    const { keycloak, onEvent, onToken, onTokens } = this.props;
     const { initialized: prevInitialized, token: prevToken } = this.state;
     const { idToken, refreshToken, token: newToken } = keycloak;
+    
+    // Notify Events listener
+    onEvent && onEvent(event);
 
     // Avoid double-refresh if state hasn't changed
     if (!prevInitialized || newToken !== prevToken) {
@@ -94,8 +100,12 @@ class KeycloakProvider extends Component {
     }
   };
 
-  refreshKeycloakToken = () => {
-    const { keycloak } = this.props;
+  refreshKeycloakToken = event => () => {
+    const { keycloak, onEvent } = this.props;
+    // Notify Events listener
+    onEvent && onEvent(event);
+
+    // Refresh Keycloak token
     keycloak.updateToken();
   };
 
@@ -124,6 +134,7 @@ KeycloakProvider.propTypes = {
   initConfig: PropTypes.shape({}),
   LoadingComponent: PropTypes.element,
   onError: PropTypes.func,
+  onEvent: PropTypes.func,
   onToken: PropTypes.func,
 };
 
@@ -133,6 +144,7 @@ KeycloakProvider.defaultProps = {
   },
   LoadingComponent: null,
   onError: null,
+  onEvent: null,
   onToken: null,
 };
 
