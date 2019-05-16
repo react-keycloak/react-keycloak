@@ -59,9 +59,25 @@ const App = () => {
 
 - `LoadingComponent`, a component to be displayed while `keycloak` is being initialized, if not provided child components will be rendered immediately. Defaults to `null`
 
-- `onError`, an handler function that receives errors launched by `keycloak`, defaults to `null`.
+- `onEvent`, an handler function that receives events launched by `keycloak`, defaults to `null`.
+
+  It can be implemented as follow
+  ```js
+    (event, error) => {
+      console.log('onKeycloakEvent', event, error);
+    }
+  ```
+  Published events are:
+    - `onReady`
+    - `onAuthSuccess`
+    - `onAuthError`
+    - `onAuthRefreshSuccess`
+    - `onAuthRefreshError`
+    - `onTokenExpired`
+    - `onAuthLogout`
 
 - `onTokens`, an handler function that receives `keycloak` tokens as an object every time they change, defaults to `null`.
+
   Keycloak tokens are returned as follow
   ```json
   {
