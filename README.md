@@ -1,3 +1,5 @@
+![React Keycloak](/art/react-keycloak-logo.svg?raw=true "React Keycloak Logo")
+
 # React Keycloak
 
 > React bindings for [Keycloak](https://www.keycloak.org/)
@@ -153,4 +155,4 @@ Made with :sparkles: & :heart: by [Mattia Panzeri](https://github.com/panz3r) an
 
 If you found this project to be helpful, please consider buying me a coffee.
 
-[![buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/white_img.png)](https://buymeacoff.ee/4f18nT0Nk)
+[![buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoff.ee/4f18nT0Nk)
