@@ -1,4 +1,4 @@
-![React Keycloak](/art/react-keycloak-logo.svg?raw=true "React Keycloak Logo")
+![React Keycloak](/art/react-keycloak-logo.png?raw=true "React Keycloak Logo")
 
 # React Keycloak
 
