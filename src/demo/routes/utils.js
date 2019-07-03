@@ -1,9 +1,24 @@
-import { map, redirect } from 'navi';
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom'
 
-export function withAuthentication(matcher) {
-  return map((request, context) =>
-    context.isAuthenticated
-      ? matcher
-      : redirect('/login?redirectTo=' + encodeURIComponent(request.mountpath + request.search))
-  );
+import { useKeycloak } from '../../lib';
+
+export function PrivateRoute ({ component: Component, ...rest }) {
+  const [keycloak] = useKeycloak();
+
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        keycloak.authenticated
+          ? <Component {...props} />
+          : <Redirect
+              to={{
+                pathname: '/login',
+                state: { from: props.location }
+              }}
+            />
+      }
+    />
+  )
 }

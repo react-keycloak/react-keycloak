@@ -1,5 +1,5 @@
-import Keycloak from 'keycloak-js';
 import React from 'react';
+import Keycloak from 'keycloak-js';
 
 import { KeycloakProvider } from '../lib';
 

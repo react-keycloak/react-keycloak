@@ -1,19 +1,23 @@
-import { route } from 'navi';
-import React from 'react';
+import React, { useCallback } from 'react';
+import { Redirect, withRouter } from "react-router-dom";
 
 import { withKeycloak } from '../../lib';
 
-const LoginPage = withKeycloak(({ keycloak }) => {
+const LoginPage = withRouter(withKeycloak(({ keycloak, location }) => {
+  const { from } = location.state || { from: { pathname: "/home" } };
+  if (keycloak.authenticated) return <Redirect to={from} />;
+
+  const login = useCallback(() => {
+      keycloak.login();
+  }, [keycloak]);
+
   return (
     <div>
-      <button type="button" onClick={() => keycloak.login()}>
+      <button type="button" onClick={login}>
         Login
       </button>
     </div>
   );
-});
+}));
 
-export default route({
-  title: 'Login',
-  view: <LoginPage />
-});
+export default LoginPage;
