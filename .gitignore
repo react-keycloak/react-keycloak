@@ -24,4 +24,4 @@ yarn-debug.log*
 yarn-error.log*
 
 # custom
-/public/keycloak.json
+/public/keycloak*.json
