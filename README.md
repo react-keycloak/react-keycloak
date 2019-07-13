@@ -145,6 +145,14 @@ export default () => {
 
 See inside `src/demo` for a demo implementing this library main features.
 
+To run the demo app:
+- Clone/Download this repo
+- Install dependencies (`npm install` or `yarn`)
+- Place a valid `keycloak.json` file inside `public` folder or setup `Keycloak` instance inside `src/demo/App.js` following [Keycloak guide](https://www.keycloak.org/docs/latest/securing_apps/index.html#_javascript_adapter)
+- Run the demo (`npm start` or `yarn start`)
+
+**Note:** The demo app is not meant to be **production-ready** nor a **starter-kit** but just a way to show this module components and their usage.
+
 ## Credits
 
 Library bootstrapped using [DimiMikadze/create-react-library](https://github.com/DimiMikadze/create-react-library) and inspired by [react-redux](https://github.com/reduxjs/react-redux)
