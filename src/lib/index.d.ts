@@ -2,7 +2,7 @@
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
-import { Component, ComponentType } from 'react';
+import { Component, ComponentType, JSX } from 'react';
 import { KeycloakInitOptions, KeycloakInstance } from 'keycloak-js';
 
 export interface ReactKeycloakContextValue {
@@ -50,7 +50,7 @@ export interface ProviderProps {
   /**
    * An optional component to display while Keycloak instance is being initialized.
    */
-  LoadingComponent?: ComponentType;
+  LoadingComponent?: JSX.Element;
 
   /**
    * An optional function to receive Keycloak errors as they happen.
