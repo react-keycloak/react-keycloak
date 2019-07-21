@@ -2,7 +2,7 @@
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
-import { Component, ComponentType, JSX } from 'react';
+import { Component, ComponentType } from 'react';
 import { KeycloakInitOptions, KeycloakInstance } from 'keycloak-js';
 
 export interface ReactKeycloakContextValue {
