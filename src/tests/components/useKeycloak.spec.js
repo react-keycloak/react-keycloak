@@ -1,14 +1,10 @@
 import React from 'react'
 import * as rtl from '@testing-library/react'
 import { renderHook } from '@testing-library/react-hooks'
-import '@testing-library/jest-dom/extend-expect'
 
 import { useKeycloak, KeycloakProvider } from '../../lib'
 
-const createKeycloakStub = () => ({
-  init: () => {},
-  updateToken: () => {}
-})
+import { createKeycloakStub } from '../utils'
 
 const createHookWrapper = () => ({ children }) =>
   <KeycloakProvider keycloak={createKeycloakStub()}>

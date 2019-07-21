@@ -5,10 +5,7 @@ import '@testing-library/jest-dom/extend-expect'
 import ReactKeycloakContext from '../../lib/components/Context'
 import KeycloakProvider from '../../lib/components/Provider'
 
-const createKeycloakStub = () => ({
-  init: () => {},
-  updateToken: () => {}
-})
+import { createKeycloakStub } from '../utils'
 
 const createChild = () => {
   class Child extends Component {
