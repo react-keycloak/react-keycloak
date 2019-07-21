@@ -6,6 +6,7 @@ node_js:
 script:
   - yarn lint
   - yarn validate:ts
+  - yarn test
 
 deploy:
   provider: npm
