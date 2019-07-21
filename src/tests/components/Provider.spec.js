@@ -10,7 +10,7 @@ const createKeycloakStub = () => ({
   updateToken: () => {}
 })
 
-const createChild = (storeKey = 'store') => {
+const createChild = () => {
   class Child extends Component {
     render () {
       return (
