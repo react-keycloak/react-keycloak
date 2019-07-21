@@ -39,6 +39,8 @@
   "devDependencies": {
     "@babel/core": "7.4.3",
     "@svgr/webpack": "^4.2.0",
+    "@testing-library/jest-dom": "^4.0.0",
+    "@testing-library/react": "^8.0.5",
     "@typescript-eslint/eslint-plugin": "1.6.0",
     "@typescript-eslint/parser": "1.6.0",
     "babel-eslint": "10.0.1",
