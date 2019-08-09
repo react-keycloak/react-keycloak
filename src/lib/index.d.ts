@@ -48,6 +48,12 @@ export interface ProviderProps {
   initConfig?: KeycloakInitOptions;
 
   /**
+   * An optional loading check function to customize LoadingComponent display condition.
+   * Return true to display LoadingComponent, false to hide it.
+   */
+  isLoadingCheck?: (keycloak: KeycloakInstance) => boolean;
+
+  /**
    * An optional component to display while Keycloak instance is being initialized.
    */
   LoadingComponent?: JSX.Element;

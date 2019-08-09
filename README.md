@@ -61,6 +61,13 @@ const App = () => {
 
 - `LoadingComponent`, a component to be displayed while `keycloak` is being initialized, if not provided child components will be rendered immediately. Defaults to `null`
 
+- `isLoadingCheck`, an optional loading check function to customize LoadingComponent display condition. Return `true` to display LoadingComponent, `false` to hide it.
+
+  Can be implemented as follow
+  ```js
+    keycloak => !keycloak.authenticated;
+  ```
+
 - `onEvent`, an handler function that receives events launched by `keycloak`, defaults to `null`.
 
   It can be implemented as follow
