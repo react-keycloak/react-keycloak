@@ -1,5 +1,15 @@
 # Changelog
 
+## 6.1.0 ( August 9, 2019 )
+
+### Feature
+
+* Add `isLoadingCheck` prop to `KeycloakProvider`.
+
+### Chore
+
+* Update `demo` app to showcase [`axios`](https://github.com/axios/axios) hook integration.
+
 ## 6.0.5 ( July 17, 2019 )
 
 ### Chore
