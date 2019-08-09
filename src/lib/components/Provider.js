@@ -5,6 +5,7 @@ import ReactKeycloakContext from './Context';
 
 const initialState = {
   initialized: false,
+  isLoading: true,
   token: undefined,
 };
 
@@ -72,17 +73,29 @@ class KeycloakProvider extends Component {
   };
 
   updateState = event => () => {
-    const { keycloak, onEvent, onToken, onTokens } = this.props;
-    const { initialized: prevInitialized, token: prevToken } = this.state;
+    const { keycloak, onEvent, onToken, onTokens, isLoadingCheck } = this.props;
+    const {
+      initialized: prevInitialized,
+      isLoading: prevLoading,
+      token: prevToken,
+    } = this.state;
     const { idToken, refreshToken, token: newToken } = keycloak;
-    
+
     // Notify Events listener
     onEvent && onEvent(event);
 
+    // Check Loading state
+    const isLoading = isLoadingCheck ? isLoadingCheck(keycloak) : false;
+
     // Avoid double-refresh if state hasn't changed
-    if (!prevInitialized || newToken !== prevToken) {
+    if (
+      !prevInitialized ||
+      isLoading !== prevLoading ||
+      newToken !== prevToken
+    ) {
       this.setState({
         initialized: true,
+        isLoading,
         token: newToken,
       });
     }
@@ -92,11 +105,12 @@ class KeycloakProvider extends Component {
       // @Deprecated: Remove on next major
       onToken && onToken(newToken);
 
-      onTokens && onTokens({
-        idToken,
-        refreshToken,
-        token: newToken,
-      });
+      onTokens &&
+        onTokens({
+          idToken,
+          refreshToken,
+          token: newToken,
+        });
     }
   };
 
@@ -111,9 +125,9 @@ class KeycloakProvider extends Component {
 
   render() {
     const { children, keycloak, LoadingComponent } = this.props;
-    const { initialized } = this.state;
+    const { initialized, isLoading } = this.state;
 
-    if (!initialized && !!LoadingComponent) {
+    if (!!LoadingComponent && (!initialized || isLoading)) {
       return LoadingComponent;
     }
 
@@ -132,6 +146,7 @@ KeycloakProvider.propTypes = {
     updateToken: PropTypes.func.isRequired,
   }).isRequired,
   initConfig: PropTypes.shape({}),
+  isLoadingCheck: PropTypes.func,
   LoadingComponent: PropTypes.element,
   onError: PropTypes.func,
   onEvent: PropTypes.func,
@@ -142,6 +157,7 @@ KeycloakProvider.defaultProps = {
   initConfig: {
     onLoad: 'check-sso',
   },
+  isLoadingCheck: null,
   LoadingComponent: null,
   onError: null,
   onEvent: null,
