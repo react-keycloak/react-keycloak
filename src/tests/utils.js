@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 
 export const createKeycloakStub = () => ({
-  init: () => {},
-  updateToken: () => {}
+  init: jest.fn(),
+  updateToken: jest.fn()
 })
 
 export const createChild = (testedProps = []) => {

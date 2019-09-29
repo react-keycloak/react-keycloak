@@ -156,6 +156,10 @@ describe('KeycloakProvider', () => {
 
       rtl.render(<MockApp />)
 
+      // Check that Keycloak init has been called once
+      expect(keycloakStub.init).toHaveBeenCalledTimes(1)
+
+      // Check that Keycloak handlers have been set
       expect(keycloakStub.onReady).toBeInstanceOf(Function)
       expect(keycloakStub.onAuthSuccess).toBeInstanceOf(Function)
       expect(keycloakStub.onAuthError).toBeInstanceOf(Function)
@@ -177,6 +181,9 @@ describe('KeycloakProvider', () => {
       expect(keycloakStub.onAuthLogout).toBeNull()
       expect(keycloakStub.onTokenExpired).toBeNull()
 
+      // Check that new Keycloak init has been called once
+      expect(newKeycloakStub.init).toHaveBeenCalledTimes(1)
+
       // Check that new Keycloak handlers have been attached
       expect(newKeycloakStub.onReady).toBeInstanceOf(Function)
       expect(newKeycloakStub.onAuthSuccess).toBeInstanceOf(Function)
@@ -185,6 +192,86 @@ describe('KeycloakProvider', () => {
       expect(newKeycloakStub.onAuthRefreshError).toBeInstanceOf(Function)
       expect(newKeycloakStub.onAuthLogout).toBeInstanceOf(Function)
       expect(newKeycloakStub.onTokenExpired).toBeInstanceOf(Function)
+    })
+  })
+
+  describe('on initConfig change', () => {
+    it('should re-init Keycloak', () => {
+      // Setup
+      const keycloakStub = createKeycloakStub()
+
+      let externalSetState
+      class MockApp extends Component {
+        constructor () {
+          super()
+          this.state = {
+            initConfig: {
+              onLoad: 'check-sso'
+            }
+          }
+          externalSetState = this.setState.bind(this)
+        }
+
+        render () {
+          const { initConfig } = this.state
+          return (
+            <KeycloakProvider
+              keycloak={keycloakStub}
+              initConfig={initConfig}
+            >
+              <div />
+            </KeycloakProvider>
+          )
+        }
+      }
+
+      rtl.render(<MockApp />)
+
+      rtl.act(() => {
+        externalSetState({ initConfig: { onLoad: 'login-required' } })
+      })
+
+      // Check that Keycloak init has been called twice
+      expect(keycloakStub.init).toHaveBeenCalledTimes(2)
+    })
+
+    it('should not re-init Keycloak if content is same', () => {
+      // Setup
+      const keycloakStub = createKeycloakStub()
+
+      let externalSetState
+      class MockApp extends Component {
+        constructor () {
+          super()
+          this.state = {
+            initConfig: {
+              onLoad: 'check-sso'
+            }
+          }
+          externalSetState = this.setState.bind(this)
+        }
+
+        render () {
+          const { initConfig } = this.state
+          return (
+            <KeycloakProvider
+              keycloak={keycloakStub}
+              initConfig={initConfig}
+            >
+              <div />
+            </KeycloakProvider>
+          )
+        }
+      }
+
+      rtl.render(<MockApp />)
+
+      rtl.act(() => {
+        externalSetState({ initConfig: { onLoad: 'check-sso' } })
+      })
+
+      // Check that Keycloak init has been called once
+      expect(keycloakStub.init).toHaveBeenCalledTimes(1)
     })
   })
 
