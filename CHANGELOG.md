@@ -1,5 +1,11 @@
 # Changelog
 
+## 6.1.1 ( September 29, 2019 )
+
+### Fix
+
+* Fix issue #28 - `Keycloak.init` is not called again when the `initConfig` prop changes.
+
 ## 6.1.0 ( August 9, 2019 )
 
 ### Feature
