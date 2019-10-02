@@ -7,6 +7,7 @@ script:
   - yarn lint
   - yarn validate:ts
   - yarn test
+  - yarn test:coverage-coveralls
 
 deploy:
   provider: npm

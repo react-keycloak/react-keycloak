@@ -10,6 +10,8 @@
     "build": "node scripts/build.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",
+    "test:coverage": "CI=true node scripts/test.js --coverage --ci",
+    "test:coverage-coveralls": "CI=true node scripts/test.js --coverage --ci --coverageReporters=text-lcov | coveralls",
     "validate:ts": "tsc --lib 'es2015' --noEmit src/**/*.ts",
     "prepublishOnly": "node scripts/build.js"
   },
@@ -54,6 +56,7 @@
     "babel-plugin-named-asset-import": "^0.3.2",
     "babel-preset-react-app": "^8.0.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "coveralls": "^3.0.6",
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "4.2.0",
