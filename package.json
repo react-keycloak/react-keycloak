@@ -10,6 +10,7 @@
     "build": "node scripts/build.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",
+    "validate:lockfile": "lockfile-lint --path yarn.lock --type yarn --allowed-hosts yarn",
     "validate:ts": "tsc --lib 'es2015' --noEmit src/**/*.ts",
     "prepublishOnly": "node scripts/build.js"
   },
@@ -76,6 +77,7 @@
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.0",
     "keycloak-js": "^6.0.1",
+    "lockfile-lint": "^2.0.1",
     "mini-css-extract-plugin": "0.8.0",
     "navi": "^0.12.6",
     "optimize-css-assets-webpack-plugin": "5.0.3",
