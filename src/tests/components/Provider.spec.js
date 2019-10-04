@@ -456,5 +456,156 @@ describe('KeycloakProvider', () => {
         token: 'fakeToken'
       })
     })
+
+    it('should notify listeners when tokens expire', () => {
+      const onEventListener = jest.fn()
+      const keycloakStub = createKeycloakStub()
+
+      rtl.render(
+        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+          <div />
+        </KeycloakProvider>
+      )
+
+      rtl.act(() => {
+        keycloakStub.onTokenExpired()
+      })
+
+      expect(onEventListener).toHaveBeenCalledTimes(1)
+      expect(onEventListener).toHaveBeenCalledWith('onTokenExpired')
+    })
+
+
+    it('should not update state twice if tokens are unchanged', () => {
+      const keycloakStub = createKeycloakStub()
+      const onEventListener = jest.fn()
+      const setStateSpy = jest.spyOn(KeycloakProvider.prototype, 'setState');
+
+      rtl.render(
+        <KeycloakProvider
+          keycloak={keycloakStub}
+          onEvent={onEventListener}
+        >
+          <div />
+        </KeycloakProvider>
+      )
+
+      rtl.act(() => {
+        keycloakStub.idToken = 'fakeIdToken'
+        keycloakStub.refreshToken = 'fakeRefreshToken'
+        keycloakStub.token = 'fakeToken'
+
+        keycloakStub.onReady()
+      })
+
+      rtl.act(() => {
+        keycloakStub.idToken = 'fakeIdToken'
+        keycloakStub.refreshToken = 'fakeRefreshToken'
+        keycloakStub.token = 'fakeToken'
+
+        keycloakStub.onAuthRefreshSuccess()
+      })
+
+      expect(onEventListener).toHaveBeenCalledTimes(2)
+      expect(onEventListener).toHaveBeenNthCalledWith(1, 'onReady')
+      expect(onEventListener).toHaveBeenNthCalledWith(2, 'onAuthRefreshSuccess')
+
+      expect(setStateSpy).toHaveBeenCalledTimes(1)
+      expect(setStateSpy).toHaveBeenNthCalledWith(1, {
+        initialized: true,
+        isLoading: false,
+        token: 'fakeToken',
+      })
+
+      // Remove setStateSpy mock
+      setStateSpy.mockRestore()
+    })
+  })
+
+  describe('if a custom isLoadingCheck is provided', () => {
+    it('should call the isLoadingCheck function', () => {
+      const isLoadingCheck = jest.fn().mockImplementation(() => true)
+      const keycloakStub = createKeycloakStub()
+
+      rtl.render(
+        <KeycloakProvider keycloak={keycloakStub} isLoadingCheck={isLoadingCheck}>
+          <div />
+        </KeycloakProvider>
+      )
+
+      rtl.act(() => {
+        keycloakStub.onReady()
+      })
+
+      expect(isLoadingCheck).toHaveBeenCalledTimes(1)
+      expect(isLoadingCheck).toHaveBeenCalledWith(keycloakStub)
+    })
+
+    it('should display LoadingComponent if the isLoadingCheck function returns true', () => {
+      const isLoadingCheck = jest.fn().mockImplementation(() => true)
+      const keycloakStub = createKeycloakStub()
+
+      const tester = rtl.render(
+        <KeycloakProvider
+          keycloak={keycloakStub}
+          isLoadingCheck={isLoadingCheck}
+          LoadingComponent={
+            <span data-testid='LoadingComponent'>Loading...</span>}
+        >
+          <div />
+        </KeycloakProvider>
+      )
+
+      rtl.act(() => {
+        keycloakStub.onReady()
+      })
+
+      expect(isLoadingCheck).toHaveBeenCalledTimes(1)
+      expect(isLoadingCheck).toHaveBeenCalledWith(keycloakStub)
+
+      expect(tester.getByTestId('LoadingComponent')).toBeVisible()
+      expect(tester.getByTestId('LoadingComponent')).toHaveTextContent(
+        'Loading...'
+      )
+    })
+
+    it('should not update state twice if loading state is unchanged', () => {
+      const isLoadingCheck = jest.fn().mockImplementation(() => true)
+      const keycloakStub = createKeycloakStub()
+      const onEventListener = jest.fn()
+      const setStateSpy = jest.spyOn(KeycloakProvider.prototype, 'setState');
+
+      rtl.render(
+        <KeycloakProvider
+          keycloak={keycloakStub}
+          onEvent={onEventListener}
+          isLoadingCheck={isLoadingCheck}
+        >
+          <div />
+        </KeycloakProvider>
+      )
+
+      rtl.act(() => {
+        keycloakStub.onReady()
+      })
+
+      rtl.act(() => {
+        keycloakStub.onAuthRefreshSuccess()
+      })
+
+      expect(onEventListener).toHaveBeenCalledTimes(2)
+      expect(onEventListener).toHaveBeenNthCalledWith(1, 'onReady')
+      expect(onEventListener).toHaveBeenNthCalledWith(2, 'onAuthRefreshSuccess')
+
+      expect(setStateSpy).toHaveBeenCalledTimes(1)
+      expect(setStateSpy).toHaveBeenNthCalledWith(1, {
+        initialized: true,
+        isLoading: true,
+        token: undefined,
+      })
+
+      // Remove setStateSpy mock
+      setStateSpy.mockRestore()
+    })
   })
 })
