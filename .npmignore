@@ -18,13 +18,15 @@ yarn-error.log*
 
 # Development folders and files
 art
+public
+src
+scripts
 config
 demo
-public
-scripts
-src
 .travis.yml
 CHANGELOG.md
 CODE_OF_CONDUCT.md
 CONTRIBUTING.md
 README.md
+UPGRADE.md
+.storybook
