@@ -7,7 +7,7 @@ const getDisplayName = name => `WithKeycloak(${name})`;
 
 function withKeycloak(WrappedComponent) {
   const Context = ReactKeycloakContext;
-  const displayName = getDisplayName(WrappedComponent.displayName || WrappedComponent.name || 'Component');
+  const displayName = getDisplayName(WrappedComponent.displayName || WrappedComponent.name);
 
   class WithKeycloakComponent extends Component {
     renderWrappedComponent = ({ initialized, keycloak }) => (
