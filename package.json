@@ -10,8 +10,8 @@
     "build": "node scripts/build.js",
     "demo": "node scripts/demo.js",
     "test": "node scripts/test.js",
-    "test:coverage": "node scripts/test.js --coverage --watchAll=false",
-    "test:coverage-coveralls": "node scripts/test.js --coverage --watchAll=false --coverageReporters=text-lcov | coveralls",
+    "coverage": "node scripts/test.js --coverage --watchAll=false",
+    "coveralls": "node scripts/test.js --coverage --watchAll=false --coverageReporters=text-lcov | coveralls",
     "validate:lockfile": "lockfile-lint --path yarn.lock --type yarn --allowed-hosts yarn",
     "validate:ts": "tsc --lib 'es2015' --noEmit src/**/*.ts",
     "prepublishOnly": "node scripts/build.js"

@@ -30,3 +30,6 @@ CONTRIBUTING.md
 README.md
 UPGRADE.md
 .storybook
+
+# custom
+.coveralls.yml

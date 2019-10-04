@@ -24,4 +24,5 @@ yarn-debug.log*
 yarn-error.log*
 
 # custom
+.coveralls.yml
 /public/keycloak*.json
