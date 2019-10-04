@@ -69,7 +69,9 @@ class KeycloakProvider extends Component {
 
   onKeycloakError = event => error => {
     const { onError, onEvent } = this.props;
+
     // @Deprecated: Remove on next major
+    /* istanbul ignore next */
     onError && onError(error);
 
     // Notify Events listener
@@ -107,6 +109,7 @@ class KeycloakProvider extends Component {
     // Notify token listener, if any
     if (newToken !== prevToken) {
       // @Deprecated: Remove on next major
+      /* istanbul ignore next */
       onToken && onToken(newToken);
 
       onTokens &&
