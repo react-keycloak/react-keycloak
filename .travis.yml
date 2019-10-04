@@ -8,7 +8,7 @@ script:
   - yarn validate:lockfile
   - yarn validate:ts
   - yarn test
-  - yarn test:coverage-coveralls
+  # - yarn test:coverage-coveralls
 
 deploy:
   provider: npm
