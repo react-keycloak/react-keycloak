@@ -1,5 +1,21 @@
 # Changelog
 
+## 6.1.2 ( October 5, 2019 )
+
+Mostly a project update release.
+Changes to pipeline, tests and project internal configurations.
+
+### Tests
+
+* Add missing unit-tests for `Provider`.
+
+### Chore
+
+* Update `Jest` configuration.
+* Improve code coverage and add `Coveralls` integration.
+* Add `validate:lockfile` security check.
+* Upgrade to latest `create-react-library` version.
+
 ## 6.1.1 ( September 29, 2019 )
 
 ### Fix
