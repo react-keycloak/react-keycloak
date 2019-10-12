@@ -12,7 +12,7 @@
     "test": "node scripts/test.js",
     "coverage": "node scripts/test.js --coverage --watchAll=false",
     "coveralls": "node scripts/test.js --coverage --watchAll=false --coverageReporters=text-lcov | coveralls",
-    "validate:lockfile": "lockfile-lint --path yarn.lock --type yarn --allowed-hosts yarn",
+    "validate:lockfile": "lockfile-lint --path yarn.lock --type yarn --allowed-hosts yarn --validate-https",
     "validate:ts": "tsc --lib 'es2015' --noEmit src/**/*.ts",
     "prepublishOnly": "node scripts/build.js"
   },
