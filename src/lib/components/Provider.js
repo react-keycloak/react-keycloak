@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import deepCompare from 'deep-compare';
+import isEqual from 'react-fast-compare';
 
 import ReactKeycloakContext from './Context';
 
@@ -34,7 +34,7 @@ class KeycloakProvider extends Component {
   componentDidUpdate({ keycloak: prevKeycloak, initConfig: prevInitConfig }) {
     if (
       this.props.keycloak !== prevKeycloak ||
-      !deepCompare(this.props.initConfig, prevInitConfig)
+      !isEqual(this.props.initConfig, prevInitConfig)
     ) {
       // De-init previous Keycloak instance
       prevKeycloak.onReady = null;
