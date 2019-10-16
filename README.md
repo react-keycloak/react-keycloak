@@ -17,7 +17,7 @@
 React Keycloak requires:
 
 - React **16.0** or later
-- a version of `keycloak-js` matching the major version (e.g. `"react-keycloak": "6.x.y"` => `"keycloak-js": "6.z.k"`)
+- a version of `keycloak-js` matching the main version (e.g. `"react-keycloak": "7.0.1"` => `"keycloak-js": "7.0.1-yymmdd"`)
 
 ```
 yarn add react-keycloak
