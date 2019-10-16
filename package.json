@@ -32,12 +32,12 @@
     "keycloak-js"
   ],
   "dependencies": {
-    "deep-compare": "^0.0.5",
     "hoist-non-react-statics": "^3.3.0",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "react-fast-compare": "^2.0.4"
   },
   "peerDependencies": {
-    "keycloak-js": "^6.0.0",
+    "keycloak-js": ">=7.0.1",
     "react": "^16.0.0"
   },
   "devDependencies": {
@@ -79,7 +79,7 @@
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.0",
-    "keycloak-js": "^6.0.1",
+    "keycloak-js": "^7.0.1",
     "lockfile-lint": "^2.0.1",
     "mini-css-extract-plugin": "0.8.0",
     "navi": "^0.12.6",
