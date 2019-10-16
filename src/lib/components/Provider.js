@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'react-fast-compare';
 
@@ -10,7 +10,7 @@ const initialState = {
   token: undefined,
 };
 
-class KeycloakProvider extends Component {
+class KeycloakProvider extends PureComponent {
   state = { ...initialState };
 
   constructor(props) {
@@ -18,17 +18,14 @@ class KeycloakProvider extends Component {
 
     const { keycloak } = props;
     if (!keycloak) {
-      throw new Error("KeycloakProvider requires 'keycloak' prop to be defined");
+      throw new Error(
+        "KeycloakProvider requires 'keycloak' prop to be defined",
+      );
     }
   }
 
   componentDidMount() {
-    this._isMounted = true;
     this.init();
-  }
-
-  componentWillUnmount() {
-    this._isMounted = false;
   }
 
   componentDidUpdate({ keycloak: prevKeycloak, initConfig: prevInitConfig }) {
