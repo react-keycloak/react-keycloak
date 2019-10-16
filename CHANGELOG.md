@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.0.1-191016 ( October 16, 2019)
+
+* Bump required `keycloak-js` version to `7.0.1`
+* Cleanup `Provider` code
+* Fix issue #32 - Support Keycloak 7
+
 ## 6.1.2 ( October 5, 2019 )
 
 Mostly a project update release.
