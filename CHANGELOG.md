@@ -1,5 +1,14 @@
 # Changelog
 
+## 8.0.0-191118 ( November 18, 2019)
+
+* Bump required `keycloak-js` version to `8.0.0`
+
+### BREAKING
+
+* `KeycloakProvider`: Set default `promiseType` to `native` on init
+* `KeycloakProvider`: Remove deprecated `onToken` and `onError` methods
+
 ## 7.0.1-191016 ( October 16, 2019)
 
 * Bump required `keycloak-js` version to `7.0.1`
