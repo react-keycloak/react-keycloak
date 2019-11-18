@@ -17,7 +17,7 @@
 React Keycloak requires:
 
 - React **16.0** or later
-- a version of `keycloak-js` matching the main version (e.g. `"react-keycloak": "7.0.1"` => `"keycloak-js": "7.0.1-yymmdd"`)
+- a version of `keycloak-js` matching the main version (e.g. `"react-keycloak": "8.0.0"` => `"keycloak-js": "8.0.0-yymmdd"`)
 
 ```
 yarn add react-keycloak
@@ -55,7 +55,8 @@ const App = () => {
 - `initConfig`, contains the object to be passed to `keycloak.init()` method, by default the following is used
 
       {
-        onLoad: 'check-sso'
+        onLoad: 'check-sso',
+        promiseType: 'native',
       }
 
   for more options see [Keycloak docs](https://www.keycloak.org/docs/latest/securing_apps/index.html#init-options).

@@ -10,6 +10,11 @@ const initialState = {
   token: undefined,
 };
 
+const defaultInitConfig = {
+  onLoad: 'check-sso',
+  promiseType: 'native',
+};
+
 class KeycloakProvider extends PureComponent {
   state = { ...initialState };
 
@@ -61,22 +66,17 @@ class KeycloakProvider extends PureComponent {
     keycloak.onAuthLogout = this.updateState('onAuthLogout');
     keycloak.onTokenExpired = this.refreshKeycloakToken('onTokenExpired');
 
-    keycloak.init({ ...initConfig });
+    keycloak.init({ ...defaultInitConfig, ...initConfig });
   }
 
   onKeycloakError = event => error => {
-    const { onError, onEvent } = this.props;
-
-    // @Deprecated: Remove on next major
-    /* istanbul ignore next */
-    onError && onError(error);
-
+    const { onEvent } = this.props;
     // Notify Events listener
     onEvent && onEvent(event, error);
   };
 
   updateState = event => () => {
-    const { keycloak, onEvent, onToken, onTokens, isLoadingCheck } = this.props;
+    const { keycloak, onEvent, onTokens, isLoadingCheck } = this.props;
     const {
       initialized: prevInitialized,
       isLoading: prevLoading,
@@ -105,10 +105,6 @@ class KeycloakProvider extends PureComponent {
 
     // Notify token listener, if any
     if (newToken !== prevToken) {
-      // @Deprecated: Remove on next major
-      /* istanbul ignore next */
-      onToken && onToken(newToken);
-
       onTokens &&
         onTokens({
           idToken,
@@ -152,20 +148,19 @@ KeycloakProvider.propTypes = {
   initConfig: PropTypes.shape({}),
   isLoadingCheck: PropTypes.func,
   LoadingComponent: PropTypes.element,
-  onError: PropTypes.func,
   onEvent: PropTypes.func,
-  onToken: PropTypes.func,
+  onTokens: PropTypes.func,
 };
 
 KeycloakProvider.defaultProps = {
   initConfig: {
     onLoad: 'check-sso',
+    promiseType: 'native',
   },
   isLoadingCheck: null,
   LoadingComponent: null,
-  onError: null,
   onEvent: null,
-  onToken: null,
+  onTokens: null,
 };
 
 export default KeycloakProvider;

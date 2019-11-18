@@ -59,21 +59,9 @@ export interface ProviderProps {
   LoadingComponent?: JSX.Element;
 
   /**
-   * An optional function to receive Keycloak errors as they happen.
-   * @deprecated migrate to onEvent
-   */
-  onError?: (error: Error) => void;
-
-  /**
    * An optional function to receive Keycloak events as they happen.
    */
   onEvent?: (eventType: KeycloakEvent, error?: Error) => void;
-
-  /**
-   * An optional function to receive Keycloak token when it changes.
-   * @deprecated migrate to onTokens
-   */
-  onToken?: (token: string) => void;
 
   /**
    * An optional function to receive Keycloak tokens when changed.
