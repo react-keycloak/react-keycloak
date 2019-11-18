@@ -80,7 +80,8 @@ describe('KeycloakProvider', () => {
 
       expect(keycloakInitSpy).toHaveBeenCalledTimes(1)
       expect(keycloakInitSpy).toHaveBeenCalledWith({
-        onLoad: 'check-sso'
+        onLoad: 'check-sso',
+        promiseType: 'native',
       })
       keycloakInitSpy.mockRestore()
     })
