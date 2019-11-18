@@ -10,6 +10,11 @@ const initialState = {
   token: undefined,
 };
 
+const defaultInitConfig = {
+  onLoad: 'check-sso',
+  promiseType: 'native',
+};
+
 class KeycloakProvider extends PureComponent {
   state = { ...initialState };
 
@@ -61,7 +66,7 @@ class KeycloakProvider extends PureComponent {
     keycloak.onAuthLogout = this.updateState('onAuthLogout');
     keycloak.onTokenExpired = this.refreshKeycloakToken('onTokenExpired');
 
-    keycloak.init({ ...initConfig });
+    keycloak.init({ ...defaultInitConfig, ...initConfig });
   }
 
   onKeycloakError = event => error => {
@@ -160,6 +165,7 @@ KeycloakProvider.propTypes = {
 KeycloakProvider.defaultProps = {
   initConfig: {
     onLoad: 'check-sso',
+    promiseType: 'native',
   },
   isLoadingCheck: null,
   LoadingComponent: null,
