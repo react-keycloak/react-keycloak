@@ -37,7 +37,7 @@
     "react-fast-compare": "^2.0.4"
   },
   "peerDependencies": {
-    "keycloak-js": "^8.0.0",
+    "keycloak-js": "^8.0.1",
     "react": "^16.0.0"
   },
   "devDependencies": {
@@ -79,7 +79,7 @@
     "jest-environment-jsdom-fourteen": "0.1.0",
     "jest-resolve": "24.9.0",
     "jest-watch-typeahead": "0.4.2",
-    "keycloak-js": "^8.0.0",
+    "keycloak-js": "^8.0.1",
     "lockfile-lint": "^2.0.1",
     "mini-css-extract-plugin": "0.8.0",
     "navi": "^0.12.6",
