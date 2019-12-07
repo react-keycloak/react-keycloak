@@ -1,5 +1,9 @@
 # Changelog
 
+## 8.0.1-191207 ( December 7, 2019)
+
+* Bump required `keycloak-js` version to `8.0.0`
+
 ## 8.0.0-191118 ( November 18, 2019)
 
 * Bump required `keycloak-js` version to `8.0.0`
