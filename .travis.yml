@@ -6,7 +6,7 @@ node_js:
 script:
   - yarn lint
   - yarn validate:lockfile
-  - yarn validate:ts
+  # - yarn validate:ts
   - yarn test
   - yarn coveralls
 
