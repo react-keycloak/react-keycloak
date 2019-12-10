@@ -1,5 +1,11 @@
 # Changelog
 
+## 8.0.1-191210 ( December 10, 2019 )
+
+### Fix
+
+* Update TS typings
+
 ## 8.0.1-191207 ( December 7, 2019)
 
 * Bump required `keycloak-js` version to `8.0.0`
