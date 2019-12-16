@@ -1,0 +1,45 @@
+{
+  "name": "@react-keycloak/core",
+  "version": "1.0.0-alpha.5",
+  "license": "MIT",
+  "description": "React bindings for Keycloak javascript adapter (core)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panz3r/react-keycloak.git"
+  },
+  "author": "Mattia Panzeri <mattia.panzeri93@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/panz3r/react-keycloak/issues"
+  },
+  "homepage": "https://github.com/panz3r/react-keycloak#readme",
+  "keywords": [
+    "react",
+    "keycloak",
+    "keycloak-js"
+  ],
+  "main": "dist/lib/react-keycloak-core.js",
+  "module": "dist/es/react-keycloak-core.js",
+  "unpkg": "dist/umd/react-keycloak-core.min.js",
+  "types": "index.d.ts",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "prebuild": "npm run clean",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build && cp ../../README.md . && cp ../../LICENSE.md ."
+  },
+  "peerDependencies": {
+    "keycloak-js": ">=8.0.1",
+    "react": ">=16"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react-fast-compare": "^2.0.4"
+  }
+}

@@ -1,185 +1,71 @@
 {
-  "name": "react-keycloak",
-  "version": "8.0.1-191210",
-  "description": "React bindings for Keycloak javascript adapter",
-  "main": "build/index.js",
-  "types": "build/index.d.ts",
+  "name": "root",
+  "private": true,
   "scripts": {
-    "lint": "eslint './src/lib/**.js'",
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "demo": "node scripts/demo.js",
-    "test": "node scripts/test.js",
-    "coverage": "node scripts/test.js --coverage --watchAll=false",
-    "coveralls": "node scripts/test.js --coverage --watchAll=false --coverageReporters=text-lcov | coveralls",
-    "validate:lockfile": "lockfile-lint --path yarn.lock --type yarn --allowed-hosts yarn --validate-https",
-    "validate:ts": "tsc --lib 'es2015' --noEmit src/lib/index.d.ts",
-    "prepublishOnly": "node scripts/build.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/panz3r/react-keycloak.git"
-  },
-  "author": "Mattia Panzeri <mattia.panzeri93@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/panz3r/react-keycloak/issues"
-  },
-  "homepage": "https://github.com/panz3r/react-keycloak#readme",
-  "license": "MIT",
-  "keywords": [
-    "react",
-    "keycloak",
-    "keycloak-js"
-  ],
-  "dependencies": {
-    "hoist-non-react-statics": "^3.3.0",
-    "prop-types": "^15.7.2",
-    "react-fast-compare": "^2.0.4"
-  },
-  "peerDependencies": {
-    "keycloak-js": "^8.0.1",
-    "react": "^16.0.0"
+    "postinstall": "lerna bootstrap --no-ci && lerna run build",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "eslint": "eslint '**/*.js'",
+    "prettier": "prettier '**/*.js' '**/*.md' '**/*.ts' --write",
+    "release": "lerna publish",
+    "clean": "lerna run clean && lerna clean && rimraf ./node_modules"
   },
   "devDependencies": {
-    "@babel/core": "7.7.4",
-    "@svgr/webpack": "4.3.3",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-transform-react-jsx": "^7.7.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@testing-library/dom": "^6.11.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/react-hooks": "^1.1.0",
     "@testing-library/user-event": "^7.1.2",
-    "@types/react": "^16.9.15",
-    "@types/react-dom": "^16.9.4",
-    "@typescript-eslint/eslint-plugin": "^2.8.0",
-    "@typescript-eslint/parser": "^2.8.0",
-    "axios": "^0.19.0",
-    "babel-eslint": "10.0.3",
-    "babel-jest": "^24.9.0",
-    "babel-loader": "8.0.6",
-    "babel-plugin-named-asset-import": "^0.3.5",
-    "babel-preset-react-app": "^9.1.0",
-    "camelcase": "^5.3.1",
-    "case-sensitive-paths-webpack-plugin": "2.2.0",
-    "coveralls": "^3.0.6",
-    "css-loader": "3.2.0",
-    "dotenv": "8.2.0",
-    "dotenv-expand": "5.1.0",
-    "eslint": "^6.6.0",
-    "eslint-config-react-app": "^5.1.0",
-    "eslint-loader": "3.0.2",
-    "eslint-plugin-flowtype": "3.13.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-jsx-a11y": "6.2.3",
-    "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-react-hooks": "^1.6.1",
-    "file-loader": "4.3.0",
-    "fs-extra": "^8.1.0",
-    "html-webpack-plugin": "4.0.0-beta.5",
-    "identity-obj-proxy": "3.0.0",
-    "jest": "24.9.0",
-    "jest-environment-jsdom-fourteen": "0.1.0",
-    "jest-resolve": "24.9.0",
-    "jest-watch-typeahead": "0.4.2",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^24.8.0",
+    "coveralls": "^3.0.4",
+    "eslint": "^6.0.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-flowtype": "^4.5.2",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.13.0",
+    "eslint-plugin-react-hooks": "^2.0.0",
+    "husky": "^3.0.0",
+    "jest": "^24.8.0",
     "keycloak-js": "^8.0.1",
-    "lockfile-lint": "^2.0.1",
-    "mini-css-extract-plugin": "0.8.0",
-    "navi": "^0.12.6",
-    "optimize-css-assets-webpack-plugin": "5.0.3",
-    "pnp-webpack-plugin": "1.5.0",
-    "postcss-flexbugs-fixes": "4.1.0",
-    "postcss-loader": "3.0.0",
-    "postcss-normalize": "8.0.1",
-    "postcss-preset-env": "6.7.0",
-    "postcss-safe-parser": "4.0.1",
+    "lerna": "^3.15.0",
+    "lint-staged": "^9.0.0",
+    "prettier": "^1.18.2",
     "react": "^16.12.0",
-    "react-app-polyfill": "^1.0.5",
-    "react-dev-utils": "^10.0.0",
     "react-dom": "^16.12.0",
-    "react-navi": "^0.12.6",
-    "react-test-renderer": "16.12.0",
-    "resolve": "1.12.2",
-    "resolve-url-loader": "3.1.1",
-    "sass-loader": "8.0.0",
-    "semver": "6.3.0",
-    "style-loader": "1.0.0",
-    "terser-webpack-plugin": "2.2.1",
-    "ts-pnp": "1.1.5",
-    "typescript": "^3.7.3",
-    "url-loader": "2.3.0",
-    "webpack": "4.41.2",
-    "webpack-dev-server": "3.9.0",
-    "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "4.3.1"
+    "react-test-renderer": "^16.12.0",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.25.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^10.0.0",
+    "rollup-plugin-node-resolve": "^5.0.2",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-size-snapshot": "^0.10.0",
+    "rollup-plugin-terser": "^5.0.0"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+  "lint-staged": {
+    "**/*.js": [
+      "eslint",
+      "prettier --write",
+      "git add"
     ]
   },
-  "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/demo/**/*.{js,jsx,ts,tsx}",
-      "!src/tests/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
-    ],
-    "setupFiles": [
-      "react-app-polyfill/jsdom"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/src/setupTests.js"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
-    ],
-    "testEnvironment": "jest-environment-jsdom-fourteen",
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "modulePaths": [],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ],
-    "watchPlugins": [
-      "jest-watch-typeahead/filename",
-      "jest-watch-typeahead/testname"
-    ]
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
-  "babel": {
-    "presets": [
-      "react-app"
-    ]
+  "dependencies": {
+    "@react-keycloak/core": "file:packages/core",
+    "@react-keycloak/web": "file:packages/web",
+    "react-navi": "file:examples/react-navi",
+    "react-router": "file:examples/react-router"
   }
 }

@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-node_modules
+/node_modules
 /.pnp
 .pnp.js
 
@@ -10,7 +10,6 @@ node_modules
 
 # production
 /build
-/demo
 
 # misc
 .DS_Store
@@ -22,12 +21,3 @@ node_modules
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# custom
-.coveralls.yml
-/public/keycloak*.json
-build
-dist
-packages/*/README.md
-packages/*/LICENSE.md
-.size-snapshot.json
