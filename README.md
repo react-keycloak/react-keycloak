@@ -8,6 +8,8 @@
 [![NPM version](https://img.shields.io/npm/v/react-keycloak.svg)](https://www.npmjs.com/package/react-keycloak)
 
 [![Dependencies](https://img.shields.io/david/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak)
+[![Build Status](https://travis-ci.com/panz3r/react-keycloak.svg?branch=master)](https://travis-ci.com/panz3r/react-keycloak)
+[![Coverage Status](https://coveralls.io/repos/github/panz3r/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/panz3r/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/issues)
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![Contributors](https://img.shields.io/badge/contributors-1-orange.svg)](#contributors)
@@ -18,16 +20,16 @@
 React Keycloak requires:
 
 - React **16.0** or later
-- a version of `keycloak-js` matching the main version (e.g. `"react-keycloak": "8.0.1"` => `"keycloak-js": "8.0.1-yymmdd"`)
+- `keycloak-js` **8.0.1** or later
 
 ```
-yarn add react-keycloak
+yarn add @react-keycloak/web
 ```
 
 or
 
 ```
-npm install --save react-keycloak
+npm install --save @react-keycloak/web
 ```
 
 ## Getting Started
@@ -38,7 +40,7 @@ Wrap your App inside `KeycloakProvider` and pass a `keycloak` instance as prop
 
 ```js
 import Keycloak from 'keycloak-js';
-import { KeycloakProvider } from 'react-keycloak';
+import { KeycloakProvider } from '@react-keycloak/web';
 
 // Setup Keycloak instance as needed
 const keycloak = new Keycloak();
@@ -104,7 +106,7 @@ const App = () => {
 When a component requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
 
 ```js
-import { withKeycloak } from 'react-keycloak';
+import { withKeycloak } from '@react-keycloak/web';
 
 const LoginPage = ({ keycloak, keycloakInitialized }) => {
   // Here you can access all of keycloak methods and variables.
@@ -126,7 +128,7 @@ export default withKeycloak(LoginPage);
 Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
 
 ```js
-import { useKeycloak } from 'react-keycloak';
+import { useKeycloak } from '@react-keycloak/web';
 
 export default () => {
   // Using array destructuring
@@ -151,17 +153,11 @@ export default () => {
 };
 ```
 
-## Demo
+## Examples
 
-See inside `src/demo` for a demo implementing this library main features.
+See inside `examples` for various demo implementing this library main features.
 
-To run the demo app:
-- Clone/Download this repo
-- Install dependencies (`npm install` or `yarn`)
-- Place a valid `keycloak.json` file inside `public` folder or setup `Keycloak` instance inside `src/demo/App.js` following [Keycloak guide](https://www.keycloak.org/docs/latest/securing_apps/index.html#_javascript_adapter)
-- Run the demo (`npm start` or `yarn start`)
-
-**Note:** The demo app is not meant to be **production-ready** nor a **starter-kit** but just a way to show this module components and their usage.
+**Note:** The demo apps are not meant to be **production-ready** nor **starter-kit** s but just a way to show this module components and their usage.
 
 ## Contributors ✨
 
