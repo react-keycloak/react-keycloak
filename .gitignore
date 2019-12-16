@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.js
 
@@ -26,3 +26,8 @@ yarn-error.log*
 # custom
 .coveralls.yml
 /public/keycloak*.json
+build
+dist
+packages/*/README.md
+packages/*/LICENSE.md
+.size-snapshot.json

@@ -1,0 +1,17 @@
+{
+  "packages": ["packages/*", "examples/*"],
+  "version": "independent",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): :rocket:"
+    },
+    "version": {
+      "conventionalCommits": true
+    },
+    "bootstrap": {
+      "hoist": ["react", "react-dom"],
+      "npmClientArgs": ["--no-package-lock"]
+    }
+  }
+}
