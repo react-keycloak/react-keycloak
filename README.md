@@ -4,16 +4,19 @@
 
 > React bindings for [Keycloak](https://www.keycloak.org/)
 
+[![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/core?label=npm%20%7C%20core)](https://www.npmjs.com/package/@react-keycloak/core)
+[![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/web?label=npm%20%7C%20web)](https://www.npmjs.com/package/@react-keycloak/web)
+
 [![License](https://img.shields.io/github/license/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/blob/master/LICENSE.md)
-[![NPM version](https://img.shields.io/npm/v/react-keycloak.svg)](https://www.npmjs.com/package/react-keycloak)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![Contributors](https://img.shields.io/badge/contributors-1-orange.svg)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Dependencies](https://img.shields.io/david/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak)
 [![Build Status](https://travis-ci.com/panz3r/react-keycloak.svg?branch=master)](https://travis-ci.com/panz3r/react-keycloak)
 [![Coverage Status](https://coveralls.io/repos/github/panz3r/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/panz3r/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/issues)
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![Contributors](https://img.shields.io/badge/contributors-1-orange.svg)](#contributors)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 
 ## Install
 
