@@ -43,20 +43,5 @@
     "@react-keycloak/core": "file:../core",
     "hoist-non-react-statics": "^3.3.0",
     "prop-types": "^15.7.2"
-  },
-  "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.7.4",
-    "@babel/plugin-transform-react-jsx": "^7.7.4",
-    "@testing-library/dom": "^6.11.0",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/react-hooks": "^1.1.0",
-    "@testing-library/user-event": "^7.1.2",
-    "keycloak-js": "^8.0.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-test-renderer": "^16.12.0",
-    "rimraf": "^3.0.0",
-    "rollup": "^1.25.2"
   }
 }
