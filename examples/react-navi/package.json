@@ -1,6 +1,6 @@
 {
   "name": "react-navi",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "dependencies": {
     "@react-keycloak/web": "file:../../packages/web",
