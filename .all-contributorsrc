@@ -1,0 +1,34 @@
+{
+  "projectName": "react-keycloak",
+  "projectOwner": "panz3r",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "angular",
+  "badgeTemplate": "[![Contributors](https://img.shields.io/badge/contributors-<%= contributors.length %>-orange.svg)](#contributors)",
+  "contributors": [
+    {
+      "login": "panz3r",
+      "name": "Mattia Panzeri",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1754457?v=4",
+      "profile": "http://panz3r.dev",
+      "contributions": [
+        "ideas",
+        "code",
+        "doc",
+        "bug",
+        "maintenance",
+        "platform",
+        "question",
+        "review",
+        "test",
+        "example"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
