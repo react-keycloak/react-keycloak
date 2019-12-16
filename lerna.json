@@ -8,7 +8,7 @@
   "command": {
     "publish": {
       "conventionalCommits": true,
-      "message": "chore(release): Release new version :rocket:"
+      "message": "chore: Release new version :rocket:"
     },
     "version": {
       "conventionalCommits": true
