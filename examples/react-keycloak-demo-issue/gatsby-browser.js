@@ -18,7 +18,7 @@ exports.wrapRootElement = ({ element }) => {
         promiseType: "native",
         onLoad: "check-sso",
         silentCheckSsoRedirectUri:
-          window.location.origin + "/silent-check-sso.html",
+          window.location.origin + "/silent-check-sso.xhtml",
       }}
       LoadingComponent={<Loading />}
     >
