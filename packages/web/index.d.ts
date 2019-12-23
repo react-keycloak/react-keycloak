@@ -112,6 +112,20 @@ export function withKeycloak<TPromise extends KeycloakPromiseType = 'native'>(
   component: ComponentType<ReactKeycloakInjectedProps<TPromise>>
 ): ComponentType
 
+export interface ReactKeycloakContextValue<
+  TPromise extends Keycloak.KeycloakPromiseType = 'native'
+> {
+  /**
+   * The single Keycloak instance of your application.
+   */
+  keycloak: KeycloakInstance<TPromise>;
+
+  /**
+   * Boolean indicating whenever the Keycloak instance has been initialized by KeycloakProvider
+   */
+  initialized: boolean;
+}
+
 /**
  *
  */
