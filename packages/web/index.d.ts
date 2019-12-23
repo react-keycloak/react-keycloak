@@ -3,6 +3,7 @@
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
 import { Component, ComponentType } from 'react'
+import { IReactKeycloakContextProps } from '@react-keycloak/core';
 import {
   KeycloakError,
   KeycloakInitOptions,
@@ -117,7 +118,7 @@ export function withKeycloak<TPromise extends KeycloakPromiseType = 'native'>(
  */
 export type ReactKeycloakHookResult<
   TPromise extends KeycloakPromiseType = 'native'
-> = ReactKeycloakContextValue<TPromise> & [KeycloakInstance<TPromise>, boolean]
+> = IReactKeycloakContextProps<TPromise> & [KeycloakInstance<TPromise>, boolean]
 
 /**
  * Return the Keycloak instance and initialization state.
