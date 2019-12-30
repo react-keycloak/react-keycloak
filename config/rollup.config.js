@@ -15,138 +15,139 @@ const sanitizePackageName = packageName =>
   (packageName || '').replace('@', '').replace('/', '-')
 
 // name will be used as the global name exposed in the UMD bundles
-const generateRollupConfig = name => [
-  // CommonJS
-  {
-    input: 'src/index.js',
-    output: {
-      file: `dist/lib/${sanitizePackageName(pkg.name)}.js`,
-      format: 'cjs',
-      indent: false
-    },
-    external,
-    plugins: [
-      nodeResolve({
-        jsnext: true
-      }),
-      babel(),
-      commonjs(),
-      sizeSnapshot()
-    ]
-  },
-
-  // ES
-  {
-    input: 'src/index.js',
-    output: {
-      file: `dist/es/${sanitizePackageName(pkg.name)}.js`,
-      format: 'es',
-      indent: false
-    },
-    external,
-    plugins: [
-      nodeResolve({
-        jsnext: true
-      }),
-      babel(),
-      commonjs(),
-      sizeSnapshot()
-    ]
-  },
-
-  // ES for Browsers
-  {
-    input: 'src/index.js',
-    output: {
-      file: `dist/es/${sanitizePackageName(pkg.name)}.mjs`,
-      format: 'es',
-      indent: false
-    },
-    external,
-    plugins: [
-      nodeResolve({
-        jsnext: true
-      }),
-      babel(),
-      commonjs(),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('production')
-      }),
-      terser({
-        compress: {
-          pure_getters: true,
-          unsafe: true,
-          unsafe_comps: true,
-          warnings: false
-        }
-      }),
-      sizeSnapshot()
-    ]
-  },
-
-  // UMD Development
-  {
-    input: 'src/index.js',
-    output: {
-      file: `dist/umd/${sanitizePackageName(pkg.name)}.js`,
-      format: 'umd',
-      globals: {
-        react: 'React'
+const generateRollupConfig = (name, skipWeb = false) =>
+  [
+    // CommonJS
+    {
+      input: 'src/index.js',
+      output: {
+        file: `dist/lib/${sanitizePackageName(pkg.name)}.js`,
+        format: 'cjs',
+        indent: false
       },
-      indent: false,
-      name
+      external,
+      plugins: [
+        nodeResolve({
+          jsnext: true
+        }),
+        babel({ runtimeHelpers: true }),
+        commonjs(),
+        sizeSnapshot()
+      ]
     },
-    external,
-    plugins: [
-      nodeResolve({
-        jsnext: true
-      }),
-      babel({
-        exclude: 'node_modules/**'
-      }),
-      commonjs(),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('development')
-      }),
-      sizeSnapshot()
-    ]
-  },
 
-  // UMD Production
-  {
-    input: 'src/index.js',
-    output: {
-      file: `dist/umd/${sanitizePackageName(pkg.name)}.min.js`,
-      format: 'umd',
-      globals: {
-        react: 'React'
+    // ES
+    {
+      input: 'src/index.js',
+      output: {
+        file: `dist/es/${sanitizePackageName(pkg.name)}.js`,
+        format: 'es',
+        indent: false
       },
-      indent: false,
-      name
+      external,
+      plugins: [
+        nodeResolve({
+          jsnext: true
+        }),
+        babel({ runtimeHelpers: true }),
+        commonjs(),
+        sizeSnapshot()
+      ]
     },
-    external,
-    plugins: [
-      nodeResolve({
-        jsnext: true
-      }),
-      babel({
-        exclude: 'node_modules/**'
-      }),
-      commonjs(),
-      replace({
-        'process.env.NODE_ENV': JSON.stringify('production')
-      }),
-      terser({
-        compress: {
-          pure_getters: true,
-          unsafe: true,
-          unsafe_comps: true,
-          warnings: false
-        }
-      }),
-      sizeSnapshot()
-    ]
-  }
-]
+
+    // ES for Browsers
+    !skipWeb && {
+      input: 'src/index.js',
+      output: {
+        file: `dist/es/${sanitizePackageName(pkg.name)}.mjs`,
+        format: 'es',
+        indent: false
+      },
+      external,
+      plugins: [
+        nodeResolve({
+          jsnext: true
+        }),
+        babel(),
+        commonjs(),
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        terser({
+          compress: {
+            pure_getters: true,
+            unsafe: true,
+            unsafe_comps: true,
+            warnings: false
+          }
+        }),
+        sizeSnapshot()
+      ]
+    },
+
+    // UMD Development
+    !skipWeb && {
+      input: 'src/index.js',
+      output: {
+        file: `dist/umd/${sanitizePackageName(pkg.name)}.js`,
+        format: 'umd',
+        globals: {
+          react: 'React'
+        },
+        indent: false,
+        name
+      },
+      external,
+      plugins: [
+        nodeResolve({
+          jsnext: true
+        }),
+        babel({
+          exclude: 'node_modules/**'
+        }),
+        commonjs(),
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('development')
+        }),
+        sizeSnapshot()
+      ]
+    },
+
+    // UMD Production
+    !skipWeb && {
+      input: 'src/index.js',
+      output: {
+        file: `dist/umd/${sanitizePackageName(pkg.name)}.min.js`,
+        format: 'umd',
+        globals: {
+          react: 'React'
+        },
+        indent: false,
+        name
+      },
+      external,
+      plugins: [
+        nodeResolve({
+          jsnext: true
+        }),
+        babel({
+          exclude: 'node_modules/**'
+        }),
+        commonjs(),
+        replace({
+          'process.env.NODE_ENV': JSON.stringify('production')
+        }),
+        terser({
+          compress: {
+            pure_getters: true,
+            unsafe: true,
+            unsafe_comps: true,
+            warnings: false
+          }
+        }),
+        sizeSnapshot()
+      ]
+    }
+  ].filter(Boolean)
 
 export default generateRollupConfig
