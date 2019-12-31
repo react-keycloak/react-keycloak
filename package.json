@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "postinstall": "lerna bootstrap --no-ci",
+    "postinstall": "lerna bootstrap --no-ci && lerna run build",
     "build": "lerna run build",
     "test": "jest",
     "test:coverage": "jest --coverage",
