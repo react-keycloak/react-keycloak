@@ -4,7 +4,6 @@
 
 > [NextJS](https://nextjs.org) bindings for [Keycloak](https://www.keycloak.org/)
 
-[![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/core?label=npm%20%7C%20core)](https://www.npmjs.com/package/@react-keycloak/core)
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/nextjs?label=npm%20%7C%20nextjs)](https://www.npmjs.com/package/@react-keycloak/nextjs)
 
 [![License](https://img.shields.io/github/license/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/blob/master/LICENSE.md)
@@ -38,8 +37,68 @@ npm install --save @react-keycloak/nextjs
 
 ## Getting Started
 
-> Coming Soon!!
->
+### Setup NextApp
+
+Create the `_app.tsx` file under `pages` folder and wrap your App inside `appWithKeycloak` and pass the `keycloak` init props
+
+```tsx
+import React from 'react'
+import App from 'next/app'
+
+import { appWithKeycloak } from '@react-keycloak/nextjs'
+
+class MyApp extends App {
+  render() {
+    const { Component, pageProps } = this.props
+    return <Component {...pageProps} />
+  }
+}
+
+export default appWithKeycloak({
+  realm: process.env.KEYCLOAK_REALM as string,
+  url: process.env.KEYCLOAK_URL as string,
+  clientId: process.env.KEYCLOAK_CLIENT_ID as string
+})(MyApp)
+```
+
+### HOC Usage
+
+When a page requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
+
+```tsx
+import { withKeycloak } from '@react-keycloak/nextjs'
+
+const IndexPage: NextPage = ({ keycloak }) => {
+  const loggedinState = keycloak?.authenticated ? (
+    <span className="text-success">logged in</span>
+  ) : (
+    <span className="text-danger">not logged in</span>
+  )
+
+  const welcomeMessage = keycloak
+    ? `Welcome back user!`
+    : 'Welcome visitor. Please login to continue.'
+
+  return (
+    <Layout title="Home | Next.js + Keycloak Example">
+      <h1 className="mt-5">Hello Next.js + Keycloak 👋</h1>
+      <div className="mb-5 lead text-muted">
+        This is an example of a Next.js site using Keycloak.
+      </div>
+
+      <p>You are: {loggedinState}</p>
+      <p>{welcomeMessage}</p>
+    </Layout>
+  )
+}
+
+export default withKeycloak(IndexPage)
+```
+
+### Hook Usage
+
+Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
+
 > See inside `examples/nextjs-app` for a sample implementation.
 
 ## Contributors ✨
