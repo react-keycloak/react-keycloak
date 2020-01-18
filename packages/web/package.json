@@ -32,7 +32,7 @@
     "clean": "rimraf ./dist",
     "prebuild": "npm run clean",
     "build": "rollup -c",
-    "prepublishOnly": "npm run build && cp ../../README.md . && cp ../../LICENSE.md ."
+    "prepublishOnly": "npm run build && cp ../../LICENSE.md ."
   },
   "peerDependencies": {
     "keycloak-js": ">=8.0.1",
