@@ -92,7 +92,7 @@ const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
 
   AppWithKeycloak.propTypes = {
     pageProps: PropTypes.shape({
-      isAuthenticated: PropTypes.bool.isRequired,
+      isAuthenticated: PropTypes.string.isRequired,
       isServer: PropTypes.bool.isRequired
     }).isRequired
   }
