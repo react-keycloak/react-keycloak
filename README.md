@@ -18,6 +18,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/panz3r/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/panz3r/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/issues)
 
+[![npm](https://img.shields.io/npm/dm/@react-keycloak/core)]()
 
 ## React
 
