@@ -10,17 +10,18 @@ import { checkIfUserAuthenticated, setCookie } from './internals/utils'
 const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
   const keycloak = getKeycloakInstance(keycloakInitOptions)
 
-  async function getPageProps({ Component, ctx }) {
-    return Component.getInitialProps ? Component.getInitialProps(ctx) : {}
+  async function getComponentInitialProps({ Component, ctx }) {
+    return Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
   }
 
   class AppWithKeycloak extends React.Component {
     static async getInitialProps(appContext) {
       const { isServer, isAuthenticated } = checkIfUserAuthenticated(appContext)
+      const cmpInitialProps = await getComponentInitialProps(appContext)
 
       return {
         pageProps: {
-          ...getPageProps(appContext),
+          ...cmpInitialProps,
           isAuthenticated,
           isServer
         }
