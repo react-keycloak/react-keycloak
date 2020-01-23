@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.10](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@1.0.0-alpha.9...@react-keycloak/nextjs@1.0.0-alpha.10) (2020-01-23)
+
+
+### Bug Fixes
+
+* **nextjs:** Fix 'getInitialProps' not forwarded ([81f0d84](https://github.com/panz3r/react-keycloak/commit/81f0d8409623ccabe3bb51bc6e4a7db789579cde))
+
+
+### Features
+
+* **nextjs:** Improve server-side auth status management ([643ef5e](https://github.com/panz3r/react-keycloak/commit/643ef5eabb4d4bb24f7089d89f09588cb7168729))
+
+
+
+
+
 # 1.0.0-alpha.7 (2020-01-08)
 
 
