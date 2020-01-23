@@ -20,7 +20,8 @@ function withKeycloak(WrappedComponent) {
         {...this.props}
         isAuthenticated={
           // either the client (keycloak.authenticated) or the server (isAuthenticated cookie) has to assert that the user is logged in
-          keycloak.authenticated || (isServer && isAuthenticated === 'true')
+          keycloak?.authenticated ||
+          ((isServer || !keycloak?.subject) && isAuthenticated === 'true')
         }
         keycloak={keycloak}
         keycloakInitialized={initialized}

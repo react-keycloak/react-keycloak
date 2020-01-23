@@ -1,20 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { isServer } from './utils'
+
 export const ServerContext = React.createContext({
-  isAuthenticated: 'true',
-  isServer: true
+  isAuthenticated: 'false',
+  isServer: isServer()
 })
 
 class ServerProvider extends Component {
   render() {
-    const { children, isAuthenticated, isServer } = this.props
+    const { children, isAuthenticated } = this.props
 
     return (
       <ServerContext.Provider
         value={{
           isAuthenticated,
-          isServer
+          isServer: isServer()
         }}
       >
         {React.Children.only(children)}
@@ -25,8 +27,7 @@ class ServerProvider extends Component {
 
 ServerProvider.propTypes = {
   children: PropTypes.element.isRequired,
-  isAuthenticated: PropTypes.string.isRequired,
-  isServer: PropTypes.bool.isRequired
+  isAuthenticated: PropTypes.string.isRequired
 }
 
 export default ServerProvider

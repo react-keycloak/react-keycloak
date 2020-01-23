@@ -1,4 +1,5 @@
 import cookie from 'cookie'
+import isNode from 'detect-node'
 import Cookie from 'js-cookie'
 
 // COOKIES
@@ -21,19 +22,19 @@ export function parseCookies(req) {
 
 // CHECK AUTH
 
-export const checkIfUserAuthenticated = ({ ctx: { req } }) => {
-  const isServer = Boolean(req)
+export const isServer = () => isNode && typeof window === 'undefined'
 
-  if (isServer) {
+export const checkIfUserAuthenticated = ({ ctx: { req } }) => {
+  if (isServer()) {
     const cookies = parseCookies(req)
     return {
-      isAuthenticated: cookies.isAuthenticated,
+      isAuthenticated: cookies.isAuthenticated || 'false',
       isServer
     }
   }
 
   return {
-    isAuthenticated: getCookie('isAuthenticated'),
+    isAuthenticated: getCookie('isAuthenticated') || 'false',
     isServer
   }
 }

@@ -42,6 +42,7 @@
   "dependencies": {
     "@react-keycloak/core": "file:../core",
     "cookie": "^0.4.0",
+    "detect-node": "^2.0.4",
     "hoist-non-react-statics": "^3.3.0",
     "js-cookie": "^2.2.1",
     "prop-types": "^15.7.2"

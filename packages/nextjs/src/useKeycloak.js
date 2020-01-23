@@ -9,7 +9,8 @@ function useKeycloak() {
 
   // either the client (keycloak.authenticated) or the server (isAuthenticated cookie) has to assert that the user is logged in
   const isAuthenticated =
-    keycloak.authenticated || (isServer && serverAuth === 'true')
+    keycloak?.authenticated ||
+    ((isServer || !keycloak?.subject) && serverAuth === 'true')
 
   return Object.assign([keycloak, initialized, isAuthenticated], {
     initialized,

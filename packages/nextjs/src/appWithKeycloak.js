@@ -16,20 +16,23 @@ const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
 
   class AppWithKeycloak extends React.Component {
     static async getInitialProps(appContext) {
-      const { isServer, isAuthenticated } = checkIfUserAuthenticated(appContext)
+      const { isAuthenticated } = checkIfUserAuthenticated(appContext)
       const cmpInitialProps = await getComponentInitialProps(appContext)
 
       return {
         pageProps: {
           ...cmpInitialProps,
-          isAuthenticated,
-          isServer
+          isAuthenticated
         }
       }
     }
 
-    state = {
-      isAuthenticated: 'false'
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        isAuthenticated: props?.pageProps?.isAuthenticated ?? 'false'
+      }
     }
 
     onEvent = (event, error) => {
@@ -38,33 +41,29 @@ const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
       }
 
       if (event === 'onAuthSuccess') {
-        setCookie('isAuthenticated', 'true')
         this.setState({
           isAuthenticated: 'true'
         })
+
+        setCookie('isAuthenticated', 'true')
       }
 
       if (event === 'onAuthLogout') {
-        setCookie('isAuthenticated', 'false')
         this.setState({
           isAuthenticated: 'false'
         })
+
+        setCookie('isAuthenticated', 'false')
       }
 
       if (event === 'onReady') {
-        // make sure our cookie state never falls out of sync with our actual
-        // keycloak state by checking on every page refresh
-        if (keycloak.authenticated) {
-          this.setState({
-            isAuthenticated: 'true'
-          })
-          return setCookie('isAuthenticated', 'true')
-        }
+        const isAuthenticated = keycloak.authenticated ? 'true' : 'false'
 
-        setCookie('isAuthenticated', 'false')
         this.setState({
-          isAuthenticated: 'false'
+          isAuthenticated
         })
+
+        setCookie('isAuthenticated', isAuthenticated)
       }
     }
 
@@ -72,17 +71,10 @@ const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
       const { pageProps, ...props } = this.props
       const { isAuthenticated } = this.state
 
-      const {
-        isAuthenticated: isAuthenticatedProp,
-        isServer,
-        ...childPageProps
-      } = pageProps
+      const { isAuthenticated: isAuthProp, ...childPageProps } = pageProps
 
       return (
-        <ServerProvider
-          isAuthenticated={isAuthenticated || isAuthenticatedProp}
-          isServer={isServer}
-        >
+        <ServerProvider isAuthenticated={isAuthenticated || isAuthProp}>
           <KeycloakProvider keycloak={keycloak} onEvent={this.onEvent}>
             <WrappedComponent {...props} pageProps={childPageProps} />
           </KeycloakProvider>
@@ -93,8 +85,7 @@ const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
 
   AppWithKeycloak.propTypes = {
     pageProps: PropTypes.shape({
-      isAuthenticated: PropTypes.string.isRequired,
-      isServer: PropTypes.bool.isRequired
+      isAuthenticated: PropTypes.string.isRequired
     }).isRequired
   }
 
