@@ -14,8 +14,8 @@ type ParsedToken = KeycloakTokenParsed & {
   family_name?: string
 }
 
-const IndexPage: NextPage = withKeycloak(({ keycloak }) => {
-  const loggedinState = keycloak?.authenticated ? (
+const IndexPage: NextPage = withKeycloak(({ isAuthenticated, keycloak }) => {
+  const loggedinState = isAuthenticated ? (
     <span className="text-success">logged in</span>
   ) : (
     <span className="text-danger">not logged in</span>
@@ -23,7 +23,7 @@ const IndexPage: NextPage = withKeycloak(({ keycloak }) => {
 
   const parsedToken: ParsedToken | undefined = keycloak?.tokenParsed
   const welcomeMessage =
-    keycloak && parsedToken
+    isAuthenticated || (keycloak && parsedToken)
       ? `Welcome back ${parsedToken?.name ?? ''}!`
       : 'Welcome visitor. Please login to continue.'
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { NextPage } from 'next'
 import { KeycloakTokenParsed } from 'keycloak-js'
 
-import { useKeycloak } from '@react-keycloak/nextjs'
+import { withKeycloak } from '@react-keycloak/nextjs'
 
 import { Layout } from '../components/Layout'
 
@@ -13,9 +13,7 @@ type ParsedToken = KeycloakTokenParsed & {
   family_name?: string
 }
 
-const ProfilePage: NextPage = () => {
-  const { keycloak } = useKeycloak()
-
+const ProfilePage: NextPage = withKeycloak(({ keycloak }) => {
   const parsedToken: ParsedToken | undefined = keycloak?.tokenParsed
 
   const profile = keycloak?.authenticated ? (
@@ -49,6 +47,6 @@ const ProfilePage: NextPage = () => {
       {profile}
     </Layout>
   )
-}
+})
 
 export default ProfilePage

@@ -23,22 +23,23 @@ export const Header = withKeycloak(({ isAuthenticated, keycloak }) => {
             className="mx-2 btn btn-outline-primary"
             onClick={() => {
               if (keycloak) {
-                window.location.href = keycloak.createLogoutUrl()
-              }
-            }}
-          >
-            Logout
-          </button>
-          <button
-            type="button"
-            className="mx-2 btn btn-outline-primary"
-            onClick={() => {
-              if (keycloak) {
                 window.location.href = keycloak.createAccountUrl()
               }
             }}
           >
             My Account
+          </button>
+
+          <button
+            type="button"
+            className="mx-2 btn btn-outline-danger"
+            onClick={() => {
+              if (keycloak) {
+                window.location.href = keycloak.createLogoutUrl()
+              }
+            }}
+          >
+            Logout
           </button>
         </>
       ) : (
@@ -54,9 +55,10 @@ export const Header = withKeycloak(({ isAuthenticated, keycloak }) => {
           >
             Signup
           </button>
+
           <button
             type="button"
-            className="mx-2 btn btn-outline-primary"
+            className="mx-2 btn btn-outline-success"
             onClick={() => {
               if (keycloak) {
                 window.location.href = keycloak.createLoginUrl()
