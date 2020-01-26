@@ -61,6 +61,54 @@ export default appWithKeycloak({
 })(MyApp)
 ```
 
+`appWithKeycloak` also accepts a second optional parameter that represents the `ProviderConfig` and the object can contains the following properties:
+
+- `initConfig`, contains the object to be passed to `keycloak.init()` method, by default the following is used
+
+      {
+        onLoad: 'check-sso',
+        promiseType: 'native',
+      }
+
+  for more options see [Keycloak docs](https://www.keycloak.org/docs/latest/securing_apps/index.html#init-options).
+
+- `LoadingComponent`, a component to be displayed while `keycloak` is being initialized, if not provided child components will be rendered immediately. Defaults to `null`
+
+- `isLoadingCheck`, an optional loading check function to customize LoadingComponent display condition. Return `true` to display LoadingComponent, `false` to hide it.
+
+  Can be implemented as follow
+  ```js
+    (keycloak, isAuthenticated) => !isAuthenticated && !keycloak.authenticated;
+  ```
+
+- `onEvent`, an handler function that receives events launched by `keycloak`, defaults to `null`.
+
+  It can be implemented as follow
+  ```js
+    (event, error) => {
+      console.log('onKeycloakEvent', event, error);
+    }
+  ```
+  Published events are:
+    - `onReady`
+    - `onAuthSuccess`
+    - `onAuthError`
+    - `onAuthRefreshSuccess`
+    - `onAuthRefreshError`
+    - `onTokenExpired`
+    - `onAuthLogout`
+
+- `onTokens`, an handler function that receives `keycloak` tokens as an object every time they change, defaults to `null`.
+
+  Keycloak tokens are returned as follow
+  ```json
+  {
+    "idToken": string,
+    "refreshToken": string,
+    "token": string,
+  }
+  ```
+
 ### HOC Usage
 
 When a page requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
