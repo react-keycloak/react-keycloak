@@ -7,7 +7,10 @@ import KeycloakProvider from './internals/keycloakProvider'
 import ServerProvider from './internals/serverProvider'
 import { checkIfUserAuthenticated, setCookie } from './internals/utils'
 
-const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
+const appWithKeycloak = (
+  keycloakInitOptions,
+  providerProps = {}
+) => WrappedComponent => {
   const keycloak = getKeycloakInstance(keycloakInitOptions)
 
   async function getComponentInitialProps({ Component, ctx }) {
@@ -65,6 +68,25 @@ const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
 
         setCookie('isAuthenticated', isAuthenticated)
       }
+
+      // Propagate events up
+      providerProps?.onEvent?.(event, error)
+    }
+
+    isLoadingCheck = keycloak => {
+      const { pageProps } = this.props
+      const { isAuthenticated } = this.state
+
+      const { isAuthenticated: isAuthProp } = pageProps
+
+      if (providerProps?.isLoadingCheck) {
+        return providerProps.isLoadingCheck(
+          keycloak,
+          isAuthenticated || isAuthProp
+        )
+      }
+
+      return false
     }
 
     render() {
@@ -75,7 +97,14 @@ const appWithKeycloak = keycloakInitOptions => WrappedComponent => {
 
       return (
         <ServerProvider isAuthenticated={isAuthenticated || isAuthProp}>
-          <KeycloakProvider keycloak={keycloak} onEvent={this.onEvent}>
+          <KeycloakProvider
+            keycloak={keycloak}
+            initConfig={providerProps?.initConfig}
+            isLoadingCheck={this.isLoadingCheck}
+            LoadingComponent={providerProps?.LoadingComponent}
+            onEvent={this.onEvent}
+            onTokens={providerProps?.onTokens}
+          >
             <WrappedComponent {...props} pageProps={childPageProps} />
           </KeycloakProvider>
         </ServerProvider>

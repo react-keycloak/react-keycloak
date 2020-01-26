@@ -3,7 +3,11 @@
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
 import { Component, ComponentType } from 'react'
-import { IReactKeycloakContextProps } from '@react-keycloak/core'
+import {
+  IReactKeycloakContextProps,
+  KeycloakEventHandler,
+  KeycloakTokens,
+} from '@react-keycloak/core'
 import { AppType } from 'next'
 import {
   KeycloakConfig,
@@ -13,40 +17,51 @@ import {
   KeycloakPromiseType
 } from 'keycloak-js'
 
-export interface KeycloakTokens {
+export type NextJSKeycloakLoadingCheck<
+  TPromise extends KeycloakPromiseType = 'native'
+> = (keycloak: KeycloakInstance<TPromise>, isAuthenticated: boolean) => boolean
+
+export type KeycloakTokensHandler = (tokens: KeycloakTokens) => void
+
+export interface ReactKeycloakProviderProps<
+  TPromise extends KeycloakPromiseType = 'native'
+> {
   /**
-   * Current idToken returned by Keycloak.
+   * The KeycloakJS config to be used when initializing Keycloak instance.
    */
-  idToken: string
+  initConfig?: KeycloakInitOptions
 
   /**
-   * Current refreshToken returned by Keycloak.
+   * An optional loading check function to customize LoadingComponent display condition.
+   * Return true to display LoadingComponent, false to hide it.
    */
-  refreshToken: string
+  isLoadingCheck?: NextJSKeycloakLoadingCheck<TPromise>
 
   /**
-   * Current JWT token returned by Keycloak.
+   * An optional component to display while Keycloak instance is being initialized.
    */
-  token: string
+  LoadingComponent?: JSX.Element
+
+  /**
+   * An optional function to receive Keycloak events as they happen.
+   */
+  onEvent?: KeycloakEventHandler
+
+  /**
+   * An optional function to receive Keycloak tokens when changed.
+   */
+  onTokens?: KeycloakTokensHandler
 }
 
-export type KeycloakLoadingCheck<
+/**
+ * NextJS App Wrapper
+ */
+export function appWithKeycloak<
   TPromise extends KeycloakPromiseType = 'native'
-> = (keycloak: KeycloakInstance<TPromise>) => boolean
-
-export type KeycloakEvent =
-  | 'onReady'
-  | 'onAuthSuccess'
-  | 'onAuthError'
-  | 'onAuthRefreshSuccess'
-  | 'onAuthRefreshError'
-  | 'onAuthLogout'
-  | 'onTokenExpired'
-
-export type KeycloakEventHandler = (
-  eventType: KeycloakEvent,
-  error?: KeycloakError
-) => void
+>(
+  options: KeycloakConfig,
+  providerProps?: ReactKeycloakProviderProps<TPromise>
+): (app: AppType<ReactKeycloakInjectedProps<TPromise>>) => AppType
 
 /**
  * Props injected by withKeycloak HOC
@@ -97,9 +112,3 @@ export type ReactKeycloakHookResult<
 export function useKeycloak<
   TPromise extends Keycloak.KeycloakPromiseType = 'native'
 >(): ReactKeycloakHookResult<TPromise>
-
-export function appWithKeycloak<
-  TPromise extends KeycloakPromiseType = 'native'
->(
-  options: KeycloakConfig
-): (app: AppType<ReactKeycloakInjectedProps<TPromise>>) => AppType
