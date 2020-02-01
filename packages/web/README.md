@@ -1,6 +1,6 @@
 ![React Keycloak](/art/react-keycloak-logo.png?raw=true "React Keycloak Logo")
 
-# React Keycloak
+# React Keycloak <!-- omit in toc -->
 
 > React bindings for [Keycloak](https://www.keycloak.org/)
 
@@ -16,6 +16,18 @@
 [![Coverage Status](https://coveralls.io/repos/github/panz3r/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/panz3r/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/issues)
 
+----
+
+## Table of Contents <!-- omit in toc -->
+- [Install](#install)
+- [Getting Started](#getting-started)
+  - [Setup KeycloakProvider](#setup-keycloakprovider)
+  - [HOC Usage](#hoc-usage)
+  - [Hook Usage (React >=16.8 required)](#hook-usage-react-168-required)
+- [Examples](#examples)
+- [Contributors](#contributors)
+
+----
 
 ## Install
 
@@ -161,7 +173,7 @@ See inside `examples` for various demo implementing this library main features.
 
 **Note:** The demo apps are not meant to be **production-ready** nor **starter-kit** s but just a way to show this module components and their usage.
 
-## Contributors ✨
+## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
