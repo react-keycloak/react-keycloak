@@ -1,6 +1,6 @@
 ![React Keycloak](/art/react-keycloak-logo.png?raw=true "React Keycloak Logo")
 
-# React Keycloak
+# React Keycloak <!-- omit in toc -->
 
 > [NextJS](https://nextjs.org) bindings for [Keycloak](https://www.keycloak.org/)
 
@@ -16,6 +16,20 @@
 [![Coverage Status](https://coveralls.io/repos/github/panz3r/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/panz3r/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/issues)
 
+----
+
+## Table of Contents <!-- omit in toc -->
+- [Install](#install)
+- [Getting Started](#getting-started)
+  - [Setup NextApp](#setup-nextapp)
+  - [HOC Usage](#hoc-usage)
+  - [Hook Usage](#hook-usage)
+- [Examples](#examples)
+- [Other Resources](#other-resources)
+  - [Securing NextJS API](#securing-nextjs-api)
+- [Contributors](#contributors)
+
+----
 
 ## Install
 
@@ -147,9 +161,19 @@ export default withKeycloak(IndexPage)
 
 Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
 
-> See inside `examples/nextjs-app` for a sample implementation.
+## Examples
 
-## Contributors ✨
+See inside `examples/nextjs-app` for a sample implementation.
+
+## Other Resources
+
+### Securing NextJS API
+
+Whilst `@react-keycloak/nextjs` can help you secure the Frontend part of a `NextJS` app if you also want to secure `NextJS`-exposed APIs you can follow the sample in [this issue](https://github.com/panz3r/react-keycloak/issues/44#issuecomment-579877959).
+
+Thanks to [@webdeb](https://github.com/webdeb) for reporting the issue and helping develop a solution.
+
+## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
