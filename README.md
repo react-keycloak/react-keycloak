@@ -1,6 +1,6 @@
 ![React Keycloak](/art/react-keycloak-logo.png?raw=true "React Keycloak Logo")
 
-# React Keycloak
+# React Keycloak <!-- omit in toc -->
 
 > React bindings for [Keycloak](https://www.keycloak.org/)
 
@@ -18,9 +18,23 @@
 [![Coverage Status](https://coveralls.io/repos/github/panz3r/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/panz3r/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/issues)
 
-[![npm](https://img.shields.io/npm/dm/@react-keycloak/core)]()
+![npm](https://img.shields.io/npm/dm/@react-keycloak/core)
 
-## React
+----
+
+## Table of Contents  <!-- omit in toc -->
+
+- [Integrations](#integrations)
+  - [React](#react)
+  - [NextJS](#nextjs)
+- [Examples](#examples)
+- [Contributors](#contributors)
+
+----
+
+## Integrations
+
+### React
 
 React Keycloak for Web requires:
 
@@ -39,7 +53,7 @@ npm install --save @react-keycloak/web
 
 See `@react-keycloak/web` package [README](https://github.com/panz3r/react-keycloak/blob/master/packages/web/README.md) for complete documentation.
 
-## NextJS
+### NextJS
 
 React Keycloak for NextJS requires:
 
@@ -65,7 +79,7 @@ See inside `examples` for various demo implementing this library main features.
 
 **Note:** The demo apps are not meant to be **production-ready** nor **starter-kit** s but just a way to show this module components and their usage.
 
-## Contributors ✨
+## Contributors
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
