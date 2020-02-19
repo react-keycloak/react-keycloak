@@ -83,6 +83,12 @@ export interface ProviderProps<
   keycloak: KeycloakInstance<TPromise>
 
   /**
+   * A flag to enable automatic token refresh. Defaults to true.
+   * This is useful if you need to disable it (not recommended).
+   */
+  autoRefreshToken?: boolean
+
+  /**
    * The KeycloakJS config to be used when initializing Keycloak instance.
    */
   initConfig?: KeycloakInitOptions

@@ -26,6 +26,7 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
         onAuthLogout: PropTypes.func,
         onTokenExpired: PropTypes.func
       }).isRequired,
+      autoRefreshToken: PropTypes.bool,
       initConfig: PropTypes.shape({}),
       isLoadingCheck: PropTypes.func,
       LoadingComponent: PropTypes.element,
@@ -35,6 +36,7 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
     }
 
     static defaultProps = {
+      autoRefreshToken: true,
       initConfig: {
         onLoad: 'check-sso',
         promiseType: 'native'
@@ -141,12 +143,14 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
     }
 
     refreshKeycloakToken = event => () => {
-      const { keycloak, onEvent } = this.props
+      const { autoRefreshToken, keycloak, onEvent } = this.props
       // Notify Events listener
       onEvent && onEvent(event)
 
-      // Refresh Keycloak token
-      keycloak.updateToken(5)
+      if (autoRefreshToken) {
+        // Refresh Keycloak token
+        keycloak.updateToken(5)
+      }
     }
 
     render() {
