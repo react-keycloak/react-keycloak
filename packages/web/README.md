@@ -21,9 +21,11 @@
 ## Table of Contents <!-- omit in toc -->
 - [Install](#install)
 - [Getting Started](#getting-started)
+  - [Setup Keycloak instance](#setup-keycloak-instance)
   - [Setup KeycloakProvider](#setup-keycloakprovider)
   - [HOC Usage](#hoc-usage)
   - [Hook Usage (React >=16.8 required)](#hook-usage-react-168-required)
+  - [External Usage (Advanced)](#external-usage-advanced)
 - [Examples](#examples)
 - [Contributors](#contributors)
 
@@ -48,16 +50,27 @@ npm install --save @react-keycloak/web
 
 ## Getting Started
 
-### Setup KeycloakProvider
+### Setup Keycloak instance
 
-Wrap your App inside `KeycloakProvider` and pass a `keycloak` instance as prop
-
+Create a `keycloak.js` file in the `src` folder of your project (where `App.js` is located) with the following content
 ```js
 import Keycloak from 'keycloak-js';
-import { KeycloakProvider } from '@react-keycloak/web';
 
 // Setup Keycloak instance as needed
+// Pass initialization options as required or leave blank to load from 'keycloak.json'
 const keycloak = new Keycloak();
+
+export default keycloak;
+```
+
+### Setup KeycloakProvider
+
+Wrap your App inside `KeycloakProvider` and pass the `keycloak` instance as prop
+
+```js
+import { KeycloakProvider } from '@react-keycloak/web';
+
+import keycloak from './keycloak';
 
 // Wrap everything inside KeycloakProvider
 const App = () => {
@@ -166,6 +179,12 @@ export default () => {
   );
 };
 ```
+
+### External Usage (Advanced)
+
+If you need to access `keycloak` instance from non-`React` files (such as `sagas`, `utils`, `providers` ...), you can import the instance directly from the `keycloak.js` file.
+
+The instance will be initialized by `react-keycloak` but you'll need to be carefull when using the instance and avoid setting/overriding any props, you can however freely access the exposed methods (such as `refreshToken`, `login`, etc...).
 
 ## Examples
 
