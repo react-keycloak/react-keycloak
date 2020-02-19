@@ -420,6 +420,28 @@ describe('KeycloakProvider', () => {
       keycloakUpdateTokenSpy.mockRestore()
     })
 
+    it('should NOT call keycloak.updateToken on onTokenExpired event if autoRefreshToken is false', () => {
+      const keycloakStub = createKeycloakStub()
+      const keycloakUpdateTokenSpy = jest
+        .spyOn(keycloakStub, 'updateToken')
+        .mockImplementation()
+
+      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+
+      rtl.render(
+        <KeycloakProvider keycloak={keycloakStub} autoRefreshToken={false}>
+          <div />
+        </KeycloakProvider>
+      )
+
+      rtl.act(() => {
+        keycloakStub.onTokenExpired()
+      })
+
+      expect(keycloakUpdateTokenSpy).not.toHaveBeenCalled()
+      keycloakUpdateTokenSpy.mockRestore()
+    })
+
     it('should return Keycloak tokens when they change', () => {
       const keycloakStub = createKeycloakStub()
       const onTokensListener = jest.fn()
