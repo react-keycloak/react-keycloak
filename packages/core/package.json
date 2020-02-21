@@ -35,7 +35,7 @@
     "prepublishOnly": "npm run build && cp ../../README.md . && cp ../../LICENSE.md ."
   },
   "peerDependencies": {
-    "keycloak-js": ">=8.0.1",
+    "keycloak-js": ">=8.0.1 || >=9.0.0",
     "react": ">=16"
   },
   "dependencies": {
