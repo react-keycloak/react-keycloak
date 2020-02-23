@@ -1,3 +1,10 @@
+# GatsbYJS sample
+
+This demo shows how to integrate `@react-keycloak/web` in a `GatsbyJS` site and also how to setup
+[`Keycloak`](https://www.keycloak.org) `silentCheckSsoRedirectUri`.
+
+> Thanks to [@orelmax](https://github.com/orelmax) for the initial implementation (available [here](https://github.com/orelmax/react-keycloak-demo-issue)).
+
 <!-- AUTO-GENERATED-CONTENT:START (STARTER) -->
 <p align="center">
   <a href="https://www.gatsbyjs.org">

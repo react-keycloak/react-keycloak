@@ -44,7 +44,7 @@
     "keycloak-js": "^9.0.0",
     "lerna": "^3.15.0",
     "lint-staged": "^9.0.0",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-test-renderer": "^16.12.0",
@@ -74,6 +74,7 @@
     "@react-keycloak/core": "file:packages/core",
     "@react-keycloak/nextjs": "file:packages/nextjs",
     "@react-keycloak/web": "file:packages/web",
+    "gatsby-starter-default": "file:examples/gatsbyjs",
     "nextjs-app": "file:examples/nextjs-app",
     "react-navi": "file:examples/react-navi",
     "react-router": "file:examples/react-router"

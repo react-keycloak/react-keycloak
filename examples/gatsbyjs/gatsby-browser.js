@@ -1,4 +1,5 @@
 const React = require("react")
+const PropTypes = require("prop-types")
 const Keycloak = require("keycloak-js")
 const { KeycloakProvider } = require("@react-keycloak/web")
 
@@ -10,7 +11,7 @@ const keycloak = new Keycloak({
 
 const Loading = () => <div>getting ready...</div>
 
-exports.wrapRootElement = ({ element }) => {
+const wrapRootElement = ({ element }) => {
   return (
     <KeycloakProvider
       keycloak={keycloak}
@@ -26,3 +27,9 @@ exports.wrapRootElement = ({ element }) => {
     </KeycloakProvider>
   )
 }
+
+wrapRootElement.propTypes = {
+  element: PropTypes.node,
+}
+
+exports.wrapRootElement = wrapRootElement
