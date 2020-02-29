@@ -6,9 +6,9 @@ import { Component, ComponentType } from 'react'
 import {
   IReactKeycloakContextProps,
   KeycloakEventHandler,
-  KeycloakTokens,
+  KeycloakTokens
 } from '@react-keycloak/core'
-import { AppType } from 'next'
+import { AppContext, AppType } from 'next'
 import {
   KeycloakConfig,
   KeycloakError,
@@ -53,15 +53,31 @@ export interface ReactKeycloakProviderProps<
   onTokens?: KeycloakTokensHandler
 }
 
+declare function appgetKeycloakInitConfig(
+  appContext: AppContext
+): Promise<AppInitialProps>
+
+export class AppTypeWithKeycloak<
+  P = {},
+  CP = {},
+  S = {},
+  TPromise
+> extends AppType<P & ReactKeycloakInjectedProps<TPromise>, CP, S> {
+  static getKeycloakInitConfig?: typeof appgetKeycloakInitConfig
+}
+
 /**
  * NextJS App Wrapper
  */
 export function appWithKeycloak<
+  P = {},
+  CP = {},
+  S = {},
   TPromise extends KeycloakPromiseType = 'native'
 >(
   options: KeycloakConfig,
   providerProps?: ReactKeycloakProviderProps<TPromise>
-): (app: AppType<ReactKeycloakInjectedProps<TPromise>>) => AppType
+): (app: AppTypeWithKeycloak<P, CP, S, TPromise>) => AppType
 
 /**
  * Props injected by withKeycloak HOC

@@ -10,23 +10,33 @@ import { checkIfUserAuthenticated, setCookie } from './internals/utils'
 const appWithKeycloak = (
   keycloakInitOptions,
   providerProps = {}
-) => WrappedComponent => {
+) => NextApp => {
   const keycloak = getKeycloakInstance(keycloakInitOptions)
 
   async function getComponentInitialProps({ Component, ctx }) {
     return Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
   }
 
+  async function getKeycloakInitialProps(appContext) {
+    return NextApp.getKeycloakInitConfig
+      ? await NextApp.getKeycloakInitConfig(appContext)
+      : {}
+  }
+
   class AppWithKeycloak extends React.Component {
     static async getInitialProps(appContext) {
       const { isAuthenticated } = checkIfUserAuthenticated(appContext)
-      const cmpInitialProps = await getComponentInitialProps(appContext)
+      const [cmpInitialProps, keycloakInitConfig] = await Promise.all([
+        getComponentInitialProps(appContext),
+        getKeycloakInitialProps(appContext)
+      ])
 
       return {
         pageProps: {
           ...cmpInitialProps,
           isAuthenticated
-        }
+        },
+        keycloakInitConfig
       }
     }
 
@@ -34,7 +44,11 @@ const appWithKeycloak = (
       super(props)
 
       this.state = {
-        isAuthenticated: props?.pageProps?.isAuthenticated ?? 'false'
+        isAuthenticated: props?.pageProps?.isAuthenticated ?? 'false',
+        keycloakInitConfig: {
+          ...(providerProps?.initConfig ?? {}),
+          ...(props?.keycloakInitConfig ?? {})
+        }
       }
     }
 
@@ -90,8 +104,9 @@ const appWithKeycloak = (
     }
 
     render() {
-      const { pageProps, ...props } = this.props
-      const { isAuthenticated } = this.state
+      // eslint-disable-next-line no-unused-vars
+      const { keycloakInitConfig: kcInitCfg, pageProps, ...props } = this.props
+      const { isAuthenticated, keycloakInitConfig } = this.state
 
       const { isAuthenticated: isAuthProp, ...childPageProps } = pageProps
 
@@ -99,13 +114,13 @@ const appWithKeycloak = (
         <ServerProvider isAuthenticated={isAuthenticated || isAuthProp}>
           <KeycloakProvider
             keycloak={keycloak}
-            initConfig={providerProps?.initConfig}
+            initConfig={keycloakInitConfig}
             isLoadingCheck={this.isLoadingCheck}
             LoadingComponent={providerProps?.LoadingComponent}
             onEvent={this.onEvent}
             onTokens={providerProps?.onTokens}
           >
-            <WrappedComponent {...props} pageProps={childPageProps} />
+            <NextApp {...props} pageProps={childPageProps} />
           </KeycloakProvider>
         </ServerProvider>
       )
@@ -115,10 +130,11 @@ const appWithKeycloak = (
   AppWithKeycloak.propTypes = {
     pageProps: PropTypes.shape({
       isAuthenticated: PropTypes.string.isRequired
-    }).isRequired
+    }).isRequired,
+    keycloakInitConfig: PropTypes.shape({}).isRequired
   }
 
-  return hoistStatics(AppWithKeycloak, WrappedComponent, {
+  return hoistStatics(AppWithKeycloak, NextApp, {
     getInitialProps: true
   })
 }
