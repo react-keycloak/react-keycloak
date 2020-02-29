@@ -123,6 +123,36 @@ export default appWithKeycloak({
   }
   ```
 
+#### Dynamic react-keycloak initConfig
+If you need to pass dynamic `initConfig` parameters to the NextJS `AppWithKeycloak`, you can implement a static `getKeycloakInitConfig` method to your wrapper `App`.
+
+Like this
+```ts
+class MyApp extends App {
+  /**
+   * Pass additional dynamic initProps to Keycloak
+   */
+  static async getKeycloakInitConfig(ctx: AppContext) {
+    console.log('MyApp - getKeycloakInitConfig', ctx)
+    // Return an object with keycloak initConfig supported keys - see Keycloak docs
+    return {
+      token: 'test'
+    }
+  }
+
+  render() {
+    const { Component, pageProps } = this.props
+    return <Component {...pageProps} />
+  }
+}
+
+export default appWithKeycloak({
+  realm: process.env.KEYCLOAK_REALM as string,
+  url: process.env.KEYCLOAK_URL as string,
+  clientId: process.env.KEYCLOAK_CLIENT_ID as string
+})(MyApp)
+```
+
 ### HOC Usage
 
 When a page requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
