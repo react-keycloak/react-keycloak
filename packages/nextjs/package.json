@@ -1,6 +1,6 @@
 {
   "name": "@react-keycloak/nextjs",
-  "version": "1.0.0-alpha.14",
+  "version": "1.0.0-alpha.15",
   "license": "MIT",
   "description": "NextJS bindings for Keycloak javascript adapter",
   "repository": {

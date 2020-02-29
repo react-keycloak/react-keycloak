@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.15](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@1.0.0-alpha.14...@react-keycloak/nextjs@1.0.0-alpha.15) (2020-02-29)
+
+
+### Features
+
+* **nextjs:** Add 'getKeycloakInitConfig' handling to allow App to pass dynamic react-keycloak initConfig parameters ([0e03190](https://github.com/panz3r/react-keycloak/commit/0e03190a5b69d416355ea3afbeb5ae9b969a512f))
+
+
+
+
+
 # [1.0.0-alpha.14](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@1.0.0-alpha.13...@react-keycloak/nextjs@1.0.0-alpha.14) (2020-02-22)
 
 **Note:** Version bump only for package @react-keycloak/nextjs
