@@ -1,0 +1,48 @@
+{
+  "name": "@react-keycloak/razzle",
+  "version": "1.0.0-alpha.1",
+  "license": "MIT",
+  "description": "Razzle bindings for Keycloak javascript adapter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panz3r/react-keycloak.git"
+  },
+  "author": "Mattia Panzeri <mattia.panzeri93@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/panz3r/react-keycloak/issues"
+  },
+  "homepage": "https://github.com/panz3r/react-keycloak#readme",
+  "keywords": [
+    "react",
+    "razzle",
+    "keycloak",
+    "keycloak-js"
+  ],
+  "main": "dist/lib/react-keycloak-razzle.js",
+  "module": "dist/es/react-keycloak-razzle.js",
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "prebuild": "npm run clean",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build && cp ../../LICENSE.md ."
+  },
+  "peerDependencies": {
+    "keycloak-js": ">=8.0.1 || >=9.0.0",
+    "razzle": ">=3",
+    "react": ">=16"
+  },
+  "dependencies": {
+    "@react-keycloak/core": "file:../core",
+    "base-64": "^0.1.0",
+    "detect-node": "^2.0.4",
+    "hoist-non-react-statics": "^3.3.0",
+    "js-cookie": "^2.2.1",
+    "prop-types": "^15.7.2"
+  }
+}

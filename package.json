@@ -73,6 +73,7 @@
   "dependencies": {
     "@react-keycloak/core": "file:packages/core",
     "@react-keycloak/nextjs": "file:packages/nextjs",
+    "@react-keycloak/razzle": "file:packages/razzle",
     "@react-keycloak/web": "file:packages/web",
     "gatsby-starter-default": "file:examples/gatsbyjs",
     "nextjs-app": "file:examples/nextjs-app",
