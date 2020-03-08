@@ -77,6 +77,7 @@
     "@react-keycloak/web": "file:packages/web",
     "gatsby-starter-default": "file:examples/gatsbyjs",
     "nextjs-app": "file:examples/nextjs-app",
+    "razzle-app": "file:examples/razzle-app",
     "react-navi": "file:examples/react-navi",
     "react-router": "file:examples/react-router"
   }
