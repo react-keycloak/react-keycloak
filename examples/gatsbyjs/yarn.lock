@@ -1135,20 +1135,16 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
-"@react-keycloak/core@^1.0.0-alpha.5":
-  version "1.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/@react-keycloak/core/-/core-1.0.0-alpha.5.tgz#ffb7c9bff7ae7514f99291a84b7d5f545a52d322"
-  integrity sha512-sDp0GdrIiFSm2Bkd08fywT0QE6ByNFcWpRjBmXF0OAwyw6/7jCiVM0fY9kdDHgvAVgH2/xbQIw/2OoXE0BqpLg==
+"@react-keycloak/core@file:../../packages/core":
+  version "1.1.1"
   dependencies:
     prop-types "^15.7.2"
     react-fast-compare "^2.0.4"
 
-"@react-keycloak/web@1.0.0-alpha.5":
-  version "1.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/@react-keycloak/web/-/web-1.0.0-alpha.5.tgz#3ec668b186822cd6df31e0452aba5862227c554d"
-  integrity sha512-MmJjNgECgJ1vp/HJdVjUQd+0785S08FTRJykQJUIloA7ym3Z/qG/dcSpTy1EwvcuqHCkzssrBUz5l+L9EYLIvg==
+"@react-keycloak/web@file:../../packages/web":
+  version "1.0.4"
   dependencies:
-    "@react-keycloak/core" "^1.0.0-alpha.5"
+    "@react-keycloak/core" "file:../../packages/core"
     hoist-non-react-statics "^3.3.0"
     prop-types "^15.7.2"
 
@@ -1496,9 +1492,9 @@ acorn-jsx@^5.1.0:
   integrity sha512-tMUqwBWfLFbJbizRmEcWSLw6HnFzfdJs2sOJEOwwtVPMoH/0Ay+E703oZz78VSXZiiDcZrQ5XKjPIUQixhmgVw==
 
 acorn@^6.2.1:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.0.tgz#b659d2ffbafa24baf5db1cdbb2c94a983ecd2784"
-  integrity sha512-gac8OEcQ2Li1dxIEWGZzsp2BitJxwkwcOm0zHAJLcPJaVvm58FRnk6RkuLRpU1EujipU2ZFODv2P9DLMfnV8mw==
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.4.1.tgz#531e58ba3f51b9dacb9a6646ca4debf5b14ca474"
+  integrity sha512-ZVA9k326Nwrj3Cj9jlh3wGFutC2ZornPNARZwsNYqQYgN0EsV2d53w5RN/co65Ohn4sUAUtb1rSUAOD6XN9idA==
 
 acorn@^7.1.0:
   version "7.1.0"
@@ -9269,11 +9265,6 @@ prepend-http@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-2.0.0.tgz#e92434bfa5ea8c19f41cdfd401d741a3c819d897"
   integrity sha1-6SQ0v6XqjBn0HN/UAddBo8gZ2Jc=
-
-prettier@^1.19.1:
-  version "1.19.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
-  integrity sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==
 
 pretty-bytes@^5.1.0, pretty-bytes@^5.3.0:
   version "5.3.0"
