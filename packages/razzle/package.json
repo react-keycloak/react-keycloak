@@ -22,7 +22,8 @@
   "module": "dist/es/react-keycloak-razzle.js",
   "types": "index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "publishConfig": {
     "access": "public"
