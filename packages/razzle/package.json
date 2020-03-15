@@ -20,6 +20,7 @@
   ],
   "main": "dist/lib/react-keycloak-razzle.js",
   "module": "dist/es/react-keycloak-razzle.js",
+  "types": "index.d.ts",
   "files": [
     "dist"
   ],
