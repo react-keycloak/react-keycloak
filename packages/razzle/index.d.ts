@@ -94,3 +94,17 @@ export type ReactKeycloakHookResult<
 export function useKeycloak<
   TPromise extends KeycloakPromiseType = 'native'
 >(): ReactKeycloakHookResult<TPromise>
+
+/**
+ * ClientPersistors
+ */
+export interface ClientPersistors {
+  Cookies: TokenPersistor
+}
+
+/**
+ * ServerPersistors
+ */
+export interface ServerPersistors {
+  ExpressCookies: (req: any) => TokenPersistor
+}
