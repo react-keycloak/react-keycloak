@@ -7,6 +7,7 @@
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/core?label=npm%20%7C%20core)](https://www.npmjs.com/package/@react-keycloak/core)
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/web?label=npm%20%7C%20web)](https://www.npmjs.com/package/@react-keycloak/web)
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/nextjs?label=npm%20%7C%20nextjs)](https://www.npmjs.com/package/@react-keycloak/nextjs)
+[![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/razzle?label=npm%20%7C%20razzle)](https://www.npmjs.com/package/@react-keycloak/razzle)
 
 [![License](https://img.shields.io/github/license/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/blob/master/LICENSE.md)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -27,6 +28,7 @@
 - [Integrations](#integrations)
   - [React](#react)
   - [NextJS](#nextjs)
+  - [Razzle](#razzle)
 - [Examples](#examples)
 - [Contributors](#contributors)
 
@@ -72,6 +74,26 @@ npm install --save @react-keycloak/nextjs
 ```
 
 See `@react-keycloak/nextjs` package [README](https://github.com/panz3r/react-keycloak/blob/master/packages/nextjs/README.md) for complete documentation.
+
+### Razzle
+
+React Keycloak for Razzle requires:
+
+- React **16.0** or later
+- Razzle **3** or later
+- `keycloak-js` **8.0.1** or later
+
+```sh
+yarn add @react-keycloak/razzle
+```
+
+or
+
+```sh
+npm install --save @react-keycloak/razzle
+```
+
+See `@react-keycloak/razzle` package [README](https://github.com/panz3r/react-keycloak/blob/master/packages/razzle/README.md) for complete documentation.
 
 ## Examples
 
