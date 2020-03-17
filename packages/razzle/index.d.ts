@@ -28,7 +28,7 @@ export interface TokenPersistor {
 /**
  * SSRKeycloakProvider
  */
-export interface SSRKeycloakProvider<
+export class SSRKeycloakProvider<
   TPromise extends KeycloakPromiseType = 'native'
 > extends KeycloakProvider<TPromise> {
   /**
@@ -98,13 +98,13 @@ export function useKeycloak<
 /**
  * ClientPersistors
  */
-export interface ClientPersistors {
+export class ClientPersistors {
   Cookies: TokenPersistor
 }
 
 /**
  * ServerPersistors
  */
-export interface ServerPersistors {
+export class ServerPersistors {
   ExpressCookies: (req: any) => TokenPersistor
 }
