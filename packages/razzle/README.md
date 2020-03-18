@@ -1,4 +1,4 @@
-![React Keycloak](/art/react-keycloak-logo.png?raw=true "React Keycloak Logo")
+![React Keycloak](/art/react-keycloak-logo.png?raw=true 'React Keycloak Logo')
 
 # React Keycloak <!-- omit in toc -->
 
@@ -9,6 +9,7 @@
 [![License](https://img.shields.io/github/license/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/blob/master/LICENSE.md)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![Contributors](https://img.shields.io/badge/contributors-2-orange.svg)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Dependencies](https://img.shields.io/david/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak)
@@ -16,9 +17,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/panz3r/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/panz3r/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/issues)
 
-----
+---
 
 ## Table of Contents <!-- omit in toc -->
+
 - [Install](#install)
 - [Getting Started](#getting-started)
   - [Setup Razzle App](#setup-razzle-app)
@@ -27,7 +29,7 @@
 - [Examples](#examples)
 - [Contributors](#contributors)
 
-----
+---
 
 ## Install
 
@@ -54,6 +56,7 @@ npm install --save @react-keycloak/razzle
 > **N.B:** This setup requires you to install [`cookie-parser`](https://github.com/expressjs/cookie-parser) middleware.
 
 Edit your app `server.js` as follow
+
 ```js
 ...
 
@@ -93,6 +96,7 @@ server
 ```
 
 Edit your `client.js` as follow
+
 ```js
 import { ClientPersistors, SSRKeycloakProvider } from '@react-keycloak/razzle'
 
@@ -117,6 +121,7 @@ hydrate(
 ### HOC Usage
 
 When a page requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
+
 ```jsx
 ...
 
@@ -166,6 +171,7 @@ export default withKeycloak(Home)
 ### Hook Usage
 
 Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
+
 ```jsx
 ...
 
@@ -233,6 +239,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
