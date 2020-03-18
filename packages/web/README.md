@@ -1,4 +1,4 @@
-![React Keycloak](/art/react-keycloak-logo.png?raw=true "React Keycloak Logo")
+![React Keycloak](/art/react-keycloak-logo.png?raw=true 'React Keycloak Logo')
 
 # React Keycloak <!-- omit in toc -->
 
@@ -9,6 +9,7 @@
 [![License](https://img.shields.io/github/license/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/blob/master/LICENSE.md)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![Contributors](https://img.shields.io/badge/contributors-2-orange.svg)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Dependencies](https://img.shields.io/david/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak)
@@ -16,9 +17,10 @@
 [![Coverage Status](https://coveralls.io/repos/github/panz3r/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/panz3r/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/issues)
 
-----
+---
 
 ## Table of Contents <!-- omit in toc -->
+
 - [Install](#install)
 - [Getting Started](#getting-started)
   - [Setup Keycloak instance](#setup-keycloak-instance)
@@ -29,7 +31,7 @@
 - [Examples](#examples)
 - [Contributors](#contributors)
 
-----
+---
 
 ## Install
 
@@ -53,14 +55,15 @@ npm install --save @react-keycloak/web
 ### Setup Keycloak instance
 
 Create a `keycloak.js` file in the `src` folder of your project (where `App.js` is located) with the following content
+
 ```js
-import Keycloak from 'keycloak-js';
+import Keycloak from 'keycloak-js'
 
 // Setup Keycloak instance as needed
 // Pass initialization options as required or leave blank to load from 'keycloak.json'
-const keycloak = new Keycloak();
+const keycloak = new Keycloak()
 
-export default keycloak;
+export default keycloak
 ```
 
 ### Setup KeycloakProvider
@@ -68,14 +71,14 @@ export default keycloak;
 Wrap your App inside `KeycloakProvider` and pass the `keycloak` instance as prop
 
 ```js
-import { KeycloakProvider } from '@react-keycloak/web';
+import { KeycloakProvider } from '@react-keycloak/web'
 
-import keycloak from './keycloak';
+import keycloak from './keycloak'
 
 // Wrap everything inside KeycloakProvider
 const App = () => {
-  return <KeycloakProvider keycloak={keycloak}>...</KeycloakProvider>;
-};
+  return <KeycloakProvider keycloak={keycloak}>...</KeycloakProvider>
+}
 ```
 
 **N.B.** If your using other providers (such as `react-redux`) it is recommended to place them inside `KeycloakProvider`.
@@ -96,35 +99,40 @@ const App = () => {
 - `isLoadingCheck`, an optional loading check function to customize LoadingComponent display condition. Return `true` to display LoadingComponent, `false` to hide it.
 
   Can be implemented as follow
+
   ```js
-    keycloak => !keycloak.authenticated;
+  keycloak => !keycloak.authenticated
   ```
 
 - `onEvent`, an handler function that receives events launched by `keycloak`, defaults to `null`.
 
   It can be implemented as follow
+
   ```js
-    (event, error) => {
-      console.log('onKeycloakEvent', event, error);
-    }
+  ;(event, error) => {
+    console.log('onKeycloakEvent', event, error)
+  }
   ```
+
   Published events are:
-    - `onReady`
-    - `onAuthSuccess`
-    - `onAuthError`
-    - `onAuthRefreshSuccess`
-    - `onAuthRefreshError`
-    - `onTokenExpired`
-    - `onAuthLogout`
+
+  - `onReady`
+  - `onAuthSuccess`
+  - `onAuthError`
+  - `onAuthRefreshSuccess`
+  - `onAuthRefreshError`
+  - `onTokenExpired`
+  - `onAuthLogout`
 
 - `onTokens`, an handler function that receives `keycloak` tokens as an object every time they change, defaults to `null`.
 
   Keycloak tokens are returned as follow
+
   ```json
   {
     "idToken": string,
     "refreshToken": string,
-    "token": string,
+    "token": string
   }
   ```
 
@@ -133,7 +141,7 @@ const App = () => {
 When a component requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
 
 ```js
-import { withKeycloak } from '@react-keycloak/web';
+import { withKeycloak } from '@react-keycloak/web'
 
 const LoginPage = ({ keycloak, keycloakInitialized }) => {
   // Here you can access all of keycloak methods and variables.
@@ -144,10 +152,10 @@ const LoginPage = ({ keycloak, keycloakInitialized }) => {
         Login
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default withKeycloak(LoginPage);
+export default withKeycloak(LoginPage)
 ```
 
 ### Hook Usage (React >=16.8 required)
@@ -155,20 +163,22 @@ export default withKeycloak(LoginPage);
 Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
 
 ```js
-import { useKeycloak } from '@react-keycloak/web';
+import { useKeycloak } from '@react-keycloak/web'
 
 export default () => {
   // Using array destructuring
-  const [keycloak, initialized] = useKeycloak();
+  const [keycloak, initialized] = useKeycloak()
   // or Object destructuring
-  const { keycloak, initialized } = useKeycloak();
+  const { keycloak, initialized } = useKeycloak()
 
   // Here you can access all of keycloak methods and variables.
   // See https://www.keycloak.org/docs/latest/securing_apps/index.html#javascript-adapter-reference
 
   return (
     <div>
-      <div>{`User is ${!keycloak.authenticated ? 'NOT ' : ''}authenticated`}</div>
+      <div>{`User is ${
+        !keycloak.authenticated ? 'NOT ' : ''
+      }authenticated`}</div>
 
       {!!keycloak.authenticated && (
         <button type="button" onClick={() => keycloak.logout()}>
@@ -176,8 +186,8 @@ export default () => {
         </button>
       )}
     </div>
-  );
-};
+  )
+}
 ```
 
 ### External Usage (Advanced)
@@ -208,6 +218,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
