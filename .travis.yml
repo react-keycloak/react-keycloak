@@ -4,6 +4,6 @@ node_js:
   - 'lts/*'
 
 script:
-  - npm run eslint
+  - npm run lint
   - npm run test:coverage
   - npm run coveralls
