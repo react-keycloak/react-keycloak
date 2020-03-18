@@ -40,6 +40,6 @@
   },
   "dependencies": {
     "prop-types": "^15.7.2",
-    "react-fast-compare": "^2.0.4"
+    "react-fast-compare": "^3.0.1"
   }
 }
