@@ -1,4 +1,4 @@
-![React Keycloak](/art/react-keycloak-logo.png?raw=true "React Keycloak Logo")
+![React Keycloak](/art/react-keycloak-logo.png?raw=true 'React Keycloak Logo')
 
 # React Keycloak <!-- omit in toc -->
 
@@ -12,6 +12,7 @@
 [![License](https://img.shields.io/github/license/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/blob/master/LICENSE.md)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![Contributors](https://img.shields.io/badge/contributors-2-orange.svg)](#contributors)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Dependencies](https://img.shields.io/david/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak)
@@ -21,9 +22,9 @@
 
 ![npm](https://img.shields.io/npm/dm/@react-keycloak/core)
 
-----
+---
 
-## Table of Contents  <!-- omit in toc -->
+## Table of Contents <!-- omit in toc -->
 
 - [Integrations](#integrations)
   - [React](#react)
@@ -32,7 +33,7 @@
 - [Examples](#examples)
 - [Contributors](#contributors)
 
-----
+---
 
 ## Integrations
 
@@ -117,6 +118,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
