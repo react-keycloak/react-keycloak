@@ -4,16 +4,16 @@
   "private": true,
   "dependencies": {
     "@react-keycloak/web": "file:../../packages/web",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "axios": "^0.19.0",
-    "keycloak-js": "^8.0.1",
-    "navi": "^0.13.6",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-navi": "^0.13.6",
-    "react-scripts": "3.3.0"
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^10.0.1",
+    "@testing-library/user-event": "^10.0.0",
+    "axios": "^0.19.2",
+    "keycloak-js": "^8.0.2",
+    "navi": "^0.14.0",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-navi": "^0.14.3",
+    "react-scripts": "^3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
