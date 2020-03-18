@@ -3,7 +3,7 @@
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
 import { Component, ComponentType } from 'react'
-import { IReactKeycloakContextProps } from '@react-keycloak/core';
+import { IReactKeycloakContextProps } from '@react-keycloak/core'
 import {
   KeycloakError,
   KeycloakInitOptions,
