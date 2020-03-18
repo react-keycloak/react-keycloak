@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/razzle-app@1.1.2...@react-keycloak/razzle-app@1.1.3) (2020-03-18)
+
+**Note:** Version bump only for package @react-keycloak/razzle-app
+
+
+
+
+
 ## [1.1.2](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/razzle-app@1.1.1...@react-keycloak/razzle-app@1.1.2) (2020-03-16)
 
 **Note:** Version bump only for package @react-keycloak/razzle-app
