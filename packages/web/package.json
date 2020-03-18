@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "@react-keycloak/core": "file:../core",
-    "hoist-non-react-statics": "^3.3.0",
+    "hoist-non-react-statics": "^3.3.2",
     "prop-types": "^15.7.2"
   }
 }
