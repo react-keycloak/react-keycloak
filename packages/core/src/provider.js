@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
 import isEqual from 'react-fast-compare'
 
@@ -9,45 +9,7 @@ const initialState = {
 }
 
 export function createReactKeycloakProvider(ReactKeycloakContext) {
-  return class KeycloakProvider extends React.PureComponent {
-    static propTypes = {
-      children: PropTypes.element.isRequired,
-      keycloak: PropTypes.shape({
-        init: PropTypes.func.isRequired,
-        updateToken: PropTypes.func.isRequired,
-        idToken: PropTypes.string,
-        refreshToken: PropTypes.string,
-        token: PropTypes.string,
-        onReady: PropTypes.func,
-        onAuthSuccess: PropTypes.func,
-        onAuthError: PropTypes.func,
-        onAuthRefreshSuccess: PropTypes.func,
-        onAuthRefreshError: PropTypes.func,
-        onAuthLogout: PropTypes.func,
-        onTokenExpired: PropTypes.func
-      }).isRequired,
-      autoRefreshToken: PropTypes.bool,
-      initConfig: PropTypes.shape({}),
-      isLoadingCheck: PropTypes.func,
-      LoadingComponent: PropTypes.element,
-      onError: PropTypes.func,
-      onEvent: PropTypes.func,
-      onTokens: PropTypes.func
-    }
-
-    static defaultProps = {
-      autoRefreshToken: true,
-      initConfig: {
-        onLoad: 'check-sso',
-        promiseType: 'native'
-      },
-      isLoadingCheck: null,
-      LoadingComponent: null,
-      onError: null,
-      onEvent: null,
-      onTokens: null
-    }
-
+  class KeycloakProvider extends React.PureComponent {
     defaultInitConfig = {
       onLoad: 'check-sso',
       promiseType: 'native'
@@ -168,6 +130,46 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
       )
     }
   }
+
+  KeycloakProvider.propTypes = {
+    children: PropTypes.element.isRequired,
+    keycloak: PropTypes.shape({
+      init: PropTypes.func.isRequired,
+      updateToken: PropTypes.func.isRequired,
+      idToken: PropTypes.string,
+      refreshToken: PropTypes.string,
+      token: PropTypes.string,
+      onReady: PropTypes.func,
+      onAuthSuccess: PropTypes.func,
+      onAuthError: PropTypes.func,
+      onAuthRefreshSuccess: PropTypes.func,
+      onAuthRefreshError: PropTypes.func,
+      onAuthLogout: PropTypes.func,
+      onTokenExpired: PropTypes.func
+    }).isRequired,
+    autoRefreshToken: PropTypes.bool,
+    initConfig: PropTypes.shape({}),
+    isLoadingCheck: PropTypes.func,
+    LoadingComponent: PropTypes.element,
+    onError: PropTypes.func,
+    onEvent: PropTypes.func,
+    onTokens: PropTypes.func
+  }
+
+  KeycloakProvider.defaultProps = {
+    autoRefreshToken: true,
+    initConfig: {
+      onLoad: 'check-sso',
+      promiseType: 'native'
+    },
+    isLoadingCheck: null,
+    LoadingComponent: null,
+    onError: null,
+    onEvent: null,
+    onTokens: null
+  }
+
+  return KeycloakProvider
 }
 
 export default createReactKeycloakProvider

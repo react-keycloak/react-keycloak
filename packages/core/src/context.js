@@ -1,7 +1,7 @@
-import React from 'react'
+import { createContext } from 'react'
 
 export function createReactKeycloakContext(initialContext) {
-  return React.createContext({
+  return createContext({
     initialized: false,
     ...initialContext
   })
