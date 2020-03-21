@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import hoistStatics from 'hoist-non-react-statics'
 
 import { KeycloakContext } from './internals/keycloak'
@@ -11,7 +11,7 @@ function withKeycloak(WrappedComponent) {
     WrappedComponent.displayName || WrappedComponent.name
   )
 
-  class WithKeycloakComponent extends Component {
+  class WithKeycloakComponent extends React.PureComponent {
     renderWrappedComponent = ({ isServer, isAuthenticated }) => ({
       initialized,
       keycloak
