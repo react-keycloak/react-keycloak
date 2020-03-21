@@ -1,20 +1,20 @@
 {
   "dist/lib/react-keycloak-razzle.js": {
-    "bundled": 124026,
-    "minified": 53898,
-    "gzipped": 11341
+    "bundled": 14293,
+    "minified": 8006,
+    "gzipped": 2451
   },
   "dist/es/react-keycloak-razzle.js": {
-    "bundled": 123707,
-    "minified": 53633,
-    "gzipped": 11290,
+    "bundled": 13945,
+    "minified": 7726,
+    "gzipped": 2385,
     "treeshaked": {
       "rollup": {
-        "code": 21281,
-        "import_statements": 93
+        "code": 1141,
+        "import_statements": 249
       },
       "webpack": {
-        "code": 22659
+        "code": 4519
       }
     }
   }
