@@ -19,7 +19,6 @@
   ],
   "main": "dist/lib/react-keycloak-core.js",
   "module": "dist/es/react-keycloak-core.js",
-  "unpkg": "dist/umd/react-keycloak-core.min.js",
   "types": "index.d.ts",
   "files": [
     "dist",
