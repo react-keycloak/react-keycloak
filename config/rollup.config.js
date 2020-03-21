@@ -3,16 +3,48 @@ import nodeResolve from 'rollup-plugin-node-resolve'
 import babel from 'rollup-plugin-babel'
 import replace from 'rollup-plugin-replace'
 import commonjs from 'rollup-plugin-commonjs'
+import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import { terser } from 'rollup-plugin-terser'
 import { sizeSnapshot } from 'rollup-plugin-size-snapshot'
 
 // get the package.json for the current package
 const packageDir = path.join(__filename, '..')
 const pkg = require(`${packageDir}/package.json`)
-const external = [...Object.keys(pkg.peerDependencies || {})]
 
 const sanitizePackageName = packageName =>
   (packageName || '').replace('@', '').replace('/', '-')
+
+const globals = {
+  react: 'React',
+  'react-dom': 'ReactDOM'
+}
+
+const babelOptions = {
+  exclude: /node_modules/
+}
+
+const commonjsOptions = {
+  ignoreGlobal: true,
+  include: /node_modules/,
+  namedExports: {
+    '../../node_modules/prop-types/index.js': [
+      'elementType',
+      'bool',
+      'func',
+      'object',
+      'oneOfType',
+      'element'
+    ],
+    '../../node_modules/react-is/index.js': [
+      'ForwardRef',
+      'isFragment',
+      'isLazy',
+      'isMemo',
+      'Memo',
+      'isValidElementType'
+    ]
+  }
+}
 
 // name will be used as the global name exposed in the UMD bundles
 const generateRollupConfig = (name, skipWeb = false) =>
@@ -25,11 +57,11 @@ const generateRollupConfig = (name, skipWeb = false) =>
         format: 'cjs',
         indent: false
       },
-      external,
       plugins: [
-        nodeResolve({
-          jsnext: true
+        peerDepsExternal({
+          includeDependencies: true
         }),
+        nodeResolve(),
         babel({ runtimeHelpers: true }),
         commonjs(),
         sizeSnapshot()
@@ -44,11 +76,11 @@ const generateRollupConfig = (name, skipWeb = false) =>
         format: 'es',
         indent: false
       },
-      external,
       plugins: [
-        nodeResolve({
-          jsnext: true
+        peerDepsExternal({
+          includeDependencies: true
         }),
+        nodeResolve(),
         babel({ runtimeHelpers: true }),
         commonjs(),
         sizeSnapshot()
@@ -63,13 +95,11 @@ const generateRollupConfig = (name, skipWeb = false) =>
         format: 'es',
         indent: false
       },
-      external,
       plugins: [
-        nodeResolve({
-          jsnext: true
-        }),
+        peerDepsExternal(),
+        nodeResolve(),
         babel(),
-        commonjs(),
+        commonjs(commonjsOptions),
         replace({
           'process.env.NODE_ENV': JSON.stringify('production')
         }),
@@ -91,21 +121,15 @@ const generateRollupConfig = (name, skipWeb = false) =>
       output: {
         file: `dist/umd/${sanitizePackageName(pkg.name)}.js`,
         format: 'umd',
-        globals: {
-          react: 'React'
-        },
+        globals,
         indent: false,
         name
       },
-      external,
       plugins: [
-        nodeResolve({
-          jsnext: true
-        }),
-        babel({
-          exclude: 'node_modules/**'
-        }),
-        commonjs(),
+        peerDepsExternal(),
+        nodeResolve(),
+        babel(babelOptions),
+        commonjs(commonjsOptions),
         replace({
           'process.env.NODE_ENV': JSON.stringify('development')
         }),
@@ -119,21 +143,15 @@ const generateRollupConfig = (name, skipWeb = false) =>
       output: {
         file: `dist/umd/${sanitizePackageName(pkg.name)}.min.js`,
         format: 'umd',
-        globals: {
-          react: 'React'
-        },
+        globals,
         indent: false,
         name
       },
-      external,
       plugins: [
-        nodeResolve({
-          jsnext: true
-        }),
-        babel({
-          exclude: 'node_modules/**'
-        }),
-        commonjs(),
+        peerDepsExternal(),
+        nodeResolve(),
+        babel(babelOptions),
+        commonjs(commonjsOptions),
         replace({
           'process.env.NODE_ENV': JSON.stringify('production')
         }),
