@@ -1,45 +1,45 @@
 {
   "dist/lib/react-keycloak-web.js": {
-    "bundled": 75164,
-    "minified": 34584,
-    "gzipped": 8373
+    "bundled": 3462,
+    "minified": 2016,
+    "gzipped": 868
   },
   "dist/es/react-keycloak-web.js": {
-    "bundled": 74850,
-    "minified": 34319,
-    "gzipped": 8308,
+    "bundled": 3260,
+    "minified": 1864,
+    "gzipped": 799,
     "treeshaked": {
       "rollup": {
-        "code": 12483,
-        "import_statements": 21
+        "code": 152,
+        "import_statements": 145
       },
       "webpack": {
-        "code": 13745
+        "code": 1215
       }
     }
   },
   "dist/es/react-keycloak-web.mjs": {
-    "bundled": 35249,
-    "minified": 21065,
-    "gzipped": 5496,
+    "bundled": 28322,
+    "minified": 15586,
+    "gzipped": 4646,
     "treeshaked": {
       "rollup": {
-        "code": 12483,
-        "import_statements": 21
+        "code": 5290,
+        "import_statements": 38
       },
       "webpack": {
-        "code": 13655
+        "code": 10392
       }
     }
   },
   "dist/umd/react-keycloak-web.js": {
-    "bundled": 64792,
-    "minified": 21722,
-    "gzipped": 6305
+    "bundled": 55316,
+    "minified": 18929,
+    "gzipped": 6109
   },
   "dist/umd/react-keycloak-web.min.js": {
-    "bundled": 35784,
-    "minified": 14874,
-    "gzipped": 4664
+    "bundled": 27885,
+    "minified": 11559,
+    "gzipped": 4037
   }
 }
