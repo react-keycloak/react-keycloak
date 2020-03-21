@@ -30,4 +30,3 @@ build
 dist
 packages/*/README.md
 packages/*/LICENSE.md
-.size-snapshot.json
