@@ -73,6 +73,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
         replace({
           'process.env.NODE_ENV': JSON.stringify('production')
         }),
+        sizeSnapshot(),
         terser({
           compress: {
             pure_getters: true,
@@ -80,8 +81,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
             unsafe_comps: true,
             warnings: false
           }
-        }),
-        sizeSnapshot()
+        })
       ]
     },
 
@@ -137,6 +137,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
         replace({
           'process.env.NODE_ENV': JSON.stringify('production')
         }),
+        sizeSnapshot(),
         terser({
           compress: {
             pure_getters: true,
@@ -144,8 +145,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
             unsafe_comps: true,
             warnings: false
           }
-        }),
-        sizeSnapshot()
+        })
       ]
     }
   ].filter(Boolean)
