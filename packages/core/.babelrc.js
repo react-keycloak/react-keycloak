@@ -18,6 +18,12 @@ module.exports = {
     '@babel/plugin-proposal-class-properties',
     // don't use `loose` mode here - need to copy symbols when spreading
     '@babel/proposal-object-rest-spread',
+    [
+      'babel-plugin-transform-react-remove-prop-types',
+      {
+        mode: 'unsafe-wrap'
+      }
+    ],
     NODE_ENV === 'test' && '@babel/transform-modules-commonjs'
   ].filter(Boolean)
 }
