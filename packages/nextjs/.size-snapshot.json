@@ -1,20 +1,20 @@
 {
   "dist/lib/react-keycloak-nextjs.js": {
-    "bundled": 153066,
-    "minified": 62777,
-    "gzipped": 14033
+    "bundled": 44455,
+    "minified": 16531,
+    "gzipped": 5114
   },
   "dist/es/react-keycloak-nextjs.js": {
-    "bundled": 152649,
-    "minified": 62409,
-    "gzipped": 13963,
+    "bundled": 44071,
+    "minified": 16220,
+    "gzipped": 5055,
     "treeshaked": {
       "rollup": {
-        "code": 23844,
-        "import_statements": 37
+        "code": 8146,
+        "import_statements": 199
       },
       "webpack": {
-        "code": 25364
+        "code": 9529
       }
     }
   }
