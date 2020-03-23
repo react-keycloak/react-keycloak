@@ -15,7 +15,6 @@ module.exports = {
   ],
   plugins: [
     '@babel/plugin-transform-react-jsx',
-    '@babel/plugin-transform-runtime',
     '@babel/plugin-proposal-class-properties',
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-proposal-nullish-coalescing-operator',
@@ -25,6 +24,13 @@ module.exports = {
       'babel-plugin-transform-react-remove-prop-types',
       {
         mode: 'unsafe-wrap'
+      }
+    ],
+    // any package needs to declare @babel/runtime@^7.9.0 as a runtime dependency.
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        version: '^7.9.0'
       }
     ],
     NODE_ENV === 'test' && '@babel/transform-modules-commonjs'
