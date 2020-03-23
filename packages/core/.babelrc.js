@@ -24,6 +24,13 @@ module.exports = {
         mode: 'unsafe-wrap'
       }
     ],
+    // any package needs to declare @babel/runtime@^7.9.0 as a runtime dependency.
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        version: '^7.9.0'
+      }
+    ],
     NODE_ENV === 'test' && '@babel/transform-modules-commonjs'
   ].filter(Boolean)
 }
