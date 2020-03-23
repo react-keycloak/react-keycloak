@@ -20,7 +20,8 @@ const globals = {
 }
 
 const babelOptions = {
-  exclude: /node_modules/
+  exclude: /node_modules/,
+  runtimeHelpers: true
 }
 
 const commonjsOptions = {
@@ -98,7 +99,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
       plugins: [
         peerDepsExternal(),
         nodeResolve(),
-        babel(),
+        babel({ runtimeHelpers: true }),
         commonjs(commonjsOptions),
         replace({
           'process.env.NODE_ENV': JSON.stringify('production')
