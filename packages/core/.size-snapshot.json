@@ -1,20 +1,20 @@
 {
   "dist/lib/react-keycloak-core.js": {
-    "bundled": 8849,
-    "minified": 4698,
-    "gzipped": 1563
+    "bundled": 7731,
+    "minified": 4119,
+    "gzipped": 1303
   },
   "dist/es/react-keycloak-core.js": {
-    "bundled": 8571,
-    "minified": 4469,
-    "gzipped": 1499,
+    "bundled": 7353,
+    "minified": 3815,
+    "gzipped": 1229,
     "treeshaked": {
       "rollup": {
-        "code": 60,
-        "import_statements": 60
+        "code": 292,
+        "import_statements": 292
       },
       "webpack": {
-        "code": 1110
+        "code": 1507
       }
     }
   }
