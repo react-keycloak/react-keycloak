@@ -1,5 +1,6 @@
 // this is used by jest only
 module.exports = {
+  compact: false,
   presets: [
     [
       '@babel/preset-env',
