@@ -23,7 +23,7 @@ const appWithKeycloak = (
       : {}
   }
 
-  class AppWithKeycloak extends React.Component {
+  class AppWithKeycloak extends React.PureComponent {
     static async getInitialProps(appContext) {
       const { isAuthenticated } = checkIfUserAuthenticated(appContext)
       const [cmpInitialProps, keycloakInitConfig] = await Promise.all([
