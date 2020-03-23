@@ -39,6 +39,7 @@
     "react": ">=16"
   },
   "dependencies": {
+    "@babel/runtime": "^7.9.0",
     "@react-keycloak/core": "file:../core",
     "hoist-non-react-statics": "^3.3.2",
     "prop-types": "^15.7.2"
