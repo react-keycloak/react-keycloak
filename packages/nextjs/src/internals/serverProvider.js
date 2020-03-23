@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import * as React from 'react'
 import PropTypes from 'prop-types'
 
 import { isServer } from './utils'
@@ -8,7 +8,7 @@ export const ServerContext = React.createContext({
   isServer: isServer()
 })
 
-class ServerProvider extends Component {
+class ServerProvider extends React.PureComponent {
   render() {
     const { children, isAuthenticated } = this.props
 
