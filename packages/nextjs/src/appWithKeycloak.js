@@ -24,7 +24,7 @@ const appWithKeycloak = (
   }
 
   async function getNextAppInitialProps(appContext){
-    return NextApp.getInitialProps ? await NextApp.getInitialProps(appContext) : null;
+    return NextApp.getInitialProps ? await NextApp.getInitialProps(appContext) : {};
   }
 
   class AppWithKeycloak extends React.Component {
