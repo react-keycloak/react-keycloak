@@ -14,7 +14,7 @@ describe('createReactKeycloakContext', () => {
   it('should return a new React Context with initialized values', () => {
     const rcContext = createReactKeycloakContext({
       initialized: false,
-      keycloak: createKeycloakStub()
+      keycloak: createKeycloakStub(),
     })
 
     expect(rcContext).toBeDefined()

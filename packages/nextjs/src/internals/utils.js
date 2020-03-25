@@ -29,12 +29,12 @@ export const checkIfUserAuthenticated = ({ ctx: { req } }) => {
     const cookies = parseCookies(req)
     return {
       isAuthenticated: cookies.isAuthenticated || 'false',
-      isServer
+      isServer,
     }
   }
 
   return {
     isAuthenticated: getCookie('isAuthenticated') || 'false',
-    isServer
+    isServer,
   }
 }

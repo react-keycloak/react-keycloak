@@ -11,17 +11,17 @@ import { terser } from 'rollup-plugin-terser'
 const packageDir = path.join(__filename, '..')
 const pkg = require(`${packageDir}/package.json`)
 
-const sanitizePackageName = packageName =>
+const sanitizePackageName = (packageName) =>
   (packageName || '').replace('@', '').replace('/', '-')
 
 const globals = {
   react: 'React',
-  'react-dom': 'ReactDOM'
+  'react-dom': 'ReactDOM',
 }
 
 const babelOptions = {
   exclude: /node_modules/,
-  runtimeHelpers: true
+  runtimeHelpers: true,
 }
 
 const commonjsOptions = {
@@ -34,7 +34,7 @@ const commonjsOptions = {
       'func',
       'object',
       'oneOfType',
-      'element'
+      'element',
     ],
     '../../node_modules/react-is/index.js': [
       'ForwardRef',
@@ -42,9 +42,9 @@ const commonjsOptions = {
       'isLazy',
       'isMemo',
       'Memo',
-      'isValidElementType'
-    ]
-  }
+      'isValidElementType',
+    ],
+  },
 }
 
 // name will be used as the global name exposed in the UMD bundles
@@ -56,17 +56,17 @@ const generateRollupConfig = (name, skipWeb = false) =>
       output: {
         file: `dist/lib/${sanitizePackageName(pkg.name)}.js`,
         format: 'cjs',
-        indent: false
+        indent: false,
       },
       plugins: [
         peerDepsExternal({
-          includeDependencies: true
+          includeDependencies: true,
         }),
         nodeResolve(),
         babel({ runtimeHelpers: true }),
         commonjs(),
-        sizeSnapshot()
-      ]
+        sizeSnapshot(),
+      ],
     },
 
     // ES
@@ -75,17 +75,17 @@ const generateRollupConfig = (name, skipWeb = false) =>
       output: {
         file: `dist/es/${sanitizePackageName(pkg.name)}.js`,
         format: 'es',
-        indent: false
+        indent: false,
       },
       plugins: [
         peerDepsExternal({
-          includeDependencies: true
+          includeDependencies: true,
         }),
         nodeResolve(),
         babel({ runtimeHelpers: true }),
         commonjs(),
-        sizeSnapshot()
-      ]
+        sizeSnapshot(),
+      ],
     },
 
     // ES for Browsers
@@ -94,7 +94,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
       output: {
         file: `dist/es/${sanitizePackageName(pkg.name)}.mjs`,
         format: 'es',
-        indent: false
+        indent: false,
       },
       plugins: [
         peerDepsExternal(),
@@ -102,7 +102,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
         babel({ runtimeHelpers: true }),
         commonjs(commonjsOptions),
         replace({
-          'process.env.NODE_ENV': JSON.stringify('production')
+          'process.env.NODE_ENV': JSON.stringify('production'),
         }),
         sizeSnapshot(),
         terser({
@@ -110,10 +110,10 @@ const generateRollupConfig = (name, skipWeb = false) =>
             pure_getters: true,
             unsafe: true,
             unsafe_comps: true,
-            warnings: false
-          }
-        })
-      ]
+            warnings: false,
+          },
+        }),
+      ],
     },
 
     // UMD Development
@@ -124,7 +124,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
         format: 'umd',
         globals,
         indent: false,
-        name
+        name,
       },
       plugins: [
         peerDepsExternal(),
@@ -132,10 +132,10 @@ const generateRollupConfig = (name, skipWeb = false) =>
         babel(babelOptions),
         commonjs(commonjsOptions),
         replace({
-          'process.env.NODE_ENV': JSON.stringify('development')
+          'process.env.NODE_ENV': JSON.stringify('development'),
         }),
-        sizeSnapshot()
-      ]
+        sizeSnapshot(),
+      ],
     },
 
     // UMD Production
@@ -146,7 +146,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
         format: 'umd',
         globals,
         indent: false,
-        name
+        name,
       },
       plugins: [
         peerDepsExternal(),
@@ -154,7 +154,7 @@ const generateRollupConfig = (name, skipWeb = false) =>
         babel(babelOptions),
         commonjs(commonjsOptions),
         replace({
-          'process.env.NODE_ENV': JSON.stringify('production')
+          'process.env.NODE_ENV': JSON.stringify('production'),
         }),
         sizeSnapshot(),
         terser({
@@ -162,11 +162,11 @@ const generateRollupConfig = (name, skipWeb = false) =>
             pure_getters: true,
             unsafe: true,
             unsafe_comps: true,
-            warnings: false
-          }
-        })
-      ]
-    }
+            warnings: false,
+          },
+        }),
+      ],
+    },
   ].filter(Boolean)
 
 export default generateRollupConfig

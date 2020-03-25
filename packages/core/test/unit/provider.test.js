@@ -6,7 +6,7 @@ import { createKeycloakStub, createChild } from '../test-utils'
 
 import {
   createReactKeycloakContext,
-  createReactKeycloakProvider
+  createReactKeycloakProvider,
 } from '../../src'
 
 describe('KeycloakProvider', () => {
@@ -51,7 +51,7 @@ describe('KeycloakProvider', () => {
       expect(keycloakInitSpy).toHaveBeenCalledTimes(1)
       expect(keycloakInitSpy).toHaveBeenCalledWith({
         onLoad: 'check-sso',
-        promiseType: 'native'
+        promiseType: 'native',
       })
     })
 
@@ -111,7 +111,7 @@ describe('KeycloakProvider', () => {
         constructor(props) {
           super(props)
           this.state = {
-            keycloak: keycloakStub
+            keycloak: keycloakStub,
           }
           externalSetState = this.setState.bind(this)
         }
@@ -181,8 +181,8 @@ describe('KeycloakProvider', () => {
 
           this.state = {
             initConfig: {
-              onLoad: 'check-sso'
-            }
+              onLoad: 'check-sso',
+            },
           }
 
           externalSetState = this.setState.bind(this)
@@ -221,8 +221,8 @@ describe('KeycloakProvider', () => {
 
           this.state = {
             initConfig: {
-              onLoad: 'check-sso'
-            }
+              onLoad: 'check-sso',
+            },
           }
 
           externalSetState = this.setState.bind(this)
@@ -321,7 +321,7 @@ describe('KeycloakProvider', () => {
 
       const stubKeycloakError = {
         error: 'StubError',
-        error_description: 'A stub error'
+        error_description: 'A stub error',
       }
 
       rtl.act(() => {
@@ -466,7 +466,7 @@ describe('KeycloakProvider', () => {
       expect(onTokensListener).toHaveBeenCalledWith({
         idToken: 'fakeIdToken',
         refreshToken: 'fakeRefreshToken',
-        token: 'fakeToken'
+        token: 'fakeToken',
       })
     })
 
@@ -528,7 +528,7 @@ describe('KeycloakProvider', () => {
       expect(setStateSpy).toHaveBeenNthCalledWith(1, {
         initialized: true,
         isLoading: false,
-        token: 'fakeToken'
+        token: 'fakeToken',
       })
 
       // Remove setStateSpy mock
@@ -625,7 +625,7 @@ describe('KeycloakProvider', () => {
       expect(setStateSpy).toHaveBeenNthCalledWith(1, {
         initialized: true,
         isLoading: true,
-        token: undefined
+        token: undefined,
       })
 
       // Remove setStateSpy mock

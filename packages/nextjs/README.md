@@ -73,7 +73,7 @@ class MyApp extends App {
 export default appWithKeycloak({
   realm: process.env.KEYCLOAK_REALM as string,
   url: process.env.KEYCLOAK_URL as string,
-  clientId: process.env.KEYCLOAK_CLIENT_ID as string
+  clientId: process.env.KEYCLOAK_CLIENT_ID as string,
 })(MyApp)
 ```
 
@@ -145,7 +145,7 @@ class MyApp extends App {
     console.log('MyApp - getKeycloakInitConfig', ctx)
     // Return an object with keycloak initConfig supported keys - see Keycloak docs
     return {
-      token: 'test'
+      token: 'test',
     }
   }
 
@@ -158,7 +158,7 @@ class MyApp extends App {
 export default appWithKeycloak({
   realm: process.env.KEYCLOAK_REALM as string,
   url: process.env.KEYCLOAK_URL as string,
-  clientId: process.env.KEYCLOAK_CLIENT_ID as string
+  clientId: process.env.KEYCLOAK_CLIENT_ID as string,
 })(MyApp)
 ```
 

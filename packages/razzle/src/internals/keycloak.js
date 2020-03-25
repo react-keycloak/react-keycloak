@@ -2,12 +2,12 @@ import { isServer } from './utils'
 
 const noops = {
   string: () => 'noop',
-  boolean: () => true
+  boolean: () => true,
 }
 
 // this is a fake Keycloak instance we use to initialize Keycloak on the server.
 // This gets over-written as soon as Keycloak is initialized on the client.
-export const getKeycloakStub = persistor => {
+export const getKeycloakStub = (persistor) => {
   const kcTokens = persistor.getTokens()
 
   return {
@@ -30,11 +30,11 @@ export const getKeycloakStub = persistor => {
     authenticated: !!kcTokens.token,
     idToken: kcTokens.idToken,
     token: kcTokens.token,
-    refreshToken: kcTokens.refreshToken
+    refreshToken: kcTokens.refreshToken,
   }
 }
 
 const Keycloak = !isServer() ? require('keycloak-js') : null
 
-export const getKeycloakInstance = keycloakConfig =>
+export const getKeycloakInstance = (keycloakConfig) =>
   !isServer() ? new Keycloak(keycloakConfig) : null

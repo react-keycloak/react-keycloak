@@ -6,12 +6,12 @@ import { ComponentType } from 'react'
 import {
   IReactKeycloakContextProps,
   KeycloakTokens,
-  KeycloakProvider
+  KeycloakProvider,
 } from '@react-keycloak/core'
 import {
   KeycloakConfig,
   KeycloakInstance,
-  KeycloakPromiseType
+  KeycloakPromiseType,
 } from 'keycloak-js'
 
 /**

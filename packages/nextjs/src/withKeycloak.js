@@ -4,7 +4,7 @@ import hoistStatics from 'hoist-non-react-statics'
 import { KeycloakContext } from './internals/keycloak'
 import { ServerContext } from './internals/serverProvider'
 
-const getDisplayName = name => `WithKeycloak(${name})`
+const getDisplayName = (name) => `WithKeycloak(${name})`
 
 function withKeycloak(WrappedComponent) {
   const displayName = getDisplayName(
@@ -14,7 +14,7 @@ function withKeycloak(WrappedComponent) {
   class WithKeycloakComponent extends React.PureComponent {
     renderWrappedComponent = ({ isServer, isAuthenticated }) => ({
       initialized,
-      keycloak
+      keycloak,
     }) => (
       <WrappedComponent
         {...this.props}

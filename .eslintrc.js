@@ -4,31 +4,31 @@ module.exports = {
     browser: true,
     node: true,
     es6: true,
-    jest: true
+    jest: true,
   },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'prettier',
-    'plugin:prettier/recommended'
+    'plugin:prettier/recommended',
   ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
     fixture: true,
-    test: true
+    test: true,
   },
   parserOptions: {
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module'
+    sourceType: 'module',
   },
   settings: {
     react: {
-      version: '16.8.3'
-    }
+      version: '16.8.3',
+    },
   },
   plugins: ['prettier', 'react', 'react-hooks'],
   rules: {
@@ -36,6 +36,6 @@ module.exports = {
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'no-unused-vars': 'error',
-    'linebreak-style': ['error', 'unix']
-  }
+    'linebreak-style': ['error', 'unix'],
+  },
 }

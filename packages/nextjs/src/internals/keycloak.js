@@ -2,7 +2,7 @@ import * as React from 'react'
 
 const noops = {
   string: () => 'noop',
-  boolean: () => true
+  boolean: () => true,
 }
 
 // this is a fake Keycloak instance we use to initialize Keycloak on the server.
@@ -24,15 +24,15 @@ const KeycloakStub = {
   hasResourceRole: noops.boolean,
   loadUserProfile: () => Promise.resolve(),
   loadUserInfo: () => Promise.resolve(),
-  authenticated: false
+  authenticated: false,
 }
 
 const Keycloak = typeof window !== 'undefined' ? require('keycloak-js') : null
 
-export const getKeycloakInstance = initOptions =>
+export const getKeycloakInstance = (initOptions) =>
   typeof window === 'undefined' ? KeycloakStub : new Keycloak(initOptions)
 
 export const KeycloakContext = React.createContext({
   keycloakInitialized: false,
-  keycloak: KeycloakStub
+  keycloak: KeycloakStub,
 })

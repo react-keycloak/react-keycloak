@@ -5,10 +5,10 @@ import { isServer } from './utils'
 
 // Context to hold Keycloak and his state
 export const KeycloakContext = createReactKeycloakContext({
-  initialized: isServer()
+  initialized: isServer(),
 })
 
 // Context to hold KeycloakStub instance
 export const KeycloakStubContext = React.createContext({
-  keycloak: null
+  keycloak: null,
 })

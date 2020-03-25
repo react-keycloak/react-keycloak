@@ -17,7 +17,7 @@ class KeycloakStubProvider extends React.PureComponent {
 
 KeycloakStubProvider.propTypes = {
   children: PropTypes.element.isRequired,
-  keycloakStub: PropTypes.shape({}).isRequired
+  keycloakStub: PropTypes.shape({}).isRequired,
 }
 
 export { KeycloakStubProvider }

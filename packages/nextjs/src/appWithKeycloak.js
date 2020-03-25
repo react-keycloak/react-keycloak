@@ -7,10 +7,9 @@ import KeycloakProvider from './internals/keycloakProvider'
 import ServerProvider from './internals/serverProvider'
 import { checkIfUserAuthenticated, setCookie } from './internals/utils'
 
-const appWithKeycloak = (
-  keycloakInitOptions,
-  providerProps = {}
-) => NextApp => {
+const appWithKeycloak = (keycloakInitOptions, providerProps = {}) => (
+  NextApp
+) => {
   const keycloak = getKeycloakInstance(keycloakInitOptions)
 
   async function getComponentInitialProps({ Component, ctx }) {
@@ -28,15 +27,15 @@ const appWithKeycloak = (
       const { isAuthenticated } = checkIfUserAuthenticated(appContext)
       const [cmpInitialProps, keycloakInitConfig] = await Promise.all([
         getComponentInitialProps(appContext),
-        getKeycloakInitialProps(appContext)
+        getKeycloakInitialProps(appContext),
       ])
 
       return {
         pageProps: {
           ...cmpInitialProps,
-          isAuthenticated
+          isAuthenticated,
         },
-        keycloakInitConfig
+        keycloakInitConfig,
       }
     }
 
@@ -47,8 +46,8 @@ const appWithKeycloak = (
         isAuthenticated: props?.pageProps?.isAuthenticated ?? 'false',
         keycloakInitConfig: {
           ...(providerProps?.initConfig ?? {}),
-          ...(props?.keycloakInitConfig ?? {})
-        }
+          ...(props?.keycloakInitConfig ?? {}),
+        },
       }
     }
 
@@ -59,7 +58,7 @@ const appWithKeycloak = (
 
       if (event === 'onAuthSuccess') {
         this.setState({
-          isAuthenticated: 'true'
+          isAuthenticated: 'true',
         })
 
         setCookie('isAuthenticated', 'true')
@@ -67,7 +66,7 @@ const appWithKeycloak = (
 
       if (event === 'onAuthLogout') {
         this.setState({
-          isAuthenticated: 'false'
+          isAuthenticated: 'false',
         })
 
         setCookie('isAuthenticated', 'false')
@@ -77,7 +76,7 @@ const appWithKeycloak = (
         const isAuthenticated = keycloak.authenticated ? 'true' : 'false'
 
         this.setState({
-          isAuthenticated
+          isAuthenticated,
         })
 
         setCookie('isAuthenticated', isAuthenticated)
@@ -87,7 +86,7 @@ const appWithKeycloak = (
       providerProps?.onEvent?.(event, error)
     }
 
-    isLoadingCheck = keycloak => {
+    isLoadingCheck = (keycloak) => {
       const { pageProps } = this.props
       const { isAuthenticated } = this.state
 
@@ -129,13 +128,13 @@ const appWithKeycloak = (
 
   AppWithKeycloak.propTypes = {
     pageProps: PropTypes.shape({
-      isAuthenticated: PropTypes.string.isRequired
+      isAuthenticated: PropTypes.string.isRequired,
     }).isRequired,
-    keycloakInitConfig: PropTypes.shape({}).isRequired
+    keycloakInitConfig: PropTypes.shape({}).isRequired,
   }
 
   return hoistStatics(AppWithKeycloak, NextApp, {
-    getInitialProps: true
+    getInitialProps: true,
   })
 }
 

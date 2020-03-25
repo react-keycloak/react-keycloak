@@ -9,14 +9,14 @@ export function PrivateRoute({ component: Component, ...rest }) {
   return (
     <Route
       {...rest}
-      render={props =>
+      render={(props) =>
         keycloak.authenticated ? (
           <Component {...props} />
         ) : (
           <Redirect
             to={{
               pathname: '/login',
-              state: { from: props.location }
+              state: { from: props.location },
             }}
           />
         )

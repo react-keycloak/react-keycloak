@@ -8,7 +8,7 @@ import {
   KeycloakError,
   KeycloakInitOptions,
   KeycloakInstance,
-  KeycloakPromiseType
+  KeycloakPromiseType,
 } from 'keycloak-js'
 
 export interface KeycloakTokens {
