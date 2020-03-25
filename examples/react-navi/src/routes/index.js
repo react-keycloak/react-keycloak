@@ -12,7 +12,7 @@ const routes = mount({
   '/home': withAuthentication(
     route({
       title: 'Home',
-      view: <HomePage />
+      view: <HomePage />,
     })
   ),
   '/login': map(async (request, context) =>
@@ -26,7 +26,7 @@ const routes = mount({
         )
       : lazy(() => import('../pages/Login'))
   ),
-  '/': redirect('/login')
+  '/': redirect('/login'),
 })
 
 export const AppRouter = () => {

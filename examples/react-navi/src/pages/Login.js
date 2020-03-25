@@ -14,5 +14,5 @@ const LoginPage = withKeycloak(({ keycloak }) => {
 
 export default route({
   title: 'Login',
-  view: <LoginPage />
+  view: <LoginPage />,
 })

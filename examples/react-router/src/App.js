@@ -7,11 +7,11 @@ import { AppRouter } from './routes'
 const keycloak = new Keycloak({
   realm: process.env.REACT_APP_KEYCLOAK_REALM,
   url: process.env.REACT_APP_KEYCLOAK_URL,
-  clientId: process.env.REACT_APP_KEYCLOAK_CLIENT_ID
+  clientId: process.env.REACT_APP_KEYCLOAK_CLIENT_ID,
 })
 
 const keycloakProviderInitConfig = {
-  onLoad: 'check-sso'
+  onLoad: 'check-sso',
 }
 
 class App extends React.PureComponent {
@@ -19,7 +19,7 @@ class App extends React.PureComponent {
     console.log('onKeycloakEvent', event, error)
   }
 
-  onKeycloakTokens = tokens => {
+  onKeycloakTokens = (tokens) => {
     console.log('onKeycloakTokens', tokens)
   }
 

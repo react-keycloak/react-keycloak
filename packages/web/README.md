@@ -101,7 +101,7 @@ const App = () => {
   Can be implemented as follow
 
   ```js
-  keycloak => !keycloak.authenticated
+  ;(keycloak) => !keycloak.authenticated
   ```
 
 - `onEvent`, an handler function that receives events launched by `keycloak`, defaults to `null`.

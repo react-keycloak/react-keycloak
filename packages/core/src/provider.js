@@ -5,18 +5,18 @@ import isEqual from 'react-fast-compare'
 const initialState = {
   initialized: false,
   isLoading: true,
-  token: undefined
+  token: undefined,
 }
 
 export function createReactKeycloakProvider(ReactKeycloakContext) {
   class KeycloakProvider extends React.PureComponent {
     defaultInitConfig = {
       onLoad: 'check-sso',
-      promiseType: 'native'
+      promiseType: 'native',
     }
 
     state = {
-      ...initialState
+      ...initialState,
     }
 
     componentDidMount() {
@@ -59,18 +59,18 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
       keycloak.init({ ...this.defaultInitConfig, ...initConfig })
     }
 
-    onKeycloakError = event => error => {
+    onKeycloakError = (event) => (error) => {
       const { onEvent } = this.props
       // Notify Events listener
       onEvent && onEvent(event, error)
     }
 
-    updateState = event => () => {
+    updateState = (event) => () => {
       const { keycloak, onEvent, onTokens, isLoadingCheck } = this.props
       const {
         initialized: prevInitialized,
         isLoading: prevLoading,
-        token: prevToken
+        token: prevToken,
       } = this.state
       const { idToken, refreshToken, token: newToken } = keycloak
 
@@ -89,7 +89,7 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
         this.setState({
           initialized: true,
           isLoading,
-          token: newToken
+          token: newToken,
         })
       }
 
@@ -99,12 +99,12 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
           onTokens({
             idToken,
             refreshToken,
-            token: newToken
+            token: newToken,
           })
       }
     }
 
-    refreshKeycloakToken = event => () => {
+    refreshKeycloakToken = (event) => () => {
       const { autoRefreshToken, keycloak, onEvent } = this.props
       // Notify Events listener
       onEvent && onEvent(event)
@@ -145,7 +145,7 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
       onAuthRefreshSuccess: PropTypes.func,
       onAuthRefreshError: PropTypes.func,
       onAuthLogout: PropTypes.func,
-      onTokenExpired: PropTypes.func
+      onTokenExpired: PropTypes.func,
     }).isRequired,
     autoRefreshToken: PropTypes.bool,
     initConfig: PropTypes.shape({}),
@@ -153,20 +153,20 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
     LoadingComponent: PropTypes.element,
     onError: PropTypes.func,
     onEvent: PropTypes.func,
-    onTokens: PropTypes.func
+    onTokens: PropTypes.func,
   }
 
   KeycloakProvider.defaultProps = {
     autoRefreshToken: true,
     initConfig: {
       onLoad: 'check-sso',
-      promiseType: 'native'
+      promiseType: 'native',
     },
     isLoadingCheck: null,
     LoadingComponent: null,
     onError: null,
     onEvent: null,
-    onTokens: null
+    onTokens: null,
   }
 
   return KeycloakProvider

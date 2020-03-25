@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { useKeycloak } from '@react-keycloak/web'
 
-export const useAxios = baseURL => {
+export const useAxios = (baseURL) => {
   const [keycloak, initialized] = useKeycloak()
   const [axiosInstance, setAxiosInstance] = useState({})
 
@@ -11,8 +11,8 @@ export const useAxios = baseURL => {
     const instance = axios.create({
       baseURL,
       headers: {
-        Authorization: initialized ? `Bearer ${keycloak.token}` : undefined
-      }
+        Authorization: initialized ? `Bearer ${keycloak.token}` : undefined,
+      },
     })
 
     setAxiosInstance({ instance })

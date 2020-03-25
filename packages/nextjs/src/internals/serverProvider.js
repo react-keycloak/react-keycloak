@@ -5,7 +5,7 @@ import { isServer } from './utils'
 
 export const ServerContext = React.createContext({
   isAuthenticated: 'false',
-  isServer: isServer()
+  isServer: isServer(),
 })
 
 class ServerProvider extends React.PureComponent {
@@ -16,7 +16,7 @@ class ServerProvider extends React.PureComponent {
       <ServerContext.Provider
         value={{
           isAuthenticated,
-          isServer: isServer()
+          isServer: isServer(),
         }}
       >
         {React.Children.only(children)}
@@ -27,7 +27,7 @@ class ServerProvider extends React.PureComponent {
 
 ServerProvider.propTypes = {
   children: PropTypes.element.isRequired,
-  isAuthenticated: PropTypes.string.isRequired
+  isAuthenticated: PropTypes.string.isRequired,
 }
 
 export default ServerProvider

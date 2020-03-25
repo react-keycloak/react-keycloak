@@ -18,10 +18,10 @@ export const createKeycloakStub = () => ({
   hasRealmRole: jest.fn(),
   hasResourceRole: jest.fn(),
   loadUserProfile: jest.fn(),
-  loadUserInfo: jest.fn()
+  loadUserInfo: jest.fn(),
 })
 
-export const createChild = ReactKeycloakContext => {
+export const createChild = (ReactKeycloakContext) => {
   class Child extends React.Component {
     render() {
       return (

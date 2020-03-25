@@ -50,8 +50,8 @@ Home.propTypes = {
   keycloak: PropTypes.shape({
     authenticated: PropTypes.bool.isRequired,
     login: PropTypes.func.isRequired,
-    logout: PropTypes.func.isRequired
-  }).isRequired
+    logout: PropTypes.func.isRequired,
+  }).isRequired,
 }
 
 export default withKeycloak(Home)

@@ -18,7 +18,7 @@ export const createKeycloakStub = () => ({
   hasRealmRole: jest.fn(),
   hasResourceRole: jest.fn(),
   loadUserProfile: jest.fn(),
-  loadUserInfo: jest.fn()
+  loadUserInfo: jest.fn(),
 })
 
 export const createChild = (testedProps = []) => {
@@ -26,7 +26,7 @@ export const createChild = (testedProps = []) => {
     render() {
       return (
         <div data-testid="keycloak">
-          {Object.keys(this.props).filter(prop => testedProps.includes(prop))}
+          {Object.keys(this.props).filter((prop) => testedProps.includes(prop))}
         </div>
       )
     }

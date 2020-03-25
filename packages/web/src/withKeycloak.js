@@ -3,7 +3,7 @@ import hoistStatics from 'hoist-non-react-statics'
 
 import ReactKeycloakContext from './context'
 
-const getDisplayName = name => `WithKeycloak(${name})`
+const getDisplayName = (name) => `WithKeycloak(${name})`
 
 function withKeycloak(WrappedComponent) {
   const Context = ReactKeycloakContext

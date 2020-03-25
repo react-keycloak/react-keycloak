@@ -6,12 +6,12 @@ module.exports = {
       '@babel/env',
       {
         targets: {
-          browsers: ['ie >= 11']
+          browsers: ['ie >= 11'],
         },
         modules: false,
-        loose: true
-      }
-    ]
+        loose: true,
+      },
+    ],
   ],
   plugins: [
     '@babel/plugin-transform-react-jsx',
@@ -23,16 +23,16 @@ module.exports = {
     [
       'babel-plugin-transform-react-remove-prop-types',
       {
-        mode: 'unsafe-wrap'
-      }
+        mode: 'unsafe-wrap',
+      },
     ],
     // any package needs to declare @babel/runtime@^7.9.0 as a runtime dependency.
     [
       '@babel/plugin-transform-runtime',
       {
-        version: '^7.9.0'
-      }
+        version: '^7.9.0',
+      },
     ],
-    NODE_ENV === 'test' && '@babel/transform-modules-commonjs'
-  ].filter(Boolean)
+    NODE_ENV === 'test' && '@babel/transform-modules-commonjs',
+  ].filter(Boolean),
 }

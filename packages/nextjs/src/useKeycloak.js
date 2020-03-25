@@ -15,7 +15,7 @@ function useKeycloak() {
   return Object.assign([keycloak, initialized, isAuthenticated], {
     initialized,
     keycloak,
-    isAuthenticated
+    isAuthenticated,
   })
 }
 

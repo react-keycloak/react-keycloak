@@ -6,11 +6,11 @@ module.exports = {
       '@babel/preset-env',
       {
         targets: {
-          node: 'current'
-        }
-      }
+          node: 'current',
+        },
+      },
     ],
-    '@babel/preset-react'
+    '@babel/preset-react',
   ],
   plugins: [
     '@babel/plugin-transform-react-jsx',
@@ -18,6 +18,6 @@ module.exports = {
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-proposal-nullish-coalescing-operator',
     // don't use `loose` mode here - need to copy symbols when spreading
-    '@babel/proposal-object-rest-spread'
-  ]
+    '@babel/proposal-object-rest-spread',
+  ],
 }

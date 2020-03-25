@@ -6,7 +6,7 @@ import { Component, ComponentType } from 'react'
 import {
   IReactKeycloakContextProps,
   KeycloakEventHandler,
-  KeycloakTokens
+  KeycloakTokens,
 } from '@react-keycloak/core'
 import { AppContext, AppType } from 'next'
 import {
@@ -14,7 +14,7 @@ import {
   KeycloakError,
   KeycloakInitOptions,
   KeycloakInstance,
-  KeycloakPromiseType
+  KeycloakPromiseType,
 } from 'keycloak-js'
 
 export type NextJSKeycloakLoadingCheck<

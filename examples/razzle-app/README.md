@@ -129,7 +129,7 @@ module.exports = {
     // do something to config
 
     return config
-  }
+  },
 }
 ```
 

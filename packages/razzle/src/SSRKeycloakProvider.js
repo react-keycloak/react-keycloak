@@ -17,8 +17,8 @@ class SSRKeycloakProvider extends React.PureComponent {
       keycloak: getKeycloakInstance(keycloakConfig),
       initConfig: {
         ...cachedTokens,
-        ...initConfig
-      }
+        ...initConfig,
+      },
     }
   }
 
@@ -33,7 +33,7 @@ class SSRKeycloakProvider extends React.PureComponent {
     this.props?.onEvent?.(event, error)
   }
 
-  onTokens = tokens => {
+  onTokens = (tokens) => {
     // Persist updated tokens
     this.props?.persistor?.setTokens(tokens)
 
@@ -68,8 +68,8 @@ SSRKeycloakProvider.propTypes = {
   persistor: PropTypes.shape({
     setTokens: PropTypes.func.isRequired,
     getTokens: PropTypes.func.isRequired,
-    resetTokens: PropTypes.func.isRequired
-  }).isRequired
+    resetTokens: PropTypes.func.isRequired,
+  }).isRequired,
 }
 
 export default SSRKeycloakProvider

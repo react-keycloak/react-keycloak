@@ -23,11 +23,11 @@ export const Cookies = {
 
     return {
       idToken: idTknStr ? atob(idTknStr) : undefined,
-      token: tknStr ? atob(tknStr) : undefined
+      token: tknStr ? atob(tknStr) : undefined,
     }
   },
   resetTokens: () => {
     removeCookie('kcToken')
     removeCookie('kcIdToken')
-  }
+  },
 }

@@ -6,7 +6,7 @@ module.exports = {
       testMatch: ['<rootDir>/packages/core/**/*.test.js'],
       setupFiles: ['<rootDir>/packages/core/test/setup.js'],
       setupFilesAfterEnv: ['<rootDir>/packages/core/test/setupAfterEnv.js'],
-      automock: false
+      automock: false,
     },
     {
       displayName: 'react-keycloak-web',
@@ -14,7 +14,7 @@ module.exports = {
       testMatch: ['<rootDir>/packages/web/**/*.test.js'],
       setupFiles: ['<rootDir>/packages/web/test/setup.js'],
       setupFilesAfterEnv: ['<rootDir>/packages/web/test/setupAfterEnv.js'],
-      coveragePathIgnorePatterns: ['<rootDir>/packages/core/dist/']
-    }
-  ]
+      coveragePathIgnorePatterns: ['<rootDir>/packages/core/dist/'],
+    },
+  ],
 }

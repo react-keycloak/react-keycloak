@@ -14,7 +14,7 @@ const createHookWrapper = () => ({ children }) => (
 describe('useKeycloak hook', () => {
   it('should return Keycloak (as object)', () => {
     const { result } = renderHook(() => useKeycloak(), {
-      wrapper: createHookWrapper()
+      wrapper: createHookWrapper(),
     })
 
     const { keycloak } = result.current
@@ -25,7 +25,7 @@ describe('useKeycloak hook', () => {
 
   it('should return initialized (as object)', () => {
     const { result } = renderHook(() => useKeycloak(), {
-      wrapper: createHookWrapper()
+      wrapper: createHookWrapper(),
     })
 
     const { initialized } = result.current
@@ -36,7 +36,7 @@ describe('useKeycloak hook', () => {
 
   it('should return Keycloak (as array[0])', () => {
     const { result } = renderHook(() => useKeycloak(), {
-      wrapper: createHookWrapper()
+      wrapper: createHookWrapper(),
     })
 
     const [keycloak] = result.current
@@ -47,7 +47,7 @@ describe('useKeycloak hook', () => {
 
   it('should return initialized (as array[1])', () => {
     const { result } = renderHook(() => useKeycloak(), {
-      wrapper: createHookWrapper()
+      wrapper: createHookWrapper(),
     })
 
     const [, initialized] = result.current

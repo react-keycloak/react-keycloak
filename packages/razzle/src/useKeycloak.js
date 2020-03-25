@@ -14,7 +14,7 @@ function useKeycloak() {
   return Object.assign([kcInstance, kcInitialized, isServerCheck], {
     initialized: kcInitialized,
     isServer: isServerCheck,
-    keycloak: kcInstance
+    keycloak: kcInstance,
   })
 }
 
