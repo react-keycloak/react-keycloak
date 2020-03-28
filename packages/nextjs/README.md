@@ -22,6 +22,7 @@
 ## Table of Contents <!-- omit in toc -->
 
 - [Install](#install)
+- [Support](#support)
 - [Getting Started](#getting-started)
   - [Setup NextApp](#setup-nextapp)
   - [HOC Usage](#hoc-usage)
@@ -39,17 +40,24 @@ React Keycloak requires:
 
 - React **16.0** or later
 - NextJS **9** or later
-- `keycloak-js` **8.0.1** or later
+- `keycloak-js` **9.0.2** or later
 
-```
+```shell
 yarn add @react-keycloak/nextjs
 ```
 
 or
 
-```
+```shell
 npm install --save @react-keycloak/nextjs
 ```
+
+## Support
+
+| version | keycloak-js version |
+| ------- | ------------------- |
+| v2.0.0+ | 9.0.2+              |
+| v1.x    | >=8.0.2 <9.0.2      |
 
 ## Getting Started
 
