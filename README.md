@@ -30,6 +30,7 @@
   - [React](#react)
   - [NextJS](#nextjs)
   - [Razzle](#razzle)
+- [Support](#support)
 - [Examples](#examples)
 - [Contributors](#contributors)
 
@@ -42,17 +43,22 @@
 React Keycloak for Web requires:
 
 - React **16.0** or later
-- `keycloak-js` **8.0.1** or later
+- `keycloak-js` **9.0.2** or later
 
-```
+```shell
 yarn add @react-keycloak/web
 ```
 
 or
 
-```
+```shell
 npm install --save @react-keycloak/web
 ```
+
+or as a `UMD` package through `unpkg`
+
+one for development: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.js
+one for production: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.min.js
 
 See `@react-keycloak/web` package [README](https://github.com/panz3r/react-keycloak/blob/master/packages/web/README.md) for complete documentation.
 
@@ -62,15 +68,15 @@ React Keycloak for NextJS requires:
 
 - React **16.0** or later
 - NextJS **9** or later
-- `keycloak-js` **8.0.1** or later
+- `keycloak-js` **9.0.2** or later
 
-```
+```shell
 yarn add @react-keycloak/nextjs
 ```
 
 or
 
-```
+```shell
 npm install --save @react-keycloak/nextjs
 ```
 
@@ -82,19 +88,26 @@ React Keycloak for Razzle requires:
 
 - React **16.0** or later
 - Razzle **3** or later
-- `keycloak-js` **8.0.1** or later
+- `keycloak-js` **9.0.2** or later
 
-```sh
+```shell
 yarn add @react-keycloak/razzle
 ```
 
 or
 
-```sh
+```shell
 npm install --save @react-keycloak/razzle
 ```
 
 See `@react-keycloak/razzle` package [README](https://github.com/panz3r/react-keycloak/blob/master/packages/razzle/README.md) for complete documentation.
+
+## Support
+
+| version | keycloak-js version |
+| ------- | ------------------- |
+| v2.0.0+ | 9.0.2+             |
+| v1.x    | >=8.0.2 <9.0.2   |
 
 ## Examples
 
