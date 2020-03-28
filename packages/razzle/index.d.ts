@@ -14,7 +14,6 @@ import {
   KeycloakConfig,
   KeycloakInitOptions,
   KeycloakInstance,
-  KeycloakPromiseType,
 } from 'keycloak-js'
 
 /**
@@ -31,9 +30,7 @@ export interface TokenPersistor {
 /**
  * SSRKeycloakProviderProps
  */
-export interface SSRKeycloakProviderProps<
-  TPromise extends KeycloakPromiseType = 'native'
-> {
+export interface SSRKeycloakProviderProps {
   /**
    * The KeycloakJS config to setup a Keycloak instance with.
    */
@@ -53,7 +50,7 @@ export interface SSRKeycloakProviderProps<
    * An optional loading check function to customize LoadingComponent display condition.
    * Return true to display LoadingComponent, false to hide it.
    */
-  isLoadingCheck?: KeycloakLoadingCheck<TPromise>
+  isLoadingCheck?: KeycloakLoadingCheck
 
   /**
    * An optional component to display while Keycloak instance is being initialized.
@@ -74,20 +71,16 @@ export interface SSRKeycloakProviderProps<
 /**
  * Makes the Keycloak instance available to the withKeycloak() and useKeycloak() calls in the component hierarchy below.
  */
-export class SSRKeycloakProvider<
-  TPromise extends KeycloakPromiseType = 'native'
-> extends Component<SSRKeycloakProviderProps<TPromise>> {}
+export class SSRKeycloakProvider extends Component<SSRKeycloakProviderProps> {}
 
 /**
  * Props injected by withKeycloak HOC
  */
-export interface ReactKeycloakInjectedProps<
-  TPromise extends KeycloakPromiseType = 'native'
-> {
+export interface ReactKeycloakInjectedProps {
   /**
    * The single Keycloak instance of your application.
    */
-  keycloak: KeycloakInstance<TPromise>
+  keycloak: KeycloakInstance
 
   /**
    * Boolean indicating whenever the Keycloak instance has been initialized by KeycloakProvider
@@ -103,33 +96,27 @@ export interface ReactKeycloakInjectedProps<
 /**
  * Makes the Keycloak instance and initialization state available to the wrapped component.
  */
-export function withKeycloak<TPromise extends KeycloakPromiseType = 'native'>(
-  component: ComponentType<ReactKeycloakInjectedProps<TPromise>>
+export function withKeycloak(
+  component: ComponentType<ReactKeycloakInjectedProps>
 ): ComponentType
 
 /**
  * Props returned by useKeycloak hook
  */
-export type ISSRKeycloakContextProps<
-  TPromise extends KeycloakPromiseType = 'native'
-> = IReactKeycloakContextProps<TPromise> & {
+export type SSRKeycloakContextProps = IReactKeycloakContextProps & {
   /**
    * Boolean indicating whenever the component is been rendered server-side or client-side
    */
   isServer: boolean
 }
 
-export type ReactKeycloakHookResult<
-  TPromise extends KeycloakPromiseType = 'native'
-> = ISSRKeycloakContextProps<TPromise> &
-  [KeycloakInstance<TPromise>, boolean, boolean]
+export type ReactKeycloakHookResult = SSRKeycloakContextProps &
+  [KeycloakInstance, boolean, boolean]
 
 /**
  * Return the Keycloak instance and initialization state.
  */
-export function useKeycloak<
-  TPromise extends KeycloakPromiseType = 'native'
->(): ReactKeycloakHookResult<TPromise>
+export function useKeycloak(): ReactKeycloakHookResult
 
 /**
  * ClientPersistors
