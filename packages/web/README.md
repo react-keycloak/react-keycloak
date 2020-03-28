@@ -22,6 +22,7 @@
 ## Table of Contents <!-- omit in toc -->
 
 - [Install](#install)
+- [Support](#support)
 - [Getting Started](#getting-started)
   - [Setup Keycloak instance](#setup-keycloak-instance)
   - [Setup KeycloakProvider](#setup-keycloakprovider)
@@ -38,17 +39,29 @@
 React Keycloak requires:
 
 - React **16.0** or later
-- `keycloak-js` **8.0.1** or later
+- `keycloak-js` **9.0.2** or later
 
-```
+```shell
 yarn add @react-keycloak/web
 ```
 
 or
 
-```
+```shell
 npm install --save @react-keycloak/web
 ```
+
+or as a `UMD` package through `unpkg`
+
+one for development: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.js
+one for production: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.min.js
+
+## Support
+
+| version | keycloak-js version |
+| ------- | ------------------- |
+| v2.0.0+ | 9.0.2+              |
+| v1.x    | >=8.0.2 <9.0.2      |
 
 ## Getting Started
 
