@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/core@1.2.0...@react-keycloak/core@1.2.1) (2020-03-30)
+
+**Note:** Version bump only for package @react-keycloak/core
+
+
+
+
+
 # [1.2.0](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/core@1.1.1...@react-keycloak/core@1.2.0) (2020-03-19)
 
 

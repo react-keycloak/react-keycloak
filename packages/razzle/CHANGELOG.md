@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0-alpha.7](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/razzle@1.0.0-alpha.6...@react-keycloak/razzle@1.0.0-alpha.7) (2020-03-30)
+
+
+### Features
+
+* **razzle:** Update TS typings ([7dd5afe](https://github.com/panz3r/react-keycloak/commit/7dd5afe1f441fa2a6ea6d70a2a49afc33c44da61))
+
+
+
+
+
 # [1.0.0-alpha.6](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/razzle@1.0.0-alpha.5...@react-keycloak/razzle@1.0.0-alpha.6) (2020-03-19)
 
 **Note:** Version bump only for package @react-keycloak/razzle

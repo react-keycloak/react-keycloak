@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.6](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/web@1.0.5...@react-keycloak/web@1.0.6) (2020-03-30)
+
+**Note:** Version bump only for package @react-keycloak/web
+
+
+
+
+
 ## [1.0.5](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/web@1.0.4...@react-keycloak/web@1.0.5) (2020-03-19)
 
 **Note:** Version bump only for package @react-keycloak/web
