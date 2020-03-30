@@ -1,6 +1,6 @@
 {
   "name": "@react-keycloak/razzle",
-  "version": "1.0.0-alpha.7",
+  "version": "2.0.0-beta.0",
   "license": "MIT",
   "description": "Razzle bindings for Keycloak javascript adapter",
   "repository": {
