@@ -2,14 +2,17 @@
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
-import { ComponentType } from 'react'
+import { Component, ComponentType } from 'react'
 import {
   IReactKeycloakContextProps,
+  KeycloakEventHandler,
+  KeycloakLoadingCheck,
   KeycloakTokens,
-  KeycloakProvider,
+  KeycloakTokensHandler,
 } from '@react-keycloak/core'
 import {
   KeycloakConfig,
+  KeycloakInitOptions,
   KeycloakInstance,
   KeycloakPromiseType,
 } from 'keycloak-js'
@@ -26,11 +29,11 @@ export interface TokenPersistor {
 }
 
 /**
- * SSRKeycloakProvider
+ * SSRKeycloakProviderProps
  */
-export class SSRKeycloakProvider<
+export interface SSRKeycloakProviderProps<
   TPromise extends KeycloakPromiseType = 'native'
-> extends KeycloakProvider<TPromise> {
+> {
   /**
    * The KeycloakJS config to setup a Keycloak instance with.
    */
@@ -40,7 +43,40 @@ export class SSRKeycloakProvider<
    * The token Persistor
    */
   persistor: TokenPersistor
+
+  /**
+   * The KeycloakJS config to be used when initializing Keycloak instance.
+   */
+  initConfig?: KeycloakInitOptions
+
+  /**
+   * An optional loading check function to customize LoadingComponent display condition.
+   * Return true to display LoadingComponent, false to hide it.
+   */
+  isLoadingCheck?: KeycloakLoadingCheck<TPromise>
+
+  /**
+   * An optional component to display while Keycloak instance is being initialized.
+   */
+  LoadingComponent?: JSX.Element
+
+  /**
+   * An optional function to receive Keycloak events as they happen.
+   */
+  onEvent?: KeycloakEventHandler
+
+  /**
+   * An optional function to receive Keycloak tokens when changed.
+   */
+  onTokens?: KeycloakTokensHandler
 }
+
+/**
+ * Makes the Keycloak instance available to the withKeycloak() and useKeycloak() calls in the component hierarchy below.
+ */
+export class SSRKeycloakProvider<
+  TPromise extends KeycloakPromiseType = 'native'
+> extends Component<SSRKeycloakProviderProps<TPromise>> {}
 
 /**
  * Props injected by withKeycloak HOC
@@ -99,12 +135,12 @@ export function useKeycloak<
  * ClientPersistors
  */
 export class ClientPersistors {
-  Cookies: TokenPersistor
+  static Cookies: TokenPersistor
 }
 
 /**
  * ServerPersistors
  */
 export class ServerPersistors {
-  ExpressCookies: (req: any) => TokenPersistor
+  static ExpressCookies: (req: any) => TokenPersistor
 }
