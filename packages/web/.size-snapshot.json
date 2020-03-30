@@ -19,27 +19,27 @@
     }
   },
   "dist/es/react-keycloak-web.mjs": {
-    "bundled": 30485,
-    "minified": 16945,
-    "gzipped": 4840,
+    "bundled": 28825,
+    "minified": 15900,
+    "gzipped": 4772,
     "treeshaked": {
       "rollup": {
-        "code": 6207,
+        "code": 5756,
         "import_statements": 38
       },
       "webpack": {
-        "code": 11567
+        "code": 11114
       }
     }
   },
   "dist/umd/react-keycloak-web.js": {
-    "bundled": 57479,
-    "minified": 19919,
-    "gzipped": 6250
+    "bundled": 55819,
+    "minified": 19115,
+    "gzipped": 6212
   },
   "dist/umd/react-keycloak-web.min.js": {
-    "bundled": 30048,
-    "minified": 12553,
-    "gzipped": 4160
+    "bundled": 28388,
+    "minified": 11742,
+    "gzipped": 4122
   }
 }
