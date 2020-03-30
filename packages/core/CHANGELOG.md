@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/core@1.2.1...@react-keycloak/core@2.0.0) (2020-03-30)
+
+
+### chore
+
+* **core:** Remove support for 'keycloak-js' pre-9.0.2 ([94f2d5f](https://github.com/panz3r/react-keycloak/commit/94f2d5f8f106955091c7cc8aaa6c6dd2dbb024c4))
+
+
+### Features
+
+* **core:** Improve TS typings ([59d3553](https://github.com/panz3r/react-keycloak/commit/59d35536cfa9c37d4d0f8052ade2294fc9a63b59))
+
+
+### BREAKING CHANGES
+
+* **core:** Drop support for older KeycloakJS versions
+
+
+
+
+
 ## [1.2.1](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/core@1.2.0...@react-keycloak/core@1.2.1) (2020-03-30)
 
 **Note:** Version bump only for package @react-keycloak/core

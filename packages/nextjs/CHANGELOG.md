@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-alpha.1](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@1.0.0-alpha.17...@react-keycloak/nextjs@2.0.0-alpha.1) (2020-03-30)
+
+
+### chore
+
+* **nextjs:** Remove support for 'keycloak-js' pre-9.0.2 ([420c3f8](https://github.com/panz3r/react-keycloak/commit/420c3f85ade9929becd5386b515476324826c9c2))
+
+
+### Features
+
+* **nextjs:** Update TS typings ([65efa34](https://github.com/panz3r/react-keycloak/commit/65efa34226de6692e85dac158b7d5782d7b400ae))
+
+
+### BREAKING CHANGES
+
+* **nextjs:** Drop support for older KeycloakJS versions
+
+
+
+
+
 # [1.0.0-alpha.17](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@1.0.0-alpha.16...@react-keycloak/nextjs@1.0.0-alpha.17) (2020-03-30)
 
 **Note:** Version bump only for package @react-keycloak/nextjs

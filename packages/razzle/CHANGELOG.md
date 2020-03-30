@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.1](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/razzle@1.0.0-alpha.7...@react-keycloak/razzle@2.0.0-beta.1) (2020-03-30)
+
+
+### chore
+
+* **razzle:** Remove support for 'keycloak-js' pre-9.0.2 ([3830422](https://github.com/panz3r/react-keycloak/commit/3830422e3ea211aba4d9b4821dacaa6e1081f951))
+
+
+### Features
+
+* **razzle:** Update TS typings ([5ae4923](https://github.com/panz3r/react-keycloak/commit/5ae492305ba00c568f4d0c439ee33d300e764bcd))
+
+
+### BREAKING CHANGES
+
+* **razzle:** Drop support for older KeycloakJS versions
+
+
+
+
+
 # [1.0.0-alpha.7](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/razzle@1.0.0-alpha.6...@react-keycloak/razzle@1.0.0-alpha.7) (2020-03-30)
 
 
