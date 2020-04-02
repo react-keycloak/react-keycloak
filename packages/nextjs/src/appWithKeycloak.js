@@ -12,8 +12,10 @@ const appWithKeycloak = (keycloakInitOptions, providerProps = {}) => (
 ) => {
   const keycloak = getKeycloakInstance(keycloakInitOptions)
 
-  async function getComponentInitialProps({ Component, ctx }) {
-    return Component.getInitialProps ? await Component.getInitialProps(ctx) : {}
+  async function getAppInitialProps(appContext) {
+    return NextApp.getInitialProps
+      ? await NextApp.getInitialProps(appContext)
+      : {}
   }
 
   async function getKeycloakInitialProps(appContext) {
@@ -25,14 +27,15 @@ const appWithKeycloak = (keycloakInitOptions, providerProps = {}) => (
   class AppWithKeycloak extends React.PureComponent {
     static async getInitialProps(appContext) {
       const { isAuthenticated } = checkIfUserAuthenticated(appContext)
-      const [cmpInitialProps, keycloakInitConfig] = await Promise.all([
-        getComponentInitialProps(appContext),
+      const [appProps, keycloakInitConfig] = await Promise.all([
+        getAppInitialProps(appContext),
         getKeycloakInitialProps(appContext),
       ])
 
       return {
+        ...appProps,
         pageProps: {
-          ...cmpInitialProps,
+          ...appProps.pageProps,
           isAuthenticated,
         },
         keycloakInitConfig,
