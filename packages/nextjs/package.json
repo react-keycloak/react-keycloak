@@ -43,7 +43,6 @@
     "@babel/runtime": "^7.9.0",
     "@react-keycloak/core": "file:../core",
     "base-64": "^0.1.0",
-    "cookie": "^0.4.0",
     "detect-node": "^2.0.4",
     "hoist-non-react-statics": "^3.3.2",
     "js-cookie": "^2.2.1",
