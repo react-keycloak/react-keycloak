@@ -63,116 +63,64 @@ npm install --save @react-keycloak/nextjs
 
 ### Setup NextApp
 
-Create the `_app.tsx` file under `pages` folder and wrap your App inside `appWithKeycloak` and pass the `keycloak` init props
+Create the `_app.tsx` file under `pages` folder and wrap your App inside `SSRKeycloakProvider` component and pass `keycloakConfig` and a `TokenPersistor`.
+
+**Note:** `@react-keycloak/nextjs` provides a default `TokenPersistor` which works with `cookies` (exported as `Persistors.Cookies`). The following examples will be based on that.
 
 ```tsx
-import React from 'react'
-import App from 'next/app'
+import cookie from 'cookie'
+import * as React from 'react'
+import type { IncomingMessage } from 'http'
+import type { AppProps, AppContext } from 'next/app'
 
-import { appWithKeycloak } from '@react-keycloak/nextjs'
+import { SSRKeycloakProvider, Persistors } from '@react-keycloak/nextjs'
+import type { KeycloakCookies } from  '@react-keycloak/nextjs'
 
-class MyApp extends App {
-  render() {
-    const { Component, pageProps } = this.props
-    return <Component {...pageProps} />
+const keycloakCfg = {
+  realm: '',
+  url: '',
+  clientId: ''
+}
+
+interface InitialProps {
+  cookies: KeycloakCookies
+}
+
+function MyApp({ Component, pageProps, cookies }: AppProps & InitialProps) {
+  return (
+    <SSRKeycloakProvider
+      keycloakConfig={keycloakCfg}
+      persistor={Persistors.Cookies(cookies)}
+    >
+      <Component {...pageProps} />
+    </SSRKeycloakProvider>
+  )
+}
+
+function parseCookies(req?: IncomingMessage) {
+  if (!req || !req.headers) {
+    return {}
+  }
+  return cookie.parse(req.headers.cookie || '')
+}
+
+MyApp.getInitialProps = async (context: AppContext) => {
+  // Extract cookies from AppContext
+  return {
+    cookies: parseCookies(context?.ctx?.req)
   }
 }
 
-export default appWithKeycloak({
-  realm: process.env.KEYCLOAK_REALM as string,
-  url: process.env.KEYCLOAK_URL as string,
-  clientId: process.env.KEYCLOAK_CLIENT_ID as string,
-})(MyApp)
+export default MyApp
 ```
 
-`appWithKeycloak` also accepts a second optional parameter that represents the `ProviderConfig` and the object can contains the following properties:
-
-- `initConfig`, contains the object to be passed to `keycloak.init()` method, by default the following is used
-
-      {
-        onLoad: 'check-sso',
-        promiseType: 'native',
-      }
-
-  for more options see [Keycloak docs](https://www.keycloak.org/docs/latest/securing_apps/index.html#init-options).
-
-- `LoadingComponent`, a component to be displayed while `keycloak` is being initialized, if not provided child components will be rendered immediately. Defaults to `null`
-
-- `isLoadingCheck`, an optional loading check function to customize LoadingComponent display condition. Return `true` to display LoadingComponent, `false` to hide it.
-
-  Can be implemented as follow
-
-  ```js
-  ;(keycloak, isAuthenticated) => !isAuthenticated && !keycloak.authenticated
-  ```
-
-- `onEvent`, an handler function that receives events launched by `keycloak`, defaults to `null`.
-
-  It can be implemented as follow
-
-  ```js
-  ;(event, error) => {
-    console.log('onKeycloakEvent', event, error)
-  }
-  ```
-
-  Published events are:
-
-  - `onReady`
-  - `onAuthSuccess`
-  - `onAuthError`
-  - `onAuthRefreshSuccess`
-  - `onAuthRefreshError`
-  - `onTokenExpired`
-  - `onAuthLogout`
-
-- `onTokens`, an handler function that receives `keycloak` tokens as an object every time they change, defaults to `null`.
-
-  Keycloak tokens are returned as follow
-
-  ```json
-  {
-    "idToken": string,
-    "refreshToken": string,
-    "token": string
-  }
-  ```
-
-#### Dynamic react-keycloak initConfig
-
-If you need to pass dynamic `initConfig` parameters to the NextJS `AppWithKeycloak`, you can implement a static `getKeycloakInitConfig` method to your wrapper `App`.
-
-Like this
-
-```ts
-class MyApp extends App {
-  /**
-   * Pass additional dynamic initProps to Keycloak
-   */
-  static async getKeycloakInitConfig(ctx: AppContext) {
-    console.log('MyApp - getKeycloakInitConfig', ctx)
-    // Return an object with keycloak initConfig supported keys - see Keycloak docs
-    return {
-      token: 'test',
-    }
-  }
-
-  render() {
-    const { Component, pageProps } = this.props
-    return <Component {...pageProps} />
-  }
-}
-
-export default appWithKeycloak({
-  realm: process.env.KEYCLOAK_REALM as string,
-  url: process.env.KEYCLOAK_URL as string,
-  clientId: process.env.KEYCLOAK_CLIENT_ID as string,
-})(MyApp)
-```
+`SSRKeycloakProvider` also accepts all the properties of [`KeycloakProvider`](https://github.com/panz3r/react-keycloak/blob/master/packages/web/README.md#setup-keycloakprovider).
 
 ### HOC Usage
 
 When a page requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
+
+**Note:** When running server-side not all properties and method of the `keycloak` instance might be available (`token`, `idToken` and `refreshToken` are available if persisted and `authenticated` is set accordingly).
 
 ```tsx
 import { withKeycloak } from '@react-keycloak/nextjs'

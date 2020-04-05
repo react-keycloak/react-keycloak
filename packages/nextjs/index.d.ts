@@ -2,27 +2,45 @@
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
-import { ComponentType } from 'react'
+import { Component, ComponentType } from 'react'
 import {
   IReactKeycloakContextProps,
   KeycloakEventHandler,
+  KeycloakLoadingCheck,
   KeycloakTokens,
+  KeycloakTokensHandler,
 } from '@react-keycloak/core'
 import {
   KeycloakConfig,
   KeycloakInitOptions,
   KeycloakInstance,
 } from 'keycloak-js'
-import { AppContext, AppType } from 'next'
 
-export type NextJSKeycloakLoadingCheck = (
-  keycloak: KeycloakInstance,
-  isAuthenticated: boolean
-) => boolean
+/**
+ * TokenPersistor
+ */
+export interface TokenPersistor {
+  setTokens: (tokens: KeycloakTokens) => void
 
-export type KeycloakTokensHandler = (tokens: KeycloakTokens) => void
+  getTokens: () => KeycloakTokens
 
-export interface ReactKeycloakProviderProps {
+  resetTokens: () => void
+}
+
+/**
+ * SSRKeycloakProviderProps
+ */
+export interface SSRKeycloakProviderProps {
+  /**
+   * The KeycloakJS config to setup a Keycloak instance with.
+   */
+  keycloakConfig: KeycloakConfig
+
+  /**
+   * The token Persistor
+   */
+  persistor: TokenPersistor
+
   /**
    * The KeycloakJS config to be used when initializing Keycloak instance.
    */
@@ -32,7 +50,7 @@ export interface ReactKeycloakProviderProps {
    * An optional loading check function to customize LoadingComponent display condition.
    * Return true to display LoadingComponent, false to hide it.
    */
-  isLoadingCheck?: NextJSKeycloakLoadingCheck
+  isLoadingCheck?: KeycloakLoadingCheck
 
   /**
    * An optional component to display while Keycloak instance is being initialized.
@@ -50,25 +68,10 @@ export interface ReactKeycloakProviderProps {
   onTokens?: KeycloakTokensHandler
 }
 
-declare function appgetKeycloakInitConfig(
-  appContext: AppContext
-): Promise<AppInitialProps>
-
-export class AppTypeWithKeycloak<P = {}, CP = {}, S = {}> extends AppType<
-  P & ReactKeycloakInjectedProps,
-  CP,
-  S
-> {
-  static getKeycloakInitConfig?: typeof appgetKeycloakInitConfig
-}
-
 /**
- * NextJS App Wrapper
+ * Makes the Keycloak instance available to the withKeycloak() and useKeycloak() calls in the component hierarchy below.
  */
-export function appWithKeycloak<P = {}, CP = {}, S = {}>(
-  options: KeycloakConfig,
-  providerProps?: ReactKeycloakProviderProps
-): (app: AppTypeWithKeycloak<P, CP, S>) => AppType
+export class SSRKeycloakProvider extends Component<SSRKeycloakProviderProps> {}
 
 /**
  * Props injected by withKeycloak HOC
@@ -85,9 +88,9 @@ export interface ReactKeycloakInjectedProps {
   keycloakInitialized: boolean
 
   /**
-   * Boolean indicating whenever the user is authenticated by Keycloak instance or by Server cookie
+   * Boolean indicating whenever the component is been rendered server-side or client-side
    */
-  isAuthenticated: boolean
+  isServer: boolean
 }
 
 /**
@@ -97,17 +100,35 @@ export function withKeycloak(
   component: ComponentType<ReactKeycloakInjectedProps>
 ): ComponentType
 
-export type INextJSKeycloakContextProps = IReactKeycloakContextProps & {
+/**
+ * Props returned by useKeycloak hook
+ */
+export type SSRKeycloakContextProps = IReactKeycloakContextProps & {
   /**
-   * Boolean indicating whenever the user is authenticated by Keycloak instance or by Server cookie
+   * Boolean indicating whenever the component is been rendered server-side or client-side
    */
-  isAuthenticated: boolean
+  isServer: boolean
 }
 
-export type ReactKeycloakHookResult = INextJSKeycloakContextProps &
+export type ReactKeycloakHookResult = SSRKeycloakContextProps &
   [KeycloakInstance, boolean, boolean]
 
 /**
  * Return the Keycloak instance and initialization state.
  */
 export function useKeycloak(): ReactKeycloakHookResult
+
+/**
+ * Cookies set by Persistors.Cookies
+ */
+export interface KeycloakCookies {
+  kcToken?: string
+  kcIdToken?: string
+}
+
+/**
+ * Persistors
+ */
+export class Persistors {
+  static Cookies: (serverSideCookies?: KeycloakCookies) => TokenPersistor
+}

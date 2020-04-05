@@ -1,21 +1,20 @@
 import { useContext } from 'react'
 
-import { KeycloakContext } from './internals/keycloak'
-import { ServerContext } from './internals/serverProvider'
+import { KeycloakContext, KeycloakStubContext } from './internals/context'
+import { isServer } from './internals/utils'
 
 function useKeycloak() {
-  const { isServer, isAuthenticated: serverAuth } = useContext(ServerContext)
+  const keycloakStub = useContext(KeycloakStubContext)
   const { initialized, keycloak } = useContext(KeycloakContext)
 
-  // either the client (keycloak.authenticated) or the server (isAuthenticated cookie) has to assert that the user is logged in
-  const isAuthenticated =
-    keycloak?.authenticated ||
-    ((isServer || !keycloak?.subject) && serverAuth === 'true')
+  const isServerCheck = isServer()
+  const kcInstance = !initialized || isServerCheck ? keycloakStub : keycloak
+  const kcInitialized = initialized || isServerCheck
 
-  return Object.assign([keycloak, initialized, isAuthenticated], {
-    initialized,
-    keycloak,
-    isAuthenticated,
+  return Object.assign([kcInstance, kcInitialized, isServerCheck], {
+    initialized: kcInitialized,
+    isServer: isServerCheck,
+    keycloak: kcInstance,
   })
 }
 

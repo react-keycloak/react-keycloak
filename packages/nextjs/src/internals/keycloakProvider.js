@@ -1,7 +1,7 @@
 import { createReactKeycloakProvider } from '@react-keycloak/core'
 
-import { KeycloakContext } from './keycloak'
+import { KeycloakContext } from './context'
 
-const reactKeycloakProvider = createReactKeycloakProvider(KeycloakContext)
+const KeycloakProvider = createReactKeycloakProvider(KeycloakContext)
 
-export default reactKeycloakProvider
+export { KeycloakProvider }
