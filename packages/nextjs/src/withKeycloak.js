@@ -1,8 +1,8 @@
 import * as React from 'react'
 import hoistStatics from 'hoist-non-react-statics'
 
-import { KeycloakContext } from './internals/keycloak'
-import { ServerContext } from './internals/serverProvider'
+import { KeycloakContext, KeycloakStubContext } from './internals/context'
+import { isServer } from './internals/utils'
 
 const getDisplayName = (name) => `WithKeycloak(${name})`
 
@@ -12,31 +12,26 @@ function withKeycloak(WrappedComponent) {
   )
 
   class WithKeycloakComponent extends React.PureComponent {
-    renderWrappedComponent = ({ isServer, isAuthenticated }) => ({
-      initialized,
-      keycloak,
-    }) => (
-      <WrappedComponent
-        {...this.props}
-        isAuthenticated={
-          // either the client (keycloak.authenticated) or the server (isAuthenticated cookie) has to assert that the user is logged in
-          keycloak?.authenticated ||
-          ((isServer || !keycloak?.subject) && isAuthenticated === 'true')
-        }
-        keycloak={keycloak}
-        keycloakInitialized={initialized}
-      />
-    )
+    renderWrappedComponent = (keycloakStub) => ({ initialized, keycloak }) => {
+      return (
+        <WrappedComponent
+          {...this.props}
+          isServer={isServer()}
+          keycloak={!initialized || isServer() ? keycloakStub : keycloak}
+          keycloakInitialized={initialized || isServer()}
+        />
+      )
+    }
 
     render() {
       return (
-        <ServerContext.Consumer>
-          {({ isServer, isAuthenticated }) => (
+        <KeycloakStubContext.Consumer>
+          {(keycloakStub) => (
             <KeycloakContext.Consumer>
-              {this.renderWrappedComponent({ isServer, isAuthenticated })}
+              {this.renderWrappedComponent(keycloakStub)}
             </KeycloakContext.Consumer>
           )}
-        </ServerContext.Consumer>
+        </KeycloakStubContext.Consumer>
       )
     }
   }

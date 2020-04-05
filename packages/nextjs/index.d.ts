@@ -1,4 +1,4 @@
-// Type definitions for react-keycloak 8.0.1-191210
+// Type definitions for @react-keycloak/nextjs
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
@@ -6,26 +6,44 @@ import { Component, ComponentType } from 'react'
 import {
   IReactKeycloakContextProps,
   KeycloakEventHandler,
+  KeycloakLoadingCheck,
   KeycloakTokens,
+  KeycloakTokensHandler,
 } from '@react-keycloak/core'
-import { AppContext, AppType } from 'next'
 import {
   KeycloakConfig,
-  KeycloakError,
   KeycloakInitOptions,
   KeycloakInstance,
   KeycloakPromiseType,
 } from 'keycloak-js'
 
-export type NextJSKeycloakLoadingCheck<
-  TPromise extends KeycloakPromiseType = 'native'
-> = (keycloak: KeycloakInstance<TPromise>, isAuthenticated: boolean) => boolean
+/**
+ * TokenPersistor
+ */
+export interface TokenPersistor {
+  setTokens: (tokens: KeycloakTokens) => void
 
-export type KeycloakTokensHandler = (tokens: KeycloakTokens) => void
+  getTokens: () => KeycloakTokens
 
-export interface ReactKeycloakProviderProps<
+  resetTokens: () => void
+}
+
+/**
+ * SSRKeycloakProviderProps
+ */
+export interface SSRKeycloakProviderProps<
   TPromise extends KeycloakPromiseType = 'native'
 > {
+  /**
+   * The KeycloakJS config to setup a Keycloak instance with.
+   */
+  keycloakConfig: KeycloakConfig
+
+  /**
+   * The token Persistor
+   */
+  persistor: TokenPersistor
+
   /**
    * The KeycloakJS config to be used when initializing Keycloak instance.
    */
@@ -35,7 +53,7 @@ export interface ReactKeycloakProviderProps<
    * An optional loading check function to customize LoadingComponent display condition.
    * Return true to display LoadingComponent, false to hide it.
    */
-  isLoadingCheck?: NextJSKeycloakLoadingCheck<TPromise>
+  isLoadingCheck?: KeycloakLoadingCheck<TPromise>
 
   /**
    * An optional component to display while Keycloak instance is being initialized.
@@ -53,31 +71,12 @@ export interface ReactKeycloakProviderProps<
   onTokens?: KeycloakTokensHandler
 }
 
-declare function appgetKeycloakInitConfig(
-  appContext: AppContext
-): Promise<AppInitialProps>
-
-export class AppTypeWithKeycloak<
-  P = {},
-  CP = {},
-  S = {},
-  TPromise
-> extends AppType<P & ReactKeycloakInjectedProps<TPromise>, CP, S> {
-  static getKeycloakInitConfig?: typeof appgetKeycloakInitConfig
-}
-
 /**
- * NextJS App Wrapper
+ * Makes the Keycloak instance available to the withKeycloak() and useKeycloak() calls in the component hierarchy below.
  */
-export function appWithKeycloak<
-  P = {},
-  CP = {},
-  S = {},
+export class SSRKeycloakProvider<
   TPromise extends KeycloakPromiseType = 'native'
->(
-  options: KeycloakConfig,
-  providerProps?: ReactKeycloakProviderProps<TPromise>
-): (app: AppTypeWithKeycloak<P, CP, S, TPromise>) => AppType
+> extends Component<SSRKeycloakProviderProps<TPromise>> {}
 
 /**
  * Props injected by withKeycloak HOC
@@ -96,9 +95,9 @@ export interface ReactKeycloakInjectedProps<
   keycloakInitialized: boolean
 
   /**
-   * Boolean indicating whenever the user is authenticated by Keycloak instance or by Server cookie
+   * Boolean indicating whenever the component is been rendered server-side or client-side
    */
-  isAuthenticated: boolean
+  isServer: boolean
 }
 
 /**
@@ -108,23 +107,41 @@ export function withKeycloak<TPromise extends KeycloakPromiseType = 'native'>(
   component: ComponentType<ReactKeycloakInjectedProps<TPromise>>
 ): ComponentType
 
-export type INextJSKeycloakContextProps<
+/**
+ * Props returned by useKeycloak hook
+ */
+export type ISSRKeycloakContextProps<
   TPromise extends KeycloakPromiseType = 'native'
-> = IReactKeycloakContextProps & {
+> = IReactKeycloakContextProps<TPromise> & {
   /**
-   * Boolean indicating whenever the user is authenticated by Keycloak instance or by Server cookie
+   * Boolean indicating whenever the component is been rendered server-side or client-side
    */
-  isAuthenticated: boolean
+  isServer: boolean
 }
 
 export type ReactKeycloakHookResult<
   TPromise extends KeycloakPromiseType = 'native'
-> = INextJSKeycloakContextProps<TPromise> &
+> = ISSRKeycloakContextProps<TPromise> &
   [KeycloakInstance<TPromise>, boolean, boolean]
 
 /**
  * Return the Keycloak instance and initialization state.
  */
 export function useKeycloak<
-  TPromise extends Keycloak.KeycloakPromiseType = 'native'
+  TPromise extends KeycloakPromiseType = 'native'
 >(): ReactKeycloakHookResult<TPromise>
+
+/**
+ * Cookies set by Persistors.Cookies
+ */
+export interface KeycloakCookies {
+  kcToken?: string
+  kcIdToken?: string
+}
+
+/**
+ * Persistors
+ */
+export class Persistors {
+  static Cookies: (serverSideCookies?: KeycloakCookies) => TokenPersistor
+}
