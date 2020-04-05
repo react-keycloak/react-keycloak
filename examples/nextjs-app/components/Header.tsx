@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { withKeycloak } from '@react-keycloak/nextjs'
 
-export const Header = withKeycloak(({ isAuthenticated, keycloak }) => {
+export const Header = withKeycloak(({ keycloak }) => {
   return (
     <header className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
       <Link href="/">
@@ -16,7 +16,7 @@ export const Header = withKeycloak(({ isAuthenticated, keycloak }) => {
           <a className="p-2 text-dark">Profile</a>
         </Link>
       </nav>
-      {isAuthenticated ? (
+      {keycloak.authenticated ? (
         <>
           <button
             type="button"
