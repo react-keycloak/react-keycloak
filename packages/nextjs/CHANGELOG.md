@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.2](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-alpha.1...@react-keycloak/nextjs@2.0.0-beta.2) (2020-04-05)
+
+
+### Bug Fixes
+
+* **nextjs:** Fix filename casing ([0da9e68](https://github.com/panz3r/react-keycloak/commit/0da9e68e2985632a1876f4d6115f2c3e34a95166))
+
+
+### Features
+
+* **nextjs:** Complete rewrite ([3ce04ad](https://github.com/panz3r/react-keycloak/commit/3ce04adaeb9a1e0523c11a518e621c0c78412eb9))
+
+
+
+
+
 # [2.0.0-alpha.1](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@1.0.0-alpha.17...@react-keycloak/nextjs@2.0.0-alpha.1) (2020-03-30)
 
 
