@@ -130,3 +130,16 @@ export interface KeycloakCookies {
 export class Persistors {
   static Cookies: (serverSideCookies?: KeycloakCookies) => TokenPersistor
 }
+
+/**
+ * getKeycloakInstance returns the current Keycloak instance
+ *
+ * @param {KeycloakConfig} keycloakConfig the Keycloak config to be use on instance creation.
+ * @param {boolean} recreate a boolean indicating whenever the Keycloak instance should be recreated, false by default.
+ *
+ * @returns {KeycloakInstance} the current (or newly created) Keycloak instance
+ */
+export function getKeycloakInstance(
+  keycloakConfig: KeycloakConfig,
+  recreate: boolean = false
+): KeycloakInstance
