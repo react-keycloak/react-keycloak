@@ -2,91 +2,31 @@
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
-import { Component, ComponentType } from 'react'
-import { IReactKeycloakContextProps } from '@react-keycloak/core'
+
 import {
-  KeycloakError,
-  KeycloakInitOptions,
-  KeycloakInstance,
-} from 'keycloak-js'
+  IReactKeycloakContextProps,
+  ProviderProps as KeycloakProviderProps,
+} from '@react-keycloak/core'
+import { KeycloakInstance } from 'keycloak-js'
+import { Component, ComponentType } from 'react'
 
-export interface KeycloakTokens {
-  /**
-   * Current idToken returned by Keycloak.
-   */
-  idToken: string
-
-  /**
-   * Current refreshToken returned by Keycloak.
-   */
-  refreshToken: string
-
-  /**
-   * Current JWT token returned by Keycloak.
-   */
-  token: string
-}
-
-export type KeycloakLoadingCheck = (keycloak: KeycloakInstance) => boolean
-
-export type KeycloakEvent =
-  | 'onReady'
-  | 'onAuthSuccess'
-  | 'onAuthError'
-  | 'onAuthRefreshSuccess'
-  | 'onAuthRefreshError'
-  | 'onAuthLogout'
-  | 'onTokenExpired'
-
-export type KeycloakEventHandler = (
-  eventType: KeycloakEvent,
-  error?: KeycloakError
-) => void
-
-export type KeycloakTokensHandler = (tokens: KeycloakTokens) => void
-
-export interface ProviderProps {
-  /**
-   * The single Keycloak instance to be used by your application.
-   */
-  keycloak: KeycloakInstance
-
-  /**
-   * The KeycloakJS config to be used when initializing Keycloak instance.
-   */
-  initConfig?: KeycloakInitOptions
-
-  /**
-   * An optional loading check function to customize LoadingComponent display condition.
-   * Return true to display LoadingComponent, false to hide it.
-   */
-  isLoadingCheck?: KeycloakLoadingCheck
-
-  /**
-   * An optional component to display while Keycloak instance is being initialized.
-   */
-  LoadingComponent?: JSX.Element
-
-  /**
-   * An optional function to receive Keycloak events as they happen.
-   */
-  onEvent?: KeycloakEventHandler
-
-  /**
-   * An optional function to receive Keycloak tokens when changed.
-   */
-  onTokens?: KeycloakTokensHandler
-}
+export {
+  KeycloakEvent,
+  KeycloakEventHandler,
+  KeycloakLoadingCheck,
+  KeycloakTokens,
+  KeycloakTokensHandler,
+} from '@react-keycloak/core'
 
 /**
  * Makes the Keycloak instance available to the withKeycloak() and useKeycloak() calls in the component hierarchy below.
  */
-export class KeycloakProvider extends Component<ProviderProps> {}
+export class KeycloakProvider extends Component<KeycloakProviderProps> {}
 
 /**
  * Props injected by withKeycloak HOC
  */
-export interface ReactKeycloakInjectedProps {
+export type ReactKeycloakInjectedProps = {
   /**
    * The single Keycloak instance of your application.
    */
