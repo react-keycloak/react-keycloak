@@ -2,17 +2,18 @@
 // Project: https://github.com/panz3r/react-keycloak
 // Definitions by: Mattia Panzeri <https://github.com/panz3r>
 // TypeScript Version: 3.4
-import { Component } from 'react'
+
 import {
   KeycloakError,
   KeycloakInitOptions,
   KeycloakInstance,
 } from 'keycloak-js'
+import { Component } from 'react'
 
 /**
  * ReactKeycloak Context props
  */
-export interface IReactKeycloakContextProps {
+export type IReactKeycloakContextProps = {
   /**
    * The single Keycloak instance of your application.
    */
@@ -25,14 +26,9 @@ export interface IReactKeycloakContextProps {
 }
 
 /**
- * Create a React context with Keycloak instance
- * @param initialContext initial context value
+ * Set of tokens provided by Keycloak
  */
-export function createReactKeycloakContext(
-  initialContext?: IReactKeycloakContextProps
-): React.Context<IReactKeycloakContextProps>
-
-export interface KeycloakTokens {
+export type KeycloakTokens = {
   /**
    * Current idToken returned by Keycloak.
    */
@@ -49,8 +45,17 @@ export interface KeycloakTokens {
   token: string
 }
 
+/**
+ * A loading check function to customize LoadingComponent display condition.
+ *
+ * @param {KeycloakInstance} keycloak the current Keycloak instance.
+ * @returns {boolean} Set to true to display LoadingComponent, false to hide it.
+ */
 export type KeycloakLoadingCheck = (keycloak: KeycloakInstance) => boolean
 
+/**
+ * ReactKeycloak event types
+ */
 export type KeycloakEvent =
   | 'onReady'
   | 'onAuthSuccess'
@@ -60,14 +65,25 @@ export type KeycloakEvent =
   | 'onAuthLogout'
   | 'onTokenExpired'
 
+/**
+ * A function that receives Keycloak events.
+ */
 export type KeycloakEventHandler = (
   eventType: KeycloakEvent,
   error?: KeycloakError
 ) => void
 
+/**
+ * A function that receives Keycloak tokens.
+ *
+ * @param {KeycloakTokens} tokens The current Keycloak tokens set.
+ */
 export type KeycloakTokensHandler = (tokens: KeycloakTokens) => void
 
-export interface ProviderProps {
+/**
+ * Props that can be passed to KeycloakProvider
+ */
+export type ProviderProps = {
   /**
    * The single Keycloak instance to be used by your application.
    */
@@ -112,8 +128,20 @@ export interface ProviderProps {
 export class KeycloakProvider extends Component<ProviderProps> {}
 
 /**
+ * Create a React context with Keycloak instance.
+ *
+ * @param {IReactKeycloakContextProps} initialContext initial context value.
+ * @returns {React.Context} the ReactKeycloak context.
+ */
+export function createReactKeycloakContext(
+  initialContext?: IReactKeycloakContextProps
+): React.Context<IReactKeycloakContextProps>
+
+/**
  * Create a ReactKeycloak Provider component to wrap the app
- * @param ReactKeycloakContext A ReactKeycloak context instance
+ *
+ * @param {React.Context} ReactKeycloakContext A ReactKeycloak context instance.
+ * @returns {KeycloakProvider} the provider for the specified ReactKeycloak context.
  */
 export function createReactKeycloakProvider(
   ReactKeycloakContext: React.Context<IReactKeycloakContextProps>
