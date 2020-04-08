@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.3](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-beta.2...@react-keycloak/nextjs@2.0.0-beta.3) (2020-04-08)
+
+
+### Features
+
+* **nextjs:** Update TS typings ([b233ce2](https://github.com/panz3r/react-keycloak/commit/b233ce29826445d1f5dc89a8b8d82031c08f4cfd))
+
+
+
+
+
 # [2.0.0-beta.2](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-alpha.1...@react-keycloak/nextjs@2.0.0-beta.2) (2020-04-05)
 
 

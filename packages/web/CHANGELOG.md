@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/web@2.0.0...@react-keycloak/web@2.1.0) (2020-04-08)
+
+
+### Features
+
+* **web:** Update TS typings ([92c1e00](https://github.com/panz3r/react-keycloak/commit/92c1e00d3737c3a361a2660b7576212a435921df))
+
+
+
+
+
 # [2.0.0](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/web@1.0.6...@react-keycloak/web@2.0.0) (2020-03-30)
 
 

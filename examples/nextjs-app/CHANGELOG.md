@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.10](https://github.com/panz3r/react-keycloak/compare/nextjs-app@1.2.9...nextjs-app@1.2.10) (2020-04-08)
+
+**Note:** Version bump only for package nextjs-app
+
+
+
+
+
 ## [1.2.9](https://github.com/panz3r/react-keycloak/compare/nextjs-app@1.2.8...nextjs-app@1.2.9) (2020-04-05)
 
 **Note:** Version bump only for package nextjs-app
