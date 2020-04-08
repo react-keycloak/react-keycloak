@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.4](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-beta.3...@react-keycloak/nextjs@2.0.0-beta.4) (2020-04-08)
+
+
+### Features
+
+* **nextjs:** Persist and expose keycloak instance ([88cbd01](https://github.com/panz3r/react-keycloak/commit/88cbd0145f6d3bd6480706b4609de5dd388deda6))
+
+
+
+
+
 # [2.0.0-beta.3](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-beta.2...@react-keycloak/nextjs@2.0.0-beta.3) (2020-04-08)
 
 
