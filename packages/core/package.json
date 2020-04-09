@@ -27,6 +27,10 @@
   "publishConfig": {
     "access": "public"
   },
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/reactkeycloak"
+  },
   "scripts": {
     "clean": "rimraf ./dist",
     "prebuild": "npm run clean",
