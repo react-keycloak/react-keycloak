@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.5](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-beta.4...@react-keycloak/nextjs@2.0.0-beta.5) (2020-04-09)
+
+**Note:** Version bump only for package @react-keycloak/nextjs
+
+
+
+
+
 # [2.0.0-beta.4](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-beta.3...@react-keycloak/nextjs@2.0.0-beta.4) (2020-04-08)
 
 

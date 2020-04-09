@@ -2,7 +2,7 @@
   "name": "gatsby-starter-default",
   "private": true,
   "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
     "@react-keycloak/web": "file:../../packages/web",

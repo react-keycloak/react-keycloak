@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6](https://github.com/gatsbyjs/gatsby-starter-default/compare/gatsby-starter-default@0.2.5...gatsby-starter-default@0.2.6) (2020-04-09)
+
+**Note:** Version bump only for package gatsby-starter-default
+
+
+
+
+
 ## [0.2.5](https://github.com/gatsbyjs/gatsby-starter-default/compare/gatsby-starter-default@0.2.4...gatsby-starter-default@0.2.5) (2020-04-08)
 
 **Note:** Version bump only for package gatsby-starter-default
