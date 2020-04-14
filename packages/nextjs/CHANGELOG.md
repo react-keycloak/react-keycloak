@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0-beta.6](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-beta.5...@react-keycloak/nextjs@2.0.0-beta.6) (2020-04-14)
+
+
+### Bug Fixes
+
+* **nextjs:** Avoid using a single 'keycloakStubInstance' for every call - reinit on first 'getKeycloakStub' ([0d058b4](https://github.com/panz3r/react-keycloak/commit/0d058b41f2d469a5281bdf4962088c6daf7f6134))
+
+
+
+
+
 # [2.0.0-beta.5](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/nextjs@2.0.0-beta.4...@react-keycloak/nextjs@2.0.0-beta.5) (2020-04-09)
 
 **Note:** Version bump only for package @react-keycloak/nextjs
