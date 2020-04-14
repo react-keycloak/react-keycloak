@@ -16,29 +16,27 @@ let keycloakStubInstance
 export const getKeycloakStub = (persistor) => {
   const kcTokens = persistor.getTokens()
 
-  if (!keycloakStubInstance) {
-    keycloakStubInstance = {
-      login: () => Promise.resolve(),
-      logout: () => Promise.resolve(),
-      register: () => Promise.resolve(),
-      accountManagement: () => Promise.resolve(),
-      init: () => Promise.resolve(),
-      createLoginUrl: noops.string,
-      createLogoutUrl: noops.string,
-      createAccountUrl: noops.string,
-      createRegisterUrl: noops.string,
-      isTokenExpired: noops.boolean,
-      updateToken: () => Promise.resolve(),
-      clearToken: noops.string,
-      hasRealmRole: noops.boolean,
-      hasResourceRole: noops.boolean,
-      loadUserProfile: () => Promise.resolve(),
-      loadUserInfo: () => Promise.resolve(),
-      authenticated: !!kcTokens.token,
-      idToken: kcTokens.idToken,
-      token: kcTokens.token,
-      refreshToken: kcTokens.refreshToken,
-    }
+  keycloakStubInstance = {
+    login: () => Promise.resolve(),
+    logout: () => Promise.resolve(),
+    register: () => Promise.resolve(),
+    accountManagement: () => Promise.resolve(),
+    init: () => Promise.resolve(),
+    createLoginUrl: noops.string,
+    createLogoutUrl: noops.string,
+    createAccountUrl: noops.string,
+    createRegisterUrl: noops.string,
+    isTokenExpired: noops.boolean,
+    updateToken: () => Promise.resolve(),
+    clearToken: noops.string,
+    hasRealmRole: noops.boolean,
+    hasResourceRole: noops.boolean,
+    loadUserProfile: () => Promise.resolve(),
+    loadUserInfo: () => Promise.resolve(),
+    authenticated: !!kcTokens.token,
+    idToken: kcTokens.idToken,
+    token: kcTokens.token,
+    refreshToken: kcTokens.refreshToken,
   }
 
   return keycloakStubInstance
