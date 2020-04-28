@@ -8,9 +8,8 @@
 
 [![License](https://img.shields.io/github/license/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak/blob/master/LICENSE.md)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![Contributors](https://img.shields.io/badge/contributors-2-orange.svg)](#contributors)
-
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Contributors](https://img.shields.io/badge/contributors-2-orange.svg)](#contributors)<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Gitter](https://img.shields.io/gitter/room/react-keycloak/community)](https://gitter.im/react-keycloak/community)
 
 [![Dependencies](https://img.shields.io/david/panz3r/react-keycloak.svg)](https://github.com/panz3r/react-keycloak)
 [![Build Status](https://travis-ci.com/panz3r/react-keycloak.svg?branch=master)](https://travis-ci.com/panz3r/react-keycloak)
@@ -53,8 +52,8 @@ npm install --save @react-keycloak/web
 
 or as a `UMD` package through `unpkg`
 
-one for development: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.js
-one for production: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.min.js
+- one for development: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.js
+- one for production: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.min.js
 
 ## Support
 
