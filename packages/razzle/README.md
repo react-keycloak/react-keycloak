@@ -228,7 +228,7 @@ export default Home
 
 ## Examples
 
-See inside `examples/razzle-app` for a sample implementation.
+See inside `examples/razzle-app` folder of [`@react-keycloak/react-keycloak-examples`](https://github.com/react-keycloak/react-keycloak-examples) repository for a sample implementation.
 
 ## Contributors
 
