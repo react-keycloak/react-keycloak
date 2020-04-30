@@ -29,6 +29,7 @@
 - [Examples](#examples)
 - [Other Resources](#other-resources)
   - [Securing NextJS API](#securing-nextjs-api)
+  - [External Usage (Advanced)](#external-usage-advanced)
 - [Contributors](#contributors)
 
 ---
@@ -166,6 +167,16 @@ See inside `examples/nextjs-app` for a sample implementation.
 Whilst `@react-keycloak/nextjs` can help you secure the Frontend part of a `NextJS` app if you also want to secure `NextJS`-exposed APIs you can follow the sample in [this issue](https://github.com/panz3r/react-keycloak/issues/44#issuecomment-579877959).
 
 Thanks to [@webdeb](https://github.com/webdeb) for reporting the issue and helping develop a solution.
+
+### External Usage (Advanced)
+
+If you need to access `keycloak` instance from non-`React` files (such as `sagas`, `utils`, `providers` ...), you can retrieve the instance using the exported `getKeycloakInstance()` method.
+
+The instance will be initialized by `react-keycloak` but you'll need to be carefull when using the instance, expecially server-side, and avoid setting/overriding any props, you can however freely access the exposed methods (such as `refreshToken`, `login`, etc...).
+
+**Note:** This approach is NOT recommended on the server-side because can lead to `token leakage` issues (see [this issue](https://github.com/panz3r/react-keycloak/issues/65) for more details).
+
+Thanks to [@webdeb](https://github.com/webdeb) for requesting this feature and helping develop and test the solution.
 
 ## Contributors
 
