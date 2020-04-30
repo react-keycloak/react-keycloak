@@ -158,7 +158,7 @@ Alternately, when a component requires access to `Keycloak`, you can also use th
 
 ## Examples
 
-See inside `examples/nextjs-app` for a sample implementation.
+See inside `examples/nextjs-app` folder of [`@react-keycloak/react-keycloak-examples`](https://github.com/react-keycloak/react-keycloak-examples) repository for a sample implementation.
 
 ## Other Resources
 
