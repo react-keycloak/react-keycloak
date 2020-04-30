@@ -210,9 +210,7 @@ The instance will be initialized by `react-keycloak` but you'll need to be caref
 
 ## Examples
 
-See inside `examples` for various demo implementing this library main features.
-
-**Note:** The demo apps are not meant to be **production-ready** nor **starter-kit** s but just a way to show this module components and their usage.
+See inside `examples` folder of [`@react-keycloak/react-keycloak-examples`](https://github.com/react-keycloak/react-keycloak-examples) repository for various demo implementing this library main features.
 
 ## Contributors
 
