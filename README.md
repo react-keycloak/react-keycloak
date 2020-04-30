@@ -111,9 +111,7 @@ See `@react-keycloak/razzle` package [README](https://github.com/panz3r/react-ke
 
 ## Examples
 
-See inside `examples` for various demo implementing this library main features.
-
-**Note:** The demo apps are not meant to be **production-ready** nor **starter-kit** s but just a way to show this module components and their usage.
+See [`@react-keycloak/react-keycloak-examples`](https://github.com/react-keycloak/react-keycloak-examples) repository for various demo implementing this library main features.
 
 ## Contributors
 
