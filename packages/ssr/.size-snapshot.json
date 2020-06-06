@@ -1,0 +1,21 @@
+{
+  "dist/lib/react-keycloak-ssr.js": {
+    "bundled": 12976,
+    "minified": 7277,
+    "gzipped": 2080
+  },
+  "dist/es/react-keycloak-ssr.js": {
+    "bundled": 12458,
+    "minified": 6868,
+    "gzipped": 1993,
+    "treeshaked": {
+      "rollup": {
+        "code": 634,
+        "import_statements": 557
+      },
+      "webpack": {
+        "code": 3309
+      }
+    }
+  }
+}

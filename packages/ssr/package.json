@@ -1,0 +1,55 @@
+{
+  "name": "@react-keycloak/ssr",
+  "version": "2.0.0-alpha.1",
+  "license": "MIT",
+  "description": "SSR bindings for Keycloak javascript adapter",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/panz3r/react-keycloak.git"
+  },
+  "author": "Mattia Panzeri <mattia.panzeri93@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/panz3r/react-keycloak/issues"
+  },
+  "homepage": "https://github.com/panz3r/react-keycloak#readme",
+  "keywords": [
+    "react",
+    "keycloak",
+    "keycloak-js",
+    "nextjs",
+    "razzle"
+  ],
+  "main": "dist/lib/react-keycloak-ssr.js",
+  "module": "dist/es/react-keycloak-ssr.js",
+  "types": "index.d.ts",
+  "files": [
+    "dist",
+    "index.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "funding": {
+    "type": "patreon",
+    "url": "https://www.patreon.com/reactkeycloak"
+  },
+  "scripts": {
+    "clean": "rimraf ./dist",
+    "prebuild": "npm run clean",
+    "build": "rollup -c",
+    "prepublishOnly": "npm run build && cp ../../LICENSE.md ."
+  },
+  "peerDependencies": {
+    "keycloak-js": ">=9.0.2",
+    "react": ">=16"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.9.0",
+    "@react-keycloak/core": "file:../core",
+    "base-64": "^0.1.0",
+    "detect-node": "^2.0.4",
+    "hoist-non-react-statics": "^3.3.2",
+    "js-cookie": "^2.2.1",
+    "prop-types": "^15.7.2"
+  }
+}
