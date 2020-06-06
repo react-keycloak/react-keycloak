@@ -6,6 +6,7 @@
 
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/core?label=npm%20%7C%20core)](https://www.npmjs.com/package/@react-keycloak/core)
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/web?label=npm%20%7C%20web)](https://www.npmjs.com/package/@react-keycloak/web)
+[![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/ssr?label=npm%20%7C%20ssr)](https://www.npmjs.com/package/@react-keycloak/ssr)
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/nextjs?label=npm%20%7C%20nextjs)](https://www.npmjs.com/package/@react-keycloak/nextjs)
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/razzle?label=npm%20%7C%20razzle)](https://www.npmjs.com/package/@react-keycloak/razzle)
 
@@ -27,6 +28,7 @@
 
 - [Integrations](#integrations)
   - [React](#react)
+  - [SSR](#ssr)
   - [NextJS](#nextjs)
   - [Razzle](#razzle)
 - [Support](#support)
@@ -62,7 +64,33 @@ or as a `UMD` package through `unpkg`
 
 See `@react-keycloak/web` package [README](https://github.com/panz3r/react-keycloak/blob/master/packages/web/README.md) for complete documentation.
 
+### SSR
+
+> Experimental (based on NextJS and Razzle ones)
+
+React Keycloak for SSR frameworks requires:
+
+- React **16.0** or later
+- SSR Framework:
+  - NextJS **9** or later
+  - Razzle **3** or later
+- `keycloak-js` **9.0.2** or later
+
+```shell
+yarn add @react-keycloak/ssr
+```
+
+or
+
+```shell
+npm install --save @react-keycloak/ssr
+```
+
+See `@react-keycloak/ssr` package [README](https://github.com/panz3r/react-keycloak/blob/master/packages/ssr/README.md) for complete documentation.
+
 ### NextJS
+
+> Deprecated (please use SSR one instead).
 
 React Keycloak for NextJS requires:
 
@@ -83,6 +111,8 @@ npm install --save @react-keycloak/nextjs
 See `@react-keycloak/nextjs` package [README](https://github.com/panz3r/react-keycloak/blob/master/packages/nextjs/README.md) for complete documentation.
 
 ### Razzle
+
+> Deprecated (please use SSR one instead).
 
 React Keycloak for Razzle requires:
 
