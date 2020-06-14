@@ -81,8 +81,8 @@ import * as React from 'react'
 import type { IncomingMessage } from 'http'
 import type { AppProps, AppContext } from 'next/app'
 
-import { SSRKeycloakProvider, ServerPersistors } from '@react-keycloak/nextjs'
-import type { KeycloakCookies } from  '@react-keycloak/nextjs'
+import { SSRKeycloakProvider, ServerPersistors } from '@react-keycloak/ssr'
+import type { KeycloakCookies } from  '@react-keycloak/ssr'
 
 const keycloakCfg = {
   realm: '',
