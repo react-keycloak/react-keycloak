@@ -127,10 +127,14 @@ export interface KeycloakCookies {
 /**
  * Persistors
  */
-export class Persistors {
+export class ServerPersistors {
   static ExpressCookies: (req: any) => TokenPersistor
 
   static SSRCookies: (serverSideCookies?: KeycloakCookies) => TokenPersistor
+}
+
+export class ClientPersistors {
+  static Cookies: TokenPersistor
 }
 
 /**
