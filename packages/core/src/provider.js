@@ -56,7 +56,9 @@ export function createReactKeycloakProvider(ReactKeycloakContext) {
       keycloak.onAuthLogout = this.updateState('onAuthLogout')
       keycloak.onTokenExpired = this.refreshKeycloakToken('onTokenExpired')
 
-      keycloak.init({ ...this.defaultInitConfig, ...initConfig })
+      keycloak
+        .init({ ...this.defaultInitConfig, ...initConfig })
+        .catch(this.onKeycloakError('onInitError'))
     }
 
     onKeycloakError = (event) => (error) => {
