@@ -129,6 +129,7 @@ const App = () => {
   Published events are:
 
   - `onReady`
+  - `onInitError`
   - `onAuthSuccess`
   - `onAuthError`
   - `onAuthRefreshSuccess`
