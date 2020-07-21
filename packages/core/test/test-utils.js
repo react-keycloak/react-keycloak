@@ -3,7 +3,7 @@
 import React from 'react'
 
 export const createKeycloakStub = () => ({
-  init: jest.fn(),
+  init: jest.fn().mockResolvedValue(),
   updateToken: jest.fn(),
   login: jest.fn(),
   logout: jest.fn(),
@@ -40,3 +40,5 @@ export const createChild = (ReactKeycloakContext) => {
 
   return Child
 }
+
+export const flushPromises = () => new Promise(setImmediate)

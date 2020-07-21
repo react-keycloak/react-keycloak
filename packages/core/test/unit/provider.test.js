@@ -2,7 +2,7 @@ import React from 'react'
 import * as rtl from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
-import { createKeycloakStub, createChild } from '../test-utils'
+import { createKeycloakStub, createChild, flushPromises } from '../test-utils'
 
 import {
   createReactKeycloakContext,
@@ -38,7 +38,7 @@ describe('KeycloakProvider', () => {
       const keycloakStub = createKeycloakStub()
       const keycloakInitSpy = jest
         .spyOn(keycloakStub, 'init')
-        .mockImplementation()
+        .mockResolvedValue()
 
       const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
 
@@ -53,6 +53,43 @@ describe('KeycloakProvider', () => {
         onLoad: 'check-sso',
         promiseType: 'native',
       })
+
+      keycloakInitSpy.mockRestore()
+    })
+
+    it('should notify error during init Keycloak instance', async () => {
+      const eventListener = jest.fn()
+      const keycloakStub = createKeycloakStub()
+      const keycloakInitSpy = jest
+        .spyOn(keycloakStub, 'init')
+        .mockRejectedValue({
+          error: 'StubError',
+          error_description: 'A stub error',
+        })
+
+      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+
+      rtl.render(
+        <KeycloakProvider keycloak={keycloakStub} onEvent={eventListener}>
+          <div />
+        </KeycloakProvider>
+      )
+
+      await flushPromises()
+
+      expect(keycloakInitSpy).toHaveBeenCalledTimes(1)
+      expect(keycloakInitSpy).toHaveBeenCalledWith({
+        onLoad: 'check-sso',
+        promiseType: 'native',
+      })
+
+      expect(eventListener).toHaveBeenCalledTimes(1)
+      expect(eventListener).toHaveBeenCalledWith('onInitError', {
+        error: 'StubError',
+        error_description: 'A stub error',
+      })
+
+      keycloakInitSpy.mockRestore()
     })
 
     it('should attach Keycloak handlers', () => {
