@@ -3,7 +3,7 @@
 import React from 'react'
 
 export const createKeycloakStub = () => ({
-  init: jest.fn(),
+  init: jest.fn().mockResolvedValue(),
   updateToken: jest.fn(),
   login: jest.fn(),
   logout: jest.fn(),
