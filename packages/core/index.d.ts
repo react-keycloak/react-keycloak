@@ -58,6 +58,7 @@ export type KeycloakLoadingCheck = (keycloak: KeycloakInstance) => boolean
  */
 export type KeycloakEvent =
   | 'onReady'
+  | 'onInitError'
   | 'onAuthSuccess'
   | 'onAuthError'
   | 'onAuthRefreshSuccess'
