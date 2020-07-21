@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/core@2.1.2...@react-keycloak/core@2.2.0) (2020-07-21)
+
+
+### Features
+
+* **core:** Add 'onInitError' event notification when 'init' call to 'keycloak' fails ([1ae1ea0](https://github.com/panz3r/react-keycloak/commit/1ae1ea022203d9dc6012fad632f6bd3efe2d78a2)), closes [#80](https://github.com/panz3r/react-keycloak/issues/80)
+* **core:** Update TS typings ([f5c43f1](https://github.com/panz3r/react-keycloak/commit/f5c43f17f8240c7df752218b4c277e207080ab8e))
+
+
+
+
+
 ## [2.1.2](https://github.com/panz3r/react-keycloak/compare/@react-keycloak/core@2.1.1...@react-keycloak/core@2.1.2) (2020-07-20)
 
 **Note:** Version bump only for package @react-keycloak/core
