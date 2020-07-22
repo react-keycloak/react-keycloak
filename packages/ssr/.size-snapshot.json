@@ -1,20 +1,20 @@
 {
   "dist/lib/react-keycloak-ssr.js": {
-    "bundled": 12976,
-    "minified": 7277,
-    "gzipped": 2080
+    "bundled": 12930,
+    "minified": 7238,
+    "gzipped": 2076
   },
   "dist/es/react-keycloak-ssr.js": {
-    "bundled": 12458,
-    "minified": 6868,
-    "gzipped": 1993,
+    "bundled": 12432,
+    "minified": 6844,
+    "gzipped": 1994,
     "treeshaked": {
       "rollup": {
-        "code": 634,
-        "import_statements": 557
+        "code": 669,
+        "import_statements": 537
       },
       "webpack": {
-        "code": 3309
+        "code": 3294
       }
     }
   }
