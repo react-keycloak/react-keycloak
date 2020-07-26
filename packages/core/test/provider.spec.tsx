@@ -1,44 +1,31 @@
-import React from 'react'
+import * as React from 'react'
 import * as rtl from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
-import { createKeycloakStub, createChild, flushPromises } from '../test-utils'
+import { createKeycloakStub, createChild, flushPromises } from './test-utils'
 
 import {
   createReactKeycloakContext,
-  createReactKeycloakProvider,
-} from '../../src'
+  IReactKeycloakContextProps,
+} from '../src/context'
+import { createReactKeycloakProvider } from '../src/provider'
+import { KeycloakClient, KeycloakInitOptions } from '../src/types'
+
+afterEach(require('@testing-library/react').cleanup)
 
 describe('KeycloakProvider', () => {
-  let keycloakCtx
+  let keycloakCtx: React.Context<IReactKeycloakContextProps>
 
   beforeEach(() => {
     keycloakCtx = createReactKeycloakContext()
   })
 
   describe('on initialization', () => {
-    it('should enforce a single child', () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
-      const keycloakStub = createKeycloakStub()
-
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
-
-      rtl.render(
-        <KeycloakProvider keycloak={keycloakStub}>
-          <div />
-          <div />
-        </KeycloakProvider>
-      )
-
-      expect(consoleSpy).toHaveBeenCalled()
-      consoleSpy.mockRestore()
-    })
-
     it('should init Keycloak instance', () => {
       const keycloakStub = createKeycloakStub()
       const keycloakInitSpy = jest
         .spyOn(keycloakStub, 'init')
-        .mockResolvedValue()
+        .mockResolvedValue(true)
 
       const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
 
@@ -51,7 +38,6 @@ describe('KeycloakProvider', () => {
       expect(keycloakInitSpy).toHaveBeenCalledTimes(1)
       expect(keycloakInitSpy).toHaveBeenCalledWith({
         onLoad: 'check-sso',
-        promiseType: 'native',
       })
 
       keycloakInitSpy.mockRestore()
@@ -80,7 +66,6 @@ describe('KeycloakProvider', () => {
       expect(keycloakInitSpy).toHaveBeenCalledTimes(1)
       expect(keycloakInitSpy).toHaveBeenCalledWith({
         onLoad: 'check-sso',
-        promiseType: 'native',
       })
 
       expect(eventListener).toHaveBeenCalledTimes(1)
@@ -143,9 +128,14 @@ describe('KeycloakProvider', () => {
 
       const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
 
-      let externalSetState
-      class MockApp extends React.Component {
-        constructor(props) {
+      let externalSetState: (newState: { keycloak: KeycloakClient }) => void
+      class MockApp extends React.Component<
+        {},
+        {
+          keycloak: KeycloakClient
+        }
+      > {
+        constructor(props: {}) {
           super(props)
           this.state = {
             keycloak: keycloakStub,
@@ -211,13 +201,18 @@ describe('KeycloakProvider', () => {
 
       const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
 
-      let externalSetState
-      class MockApp extends React.Component {
-        constructor(props) {
+      let externalSetState: (newState: {
+        initOptions: KeycloakInitOptions
+      }) => void
+      class MockApp extends React.Component<
+        {},
+        { initOptions: KeycloakInitOptions }
+      > {
+        constructor(props: {}) {
           super(props)
 
           this.state = {
-            initConfig: {
+            initOptions: {
               onLoad: 'check-sso',
             },
           }
@@ -226,9 +221,9 @@ describe('KeycloakProvider', () => {
         }
 
         render() {
-          const { initConfig } = this.state
+          const { initOptions } = this.state
           return (
-            <KeycloakProvider keycloak={keycloakStub} initConfig={initConfig}>
+            <KeycloakProvider keycloak={keycloakStub} initOptions={initOptions}>
               <div />
             </KeycloakProvider>
           )
@@ -238,7 +233,7 @@ describe('KeycloakProvider', () => {
       rtl.render(<MockApp />)
 
       rtl.act(() => {
-        externalSetState({ initConfig: { onLoad: 'login-required' } })
+        externalSetState({ initOptions: { onLoad: 'login-required' } })
       })
 
       // Check that Keycloak init has been called twice
@@ -251,13 +246,18 @@ describe('KeycloakProvider', () => {
 
       const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
 
-      let externalSetState
-      class MockApp extends React.Component {
-        constructor(props) {
+      let externalSetState: (newState: {
+        initOptions: KeycloakInitOptions
+      }) => void
+      class MockApp extends React.Component<
+        {},
+        { initOptions: KeycloakInitOptions }
+      > {
+        constructor(props: {}) {
           super(props)
 
           this.state = {
-            initConfig: {
+            initOptions: {
               onLoad: 'check-sso',
             },
           }
@@ -266,9 +266,9 @@ describe('KeycloakProvider', () => {
         }
 
         render() {
-          const { initConfig } = this.state
+          const { initOptions } = this.state
           return (
-            <KeycloakProvider keycloak={keycloakStub} initConfig={initConfig}>
+            <KeycloakProvider keycloak={keycloakStub} initOptions={initOptions}>
               <div />
             </KeycloakProvider>
           )
@@ -278,7 +278,7 @@ describe('KeycloakProvider', () => {
       rtl.render(<MockApp />)
 
       rtl.act(() => {
-        externalSetState({ initConfig: { onLoad: 'check-sso' } })
+        externalSetState({ initOptions: { onLoad: 'check-sso' } })
       })
 
       // Check that Keycloak init has been called once
@@ -317,7 +317,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onReady()
+        keycloakStub.onReady!()
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(1)
@@ -337,7 +337,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onAuthSuccess()
+        keycloakStub.onAuthSuccess!()
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(1)
@@ -362,7 +362,7 @@ describe('KeycloakProvider', () => {
       }
 
       rtl.act(() => {
-        keycloakStub.onAuthError(stubKeycloakError)
+        keycloakStub.onAuthError!(stubKeycloakError)
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(1)
@@ -385,7 +385,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onAuthRefreshSuccess()
+        keycloakStub.onAuthRefreshSuccess!()
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(1)
@@ -405,7 +405,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onAuthRefreshError()
+        keycloakStub.onAuthRefreshError!()
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(1)
@@ -428,7 +428,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onAuthLogout()
+        keycloakStub.onAuthLogout!()
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(1)
@@ -450,7 +450,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onTokenExpired()
+        keycloakStub.onTokenExpired!()
       })
 
       expect(keycloakUpdateTokenSpy).toHaveBeenCalledTimes(1)
@@ -472,7 +472,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onTokenExpired()
+        keycloakStub.onTokenExpired!()
       })
 
       expect(keycloakUpdateTokenSpy).not.toHaveBeenCalled()
@@ -496,7 +496,7 @@ describe('KeycloakProvider', () => {
         keycloakStub.refreshToken = 'fakeRefreshToken'
         keycloakStub.token = 'fakeToken'
 
-        keycloakStub.onAuthRefreshSuccess()
+        keycloakStub.onAuthRefreshSuccess!()
       })
 
       expect(onTokensListener).toHaveBeenCalledTimes(1)
@@ -520,7 +520,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onTokenExpired()
+        keycloakStub.onTokenExpired!()
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(1)
@@ -546,7 +546,7 @@ describe('KeycloakProvider', () => {
         keycloakStub.refreshToken = 'fakeRefreshToken'
         keycloakStub.token = 'fakeToken'
 
-        keycloakStub.onReady()
+        keycloakStub.onReady!()
       })
 
       rtl.act(() => {
@@ -554,7 +554,7 @@ describe('KeycloakProvider', () => {
         keycloakStub.refreshToken = 'fakeRefreshToken'
         keycloakStub.token = 'fakeToken'
 
-        keycloakStub.onAuthRefreshSuccess()
+        keycloakStub.onAuthRefreshSuccess!()
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(2)
@@ -590,7 +590,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onReady()
+        keycloakStub.onReady!()
       })
 
       expect(isLoadingCheck).toHaveBeenCalledTimes(1)
@@ -616,7 +616,7 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onReady()
+        keycloakStub.onReady!()
       })
 
       expect(isLoadingCheck).toHaveBeenCalledTimes(1)
@@ -647,11 +647,11 @@ describe('KeycloakProvider', () => {
       )
 
       rtl.act(() => {
-        keycloakStub.onReady()
+        keycloakStub.onReady!()
       })
 
       rtl.act(() => {
-        keycloakStub.onAuthRefreshSuccess()
+        keycloakStub.onAuthRefreshSuccess!()
       })
 
       expect(onEventListener).toHaveBeenCalledTimes(2)

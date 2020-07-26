@@ -28,5 +28,6 @@ yarn-error.log*
 /public/keycloak*.json
 build
 dist
+packages/*/coverage/*
 packages/*/README.md
 packages/*/LICENSE.md
