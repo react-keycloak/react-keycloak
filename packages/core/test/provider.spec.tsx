@@ -4,20 +4,17 @@ import '@testing-library/jest-dom/extend-expect'
 
 import { createKeycloakStub, createChild, flushPromises } from './test-utils'
 
-import {
-  createReactKeycloakContext,
-  IReactKeycloakContextProps,
-} from '../src/context'
-import { createReactKeycloakProvider } from '../src/provider'
-import { KeycloakClient, KeycloakInitOptions } from '../src/types'
+import { createAuthContext, IAuthContextProps } from '../src/context'
+import { createAuthProvider } from '../src/provider'
+import { AuthClient, AuthClientInitOptions } from '../src/types'
 
 afterEach(require('@testing-library/react').cleanup)
 
-describe('KeycloakProvider', () => {
-  let keycloakCtx: React.Context<IReactKeycloakContextProps>
+describe('AuthProvider', () => {
+  let keycloakCtx: React.Context<IAuthContextProps<AuthClient>>
 
   beforeEach(() => {
-    keycloakCtx = createReactKeycloakContext()
+    keycloakCtx = createAuthContext()
   })
 
   describe('on initialization', () => {
@@ -27,12 +24,12 @@ describe('KeycloakProvider', () => {
         .spyOn(keycloakStub, 'init')
         .mockResolvedValue(true)
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub}>
+        <AuthProvider authClient={keycloakStub}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       expect(keycloakInitSpy).toHaveBeenCalledTimes(1)
@@ -53,12 +50,12 @@ describe('KeycloakProvider', () => {
           error_description: 'A stub error',
         })
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={eventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={eventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       await flushPromises()
@@ -80,12 +77,12 @@ describe('KeycloakProvider', () => {
     it('should attach Keycloak handlers', () => {
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub}>
+        <AuthProvider authClient={keycloakStub}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       expect(keycloakStub.onReady).toBeDefined()
@@ -100,17 +97,17 @@ describe('KeycloakProvider', () => {
     it('should diplay LoadingComponent if provided', () => {
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       const tester = rtl.render(
-        <KeycloakProvider
-          keycloak={keycloakStub}
+        <AuthProvider
+          authClient={keycloakStub}
           LoadingComponent={
             <span data-testid="LoadingComponent">Loading...</span>
           }
         >
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       expect(tester.getByTestId('LoadingComponent')).toBeVisible()
@@ -126,29 +123,29 @@ describe('KeycloakProvider', () => {
       const keycloakStub = createKeycloakStub()
       const newKeycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
-      let externalSetState: (newState: { keycloak: KeycloakClient }) => void
+      let externalSetState: (newState: { authClient: AuthClient }) => void
       class MockApp extends React.Component<
         {},
         {
-          keycloak: KeycloakClient
+          authClient: AuthClient
         }
       > {
         constructor(props: {}) {
           super(props)
           this.state = {
-            keycloak: keycloakStub,
+            authClient: keycloakStub,
           }
           externalSetState = this.setState.bind(this)
         }
 
         render() {
-          const { keycloak } = this.state
+          const { authClient } = this.state
           return (
-            <KeycloakProvider keycloak={keycloak}>
+            <AuthProvider authClient={authClient}>
               <div />
-            </KeycloakProvider>
+            </AuthProvider>
           )
         }
       }
@@ -168,7 +165,7 @@ describe('KeycloakProvider', () => {
       expect(keycloakStub.onTokenExpired).toBeInstanceOf(Function)
 
       rtl.act(() => {
-        externalSetState({ keycloak: newKeycloakStub })
+        externalSetState({ authClient: newKeycloakStub })
       })
 
       // Check that old Keycloak handlers have been detached
@@ -199,14 +196,14 @@ describe('KeycloakProvider', () => {
       // Setup
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       let externalSetState: (newState: {
-        initOptions: KeycloakInitOptions
+        initOptions: AuthClientInitOptions
       }) => void
       class MockApp extends React.Component<
         {},
-        { initOptions: KeycloakInitOptions }
+        { initOptions: AuthClientInitOptions }
       > {
         constructor(props: {}) {
           super(props)
@@ -223,9 +220,9 @@ describe('KeycloakProvider', () => {
         render() {
           const { initOptions } = this.state
           return (
-            <KeycloakProvider keycloak={keycloakStub} initOptions={initOptions}>
+            <AuthProvider authClient={keycloakStub} initOptions={initOptions}>
               <div />
-            </KeycloakProvider>
+            </AuthProvider>
           )
         }
       }
@@ -244,14 +241,14 @@ describe('KeycloakProvider', () => {
       // Setup
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       let externalSetState: (newState: {
-        initOptions: KeycloakInitOptions
+        initOptions: AuthClientInitOptions
       }) => void
       class MockApp extends React.Component<
         {},
-        { initOptions: KeycloakInitOptions }
+        { initOptions: AuthClientInitOptions }
       > {
         constructor(props: {}) {
           super(props)
@@ -268,9 +265,9 @@ describe('KeycloakProvider', () => {
         render() {
           const { initOptions } = this.state
           return (
-            <KeycloakProvider keycloak={keycloakStub} initOptions={initOptions}>
+            <AuthProvider authClient={keycloakStub} initOptions={initOptions}>
               <div />
-            </KeycloakProvider>
+            </AuthProvider>
           )
         }
       }
@@ -289,17 +286,17 @@ describe('KeycloakProvider', () => {
   it('should add the Keycloak instance to context', () => {
     const keycloakStub = createKeycloakStub()
 
-    const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+    const AuthProvider = createAuthProvider(keycloakCtx)
     const Child = createChild(keycloakCtx)
 
     const tester = rtl.render(
-      <KeycloakProvider keycloak={keycloakStub}>
+      <AuthProvider authClient={keycloakStub}>
         <Child />
-      </KeycloakProvider>
+      </AuthProvider>
     )
 
     expect(tester.getByTestId('keycloak')).toHaveTextContent(
-      'keycloak: present'
+      'authClient: present'
     )
   })
 
@@ -308,12 +305,12 @@ describe('KeycloakProvider', () => {
       const onEventListener = jest.fn()
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={onEventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -328,12 +325,12 @@ describe('KeycloakProvider', () => {
       const onEventListener = jest.fn()
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={onEventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -348,12 +345,12 @@ describe('KeycloakProvider', () => {
       const onEventListener = jest.fn()
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={onEventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       const stubKeycloakError = {
@@ -376,12 +373,12 @@ describe('KeycloakProvider', () => {
       const onEventListener = jest.fn()
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={onEventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -396,12 +393,12 @@ describe('KeycloakProvider', () => {
       const onEventListener = jest.fn()
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={onEventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -419,12 +416,12 @@ describe('KeycloakProvider', () => {
       const onEventListener = jest.fn()
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={onEventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -441,12 +438,12 @@ describe('KeycloakProvider', () => {
         .spyOn(keycloakStub, 'updateToken')
         .mockImplementation()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub}>
+        <AuthProvider authClient={keycloakStub}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -463,12 +460,12 @@ describe('KeycloakProvider', () => {
         .spyOn(keycloakStub, 'updateToken')
         .mockImplementation()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} autoRefreshToken={false}>
+        <AuthProvider authClient={keycloakStub} autoRefreshToken={false}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -483,12 +480,12 @@ describe('KeycloakProvider', () => {
       const keycloakStub = createKeycloakStub()
       const onTokensListener = jest.fn()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onTokens={onTokensListener}>
+        <AuthProvider authClient={keycloakStub} onTokens={onTokensListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -511,12 +508,12 @@ describe('KeycloakProvider', () => {
       const onEventListener = jest.fn()
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={onEventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -531,14 +528,14 @@ describe('KeycloakProvider', () => {
       const keycloakStub = createKeycloakStub()
       const onEventListener = jest.fn()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
-      const setStateSpy = jest.spyOn(KeycloakProvider.prototype, 'setState')
+      const setStateSpy = jest.spyOn(AuthProvider.prototype, 'setState')
 
       rtl.render(
-        <KeycloakProvider keycloak={keycloakStub} onEvent={onEventListener}>
+        <AuthProvider authClient={keycloakStub} onEvent={onEventListener}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -578,15 +575,12 @@ describe('KeycloakProvider', () => {
       const isLoadingCheck = jest.fn().mockImplementation(() => true)
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       rtl.render(
-        <KeycloakProvider
-          keycloak={keycloakStub}
-          isLoadingCheck={isLoadingCheck}
-        >
+        <AuthProvider authClient={keycloakStub} isLoadingCheck={isLoadingCheck}>
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -601,18 +595,18 @@ describe('KeycloakProvider', () => {
       const isLoadingCheck = jest.fn().mockImplementation(() => true)
       const keycloakStub = createKeycloakStub()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
+      const AuthProvider = createAuthProvider(keycloakCtx)
 
       const tester = rtl.render(
-        <KeycloakProvider
-          keycloak={keycloakStub}
+        <AuthProvider
+          authClient={keycloakStub}
           isLoadingCheck={isLoadingCheck}
           LoadingComponent={
             <span data-testid="LoadingComponent">Loading...</span>
           }
         >
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {
@@ -633,17 +627,17 @@ describe('KeycloakProvider', () => {
       const keycloakStub = createKeycloakStub()
       const onEventListener = jest.fn()
 
-      const KeycloakProvider = createReactKeycloakProvider(keycloakCtx)
-      const setStateSpy = jest.spyOn(KeycloakProvider.prototype, 'setState')
+      const AuthProvider = createAuthProvider(keycloakCtx)
+      const setStateSpy = jest.spyOn(AuthProvider.prototype, 'setState')
 
       rtl.render(
-        <KeycloakProvider
-          keycloak={keycloakStub}
+        <AuthProvider
+          authClient={keycloakStub}
           onEvent={onEventListener}
           isLoadingCheck={isLoadingCheck}
         >
           <div />
-        </KeycloakProvider>
+        </AuthProvider>
       )
 
       rtl.act(() => {

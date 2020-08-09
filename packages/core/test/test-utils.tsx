@@ -2,25 +2,25 @@
 
 import * as React from 'react'
 
-import { IReactKeycloakContextProps } from '../src/context'
-import { KeycloakClient } from '../src/types'
+import { IAuthContextProps } from '../src/context'
+import { AuthClient } from '../src/types'
 
-export const createKeycloakStub = (): KeycloakClient => ({
+export const createKeycloakStub = (): AuthClient => ({
   init: jest.fn().mockResolvedValue(true),
   updateToken: jest.fn(),
 })
 
 export const createChild = (
-  ReactKeycloakContext: React.Context<IReactKeycloakContextProps>
+  ReactKeycloakContext: React.Context<IAuthContextProps<AuthClient>>
 ) => {
   class Child extends React.Component {
     render() {
       return (
         <ReactKeycloakContext.Consumer>
-          {({ keycloak }) => {
+          {({ authClient }) => {
             return (
               <div data-testid="keycloak">
-                keycloak: {keycloak ? 'present' : 'absent'}
+                authClient: {authClient ? 'present' : 'absent'}
               </div>
             )
           }}

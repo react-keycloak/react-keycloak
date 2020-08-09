@@ -1,17 +1,17 @@
-export interface KeycloakError {
+export interface AuthClientError {
   error: string
 
   error_description: string
 }
 
-export interface KeycloakInitOptions {
+export interface AuthClientInitOptions {
   [paramName: string]: any
 }
 
 /**
- * A client for the Keycloak authentication server.
+ * A client for the Auth server.
  */
-export interface KeycloakClient {
+export interface AuthClient {
   /**
    * The base64 encoded token that can be sent in the Authorization header in
    * requests to services.
@@ -41,7 +41,7 @@ export interface KeycloakClient {
   /**
    * Called if there was an error during authentication.
    */
-  onAuthError?(errorData: KeycloakError): void
+  onAuthError?(errorData: AuthClientError): void
 
   /**
    * Called when the token is refreshed.
@@ -61,7 +61,7 @@ export interface KeycloakClient {
 
   /**
    * Called when the access token is expired. If a refresh token is available
-   * the token can be refreshed with Keycloak#updateToken, or in cases where
+   * the token can be refreshed with Auth#updateToken, or in cases where
    * it's not (ie. with implicit flow) you can redirect to login screen to
    * obtain a new access token.
    */
@@ -72,41 +72,28 @@ export interface KeycloakClient {
    * @param initOptions Initialization options.
    * @returns A promise to set functions to be invoked on success or error.
    */
-  init(initOptions: KeycloakInitOptions): Promise<boolean>
+  init(initOptions: AuthClientInitOptions): Promise<boolean>
 
   /**
    * If the token expires within `minValidity` seconds, the token is refreshed.
    * If the session status iframe is enabled, the session status is also
    * checked.
+   *
    * @returns A promise to set functions that can be invoked if the token is
    *          still valid, or if the token is no longer valid.
-   * @example
-   * ```js
-   * keycloak.updateToken(5).success(function(refreshed) {
-   *   if (refreshed) {
-   *     alert('Token was successfully refreshed');
-   *   } else {
-   *     alert('Token is still valid');
-   *   }
-   * }).error(function() {
-   *   alert('Failed to refresh the token, or the session has expired');
-   * });
    */
   updateToken(minValidity: number): Promise<boolean>
 }
 
 /**
- * Set of tokens provided by KeycloakClient
+ * Set of tokens provided by AuthClient
  */
-export type KeycloakTokens = Pick<
-  KeycloakClient,
-  'idToken' | 'refreshToken' | 'token'
->
+export type AuthClientTokens = Pick<AuthClient, 'idToken' | 'refreshToken' | 'token'>
 
 /**
- * ReactKeycloak event types
+ * ReactAuth event types
  */
-export type KeycloakEvent =
+export type AuthClientEvent =
   | 'onReady'
   | 'onInitError'
   | 'onAuthSuccess'

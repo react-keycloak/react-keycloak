@@ -1,23 +1,23 @@
 import * as React from 'react'
 import isEqual from 'react-fast-compare'
 
-import { IReactKeycloakContextProps } from './context'
+import { IAuthContextProps } from './context'
 import {
-  KeycloakClient,
-  KeycloakError,
-  KeycloakEvent,
-  KeycloakInitOptions,
-  KeycloakTokens,
+  AuthClient,
+  AuthClientError,
+  AuthClientEvent,
+  AuthClientInitOptions,
+  AuthClientTokens,
 } from './types'
 
 /**
- * Props that can be passed to KeycloakProvider
+ * Props that can be passed to AuthProvider
  */
-export type KeycloakProviderProps = {
+export type AuthProviderProps<T extends AuthClient> = {
   /**
-   * The single Keycloak instance to be used by your application.
+   * The single AuthClient instance to be used by your application.
    */
-  keycloak: KeycloakClient
+  authClient: T
 
   /**
    * A flag to enable automatic token refresh. Defaults to true.
@@ -28,68 +28,68 @@ export type KeycloakProviderProps = {
   autoRefreshToken?: boolean
 
   /**
-   * The KeycloakJS config to be used when initializing Keycloak instance.
+   * The config to be used when initializing AuthClient instance.
    */
-  initOptions?: KeycloakInitOptions
+  initOptions?: AuthClientInitOptions
 
   /**
    * An optional loading check function to customize LoadingComponent display condition.
    * Return `true` to display LoadingComponent, `false` to hide it.
    *
-   * @param {KeycloakClient} keycloak the current KeycloakClient instance.
+   * @param authClient the current AuthClient instance.
    *
    * @returns {boolean} Set to true to display LoadingComponent, false to hide it.
    */
-  isLoadingCheck?: (keycloak: KeycloakClient) => boolean
+  isLoadingCheck?: (authClient: T) => boolean
 
   /**
-   * An optional component to display while Keycloak instance is being initialized.
+   * An optional component to display while AuthClient instance is being initialized.
    */
   LoadingComponent?: JSX.Element
 
   /**
-   * An optional function to receive Keycloak events as they happen.
+   * An optional function to receive AuthClient events as they happen.
    */
-  onEvent?: (eventType: KeycloakEvent, error?: KeycloakError) => void
+  onEvent?: (eventType: AuthClientEvent, error?: AuthClientError) => void
 
   /**
-   * An optional function to receive Keycloak tokens when changed.
+   * An optional function to receive AuthClient tokens when changed.
    *
-   * @param {KeycloakTokens} tokens The current Keycloak tokens set.
+   * @param {AuthClientTokens} tokens The current AuthClient tokens set.
    */
-  onTokens?: (tokens: KeycloakTokens) => void
+  onTokens?: (tokens: AuthClientTokens) => void
 }
 
-type KeycloakProviderState = {
+type AuthProviderState = {
   initialized: boolean
   isLoading: boolean
   token?: string
 }
 
 /**
- * Create a ReactKeycloakProvider component to wrap a React app with, it will take care of common Keycloak
+ * Create an AuthProvider component to wrap a React app with, it will take care of common AuthClient
  * lifecycle handling (such as initialization and token refresh).
  *
- * @param ReactKeycloakContext the ReactKeycloak context to be used by the created ReactKeycloakProvider
+ * @param AuthContext the Auth context to be used by the created AuthProvider
  *
- * @returns {ReactKeycloakProvider} the ReactKeycloakProvider component
+ * @returns the AuthProvider component
  */
-export function createReactKeycloakProvider(
-  ReactKeycloakContext: React.Context<IReactKeycloakContextProps>
+export function createAuthProvider<T extends AuthClient>(
+  AuthContext: React.Context<IAuthContextProps<T>>
 ) {
-  const defaultInitOptions: KeycloakInitOptions = {
+  const defaultInitOptions: AuthClientInitOptions = {
     onLoad: 'check-sso',
   }
 
-  const initialState: KeycloakProviderState = {
+  const initialState: AuthProviderState = {
     initialized: false,
     isLoading: true,
     token: undefined,
   }
 
   return class KeycloakProvider extends React.PureComponent<
-    KeycloakProviderProps,
-    KeycloakProviderState
+    AuthProviderProps<T>,
+    AuthProviderState
   > {
     state = {
       ...initialState,
@@ -100,64 +100,67 @@ export function createReactKeycloakProvider(
     }
 
     componentDidUpdate({
-      keycloak: prevKeycloak,
+      authClient: prevAuthClient,
       initOptions: prevInitOptions,
-    }: KeycloakProviderProps) {
-      const { initOptions, keycloak } = this.props
-      if (keycloak !== prevKeycloak || !isEqual(initOptions, prevInitOptions)) {
-        // De-init previous Keycloak instance
-        prevKeycloak.onReady = undefined
-        prevKeycloak.onAuthSuccess = undefined
-        prevKeycloak.onAuthError = undefined
-        prevKeycloak.onAuthRefreshSuccess = undefined
-        prevKeycloak.onAuthRefreshError = undefined
-        prevKeycloak.onAuthLogout = undefined
-        prevKeycloak.onTokenExpired = undefined
+    }: AuthProviderProps<T>) {
+      const { initOptions, authClient } = this.props
+      if (
+        authClient !== prevAuthClient ||
+        !isEqual(initOptions, prevInitOptions)
+      ) {
+        // De-init previous AuthClient instance
+        prevAuthClient.onReady = undefined
+        prevAuthClient.onAuthSuccess = undefined
+        prevAuthClient.onAuthError = undefined
+        prevAuthClient.onAuthRefreshSuccess = undefined
+        prevAuthClient.onAuthRefreshError = undefined
+        prevAuthClient.onAuthLogout = undefined
+        prevAuthClient.onTokenExpired = undefined
 
         // Reset state
         this.setState({ ...initialState })
-        // Init new Keycloak instance
+        // Init new AuthClient instance
         this.init()
       }
     }
 
     init() {
-      const { initOptions, keycloak } = this.props
+      const { initOptions, authClient } = this.props
 
       // Attach Keycloak listeners
-      keycloak.onReady = this.updateState('onReady')
-      keycloak.onAuthSuccess = this.updateState('onAuthSuccess')
-      keycloak.onAuthError = this.onKeycloakError('onAuthError')
-      keycloak.onAuthRefreshSuccess = this.updateState('onAuthRefreshSuccess')
-      keycloak.onAuthRefreshError = this.onKeycloakError('onAuthRefreshError')
-      keycloak.onAuthLogout = this.updateState('onAuthLogout')
-      keycloak.onTokenExpired = this.refreshKeycloakToken('onTokenExpired')
+      authClient.onReady = this.updateState('onReady')
+      authClient.onAuthSuccess = this.updateState('onAuthSuccess')
+      authClient.onAuthError = this.onError('onAuthError')
+      authClient.onAuthRefreshSuccess = this.updateState('onAuthRefreshSuccess')
+      authClient.onAuthRefreshError = this.onError('onAuthRefreshError')
+      authClient.onAuthLogout = this.updateState('onAuthLogout')
+      authClient.onTokenExpired = this.refreshToken('onTokenExpired')
 
-      keycloak
+      authClient
         .init({ ...defaultInitOptions, ...initOptions })
-        .catch(this.onKeycloakError('onInitError'))
+        .catch(this.onError('onInitError'))
     }
 
-    onKeycloakError = (event: KeycloakEvent) => (error?: KeycloakError) => {
+    onError = (event: AuthClientEvent) => (error?: AuthClientError) => {
       const { onEvent } = this.props
       // Notify Events listener
       onEvent && onEvent(event, error)
     }
 
-    updateState = (event: KeycloakEvent) => () => {
-      const { keycloak, onEvent, onTokens, isLoadingCheck } = this.props
+    updateState = (event: AuthClientEvent) => () => {
+      const { authClient, onEvent, onTokens, isLoadingCheck } = this.props
       const {
         initialized: prevInitialized,
         isLoading: prevLoading,
         token: prevToken,
       } = this.state
-      const { idToken, refreshToken, token: newToken } = keycloak
+      const { idToken, refreshToken, token: newToken } = authClient
 
       // Notify Events listener
       onEvent && onEvent(event)
 
       // Check Loading state
-      const isLoading = isLoadingCheck ? isLoadingCheck(keycloak) : false
+      const isLoading = isLoadingCheck ? isLoadingCheck(authClient) : false
 
       // Avoid double-refresh if state hasn't changed
       if (
@@ -183,19 +186,19 @@ export function createReactKeycloakProvider(
       }
     }
 
-    refreshKeycloakToken = (event: KeycloakEvent) => () => {
-      const { autoRefreshToken, keycloak, onEvent } = this.props
+    refreshToken = (event: AuthClientEvent) => () => {
+      const { autoRefreshToken, authClient, onEvent } = this.props
       // Notify Events listener
       onEvent && onEvent(event)
 
       if (autoRefreshToken !== false) {
         // Refresh Keycloak token
-        keycloak.updateToken(5)
+        authClient.updateToken(5)
       }
     }
 
     render() {
-      const { children, keycloak, LoadingComponent } = this.props
+      const { children, authClient, LoadingComponent } = this.props
       const { initialized, isLoading } = this.state
 
       if (!!LoadingComponent && (!initialized || isLoading)) {
@@ -203,12 +206,12 @@ export function createReactKeycloakProvider(
       }
 
       return (
-        <ReactKeycloakContext.Provider value={{ initialized, keycloak }}>
+        <AuthContext.Provider value={{ initialized, authClient }}>
           {children}
-        </ReactKeycloakContext.Provider>
+        </AuthContext.Provider>
       )
     }
   }
 }
 
-export default createReactKeycloakProvider
+export default createAuthProvider

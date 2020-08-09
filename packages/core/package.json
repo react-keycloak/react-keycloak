@@ -1,6 +1,6 @@
 {
   "name": "@react-keycloak/core",
-  "version": "3.0.0-alpha.2",
+  "version": "3.0.0-alpha.3",
   "license": "MIT",
   "description": "React bindings for Keycloak javascript adapter (core)",
   "repository": {
@@ -43,7 +43,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "prepublishOnly": "yarn build && cp ../../README.md . && cp ../../LICENSE.md ."
+    "prepublishOnly": "npm run build && cp ../../README.md . && cp ../../LICENSE.md ."
   },
   "peerDependencies": {
     "react": ">=16"

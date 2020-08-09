@@ -1,12 +1,12 @@
 import { createKeycloakStub } from './test-utils';
 
-import createReactKeycloakContext from '../src/context';
+import createAuthContext from '../src/context';
 
 afterEach(require('@testing-library/react').cleanup);
 
 describe('createReactKeycloakContext', () => {
   it('should return a new React Context with null', () => {
-    const rcContext = createReactKeycloakContext();
+    const rcContext = createAuthContext();
 
     expect(rcContext).toBeDefined();
     expect(rcContext.Consumer).toBeDefined();
@@ -14,9 +14,9 @@ describe('createReactKeycloakContext', () => {
   });
 
   it('should return a new React Context with initialized values', () => {
-    const rcContext = createReactKeycloakContext({
+    const rcContext = createAuthContext({
       initialized: false,
-      keycloak: createKeycloakStub(),
+      authClient: createKeycloakStub(),
     });
 
     expect(rcContext).toBeDefined();
