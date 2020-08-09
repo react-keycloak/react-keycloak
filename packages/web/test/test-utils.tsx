@@ -1,9 +1,9 @@
 /* istanbul ignore file */
 
-import React from 'react'
+import * as React from 'react'
 
 export const createKeycloakStub = () => ({
-  init: jest.fn().mockResolvedValue(),
+  init: jest.fn().mockResolvedValue(true),
   updateToken: jest.fn(),
   login: jest.fn(),
   logout: jest.fn(),
@@ -21,16 +21,10 @@ export const createKeycloakStub = () => ({
   loadUserInfo: jest.fn(),
 })
 
-export const createChild = (testedProps = []) => {
-  class Child extends React.Component {
-    render() {
-      return (
-        <div data-testid="keycloak">
-          {Object.keys(this.props).filter((prop) => testedProps.includes(prop))}
-        </div>
-      )
-    }
-  }
-
-  return Child
+export const createChild = (testedProps: string[] = []): React.FC<unknown> => {
+  return (props) => (
+    <div data-testid="keycloak">
+      {Object.keys(props).filter((prop) => testedProps.includes(prop))}
+    </div>
+  )
 }

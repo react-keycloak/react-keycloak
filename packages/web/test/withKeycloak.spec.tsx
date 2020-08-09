@@ -2,9 +2,11 @@ import React from 'react'
 import * as rtl from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 
-import { createChild, createKeycloakStub } from '../test-utils'
+import { createChild, createKeycloakStub } from './test-utils'
 
-import { KeycloakProvider, withKeycloak } from '../../src'
+import { ReactKeycloakProvider, withKeycloak } from '../src'
+
+afterEach(require('@testing-library/react').cleanup)
 
 describe('withKeycloak HOC', () => {
   it('should pass Keycloak to component props', () => {
@@ -12,9 +14,9 @@ describe('withKeycloak HOC', () => {
     const Container = withKeycloak(createChild(['keycloak']))
 
     const tester = rtl.render(
-      <KeycloakProvider keycloak={keycloakStub}>
+      <ReactKeycloakProvider authClient={keycloakStub}>
         <Container />
-      </KeycloakProvider>
+      </ReactKeycloakProvider>
     )
 
     expect(tester.getByTestId('keycloak')).toHaveTextContent('keycloak')
@@ -25,9 +27,9 @@ describe('withKeycloak HOC', () => {
     const Container = withKeycloak(createChild(['keycloakInitialized']))
 
     const tester = rtl.render(
-      <KeycloakProvider keycloak={keycloakStub}>
+      <ReactKeycloakProvider authClient={keycloakStub}>
         <Container />
-      </KeycloakProvider>
+      </ReactKeycloakProvider>
     )
 
     expect(tester.getByTestId('keycloak')).toHaveTextContent(

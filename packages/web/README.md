@@ -48,11 +48,6 @@ or
 npm install --save @react-keycloak/web
 ```
 
-or as a `UMD` package through `unpkg`
-
-- one for development: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.js
-- one for production: https://unpkg.com/@react-keycloak/web@latest/dist/umd/react-keycloak-web.min.js
-
 ## Support
 
 | version | keycloak-js version |
@@ -78,28 +73,27 @@ export default keycloak
 
 ### Setup KeycloakProvider
 
-Wrap your App inside `KeycloakProvider` and pass the `keycloak` instance as prop
+Wrap your App inside `ReactKeycloakProvider` and pass the `keycloak` instance as prop
 
 ```js
-import { KeycloakProvider } from '@react-keycloak/web'
+import { ReactKeycloakProvider } from '@react-keycloak/web'
 
 import keycloak from './keycloak'
 
 // Wrap everything inside KeycloakProvider
 const App = () => {
-  return <KeycloakProvider keycloak={keycloak}>...</KeycloakProvider>
+  return <ReactKeycloakProvider authClient={keycloak}>...</ReactKeycloakProvider>
 }
 ```
 
-**N.B.** If your using other providers (such as `react-redux`) it is recommended to place them inside `KeycloakProvider`.
+**N.B.** If your using other providers (such as `react-redux`) it is recommended to place them inside `ReactKeycloakProvider`.
 
-`KeycloakProvider` automatically invokes `keycloak.init()` method when needed and supports the following props:
+`ReactKeycloakProvider` automatically invokes `keycloak.init()` method when needed and supports the following props:
 
 - `initConfig`, contains the object to be passed to `keycloak.init()` method, by default the following is used
 
       {
         onLoad: 'check-sso',
-        promiseType: 'native',
       }
 
   for more options see [Keycloak docs](https://www.keycloak.org/docs/latest/securing_apps/index.html#init-options).

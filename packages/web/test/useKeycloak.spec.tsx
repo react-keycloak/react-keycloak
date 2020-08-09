@@ -1,14 +1,20 @@
 import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { createKeycloakStub } from '../test-utils'
+import { createKeycloakStub } from './test-utils'
 
-import { useKeycloak, KeycloakProvider } from '../../src'
+import { useKeycloak, ReactKeycloakProvider } from '../src'
 
-const createHookWrapper = () => ({ children }) => (
-  <KeycloakProvider keycloak={createKeycloakStub()}>
+afterEach(require('@testing-library/react').cleanup)
+
+const createHookWrapper = () => ({
+  children,
+}: {
+  children: React.ComponentType<unknown>
+}) => (
+  <ReactKeycloakProvider authClient={createKeycloakStub()}>
     {children}
-  </KeycloakProvider>
+  </ReactKeycloakProvider>
 )
 
 describe('useKeycloak hook', () => {

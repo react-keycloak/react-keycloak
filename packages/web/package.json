@@ -1,6 +1,6 @@
 {
   "name": "@react-keycloak/web",
-  "version": "2.1.4",
+  "version": "3.0.0-alpha.1",
   "license": "MIT",
   "description": "React bindings for Keycloak javascript adapter",
   "repository": {
@@ -17,13 +17,13 @@
     "keycloak",
     "keycloak-js"
   ],
-  "main": "dist/lib/react-keycloak-web.js",
-  "module": "dist/es/react-keycloak-web.js",
-  "unpkg": "dist/umd/react-keycloak-web.min.js",
-  "types": "index.d.ts",
+  "main": "lib-commonjs/index.js",
+  "jsnext:main": "lib/index.js",
+  "module": "lib/index.js",
+  "typings": "lib/index.d.ts",
   "files": [
-    "dist",
-    "index.d.ts"
+    "lib",
+    "lib-commonjs"
   ],
   "publishConfig": {
     "access": "public"
@@ -33,9 +33,14 @@
     "url": "https://www.patreon.com/reactkeycloak"
   },
   "scripts": {
-    "clean": "rimraf ./dist",
+    "clean": "rimraf lib lib-commonjs",
     "prebuild": "npm run clean",
-    "build": "rollup -c",
+    "compile:commonjs": "tsc --module commonjs --outDir lib-commonjs",
+    "compile:esnext": "tsc --module esnext --outDir lib",
+    "compile": "run-p compile:*",
+    "fixmaps:lib": "tweak_sourcemap_paths -a --include 'lib/**/*.js.map' 'lib-commonjs/**/*.js.map'",
+    "fixmaps": "run-p fixmaps:*",
+    "build": "run-s compile fixmaps",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
@@ -43,12 +48,16 @@
   },
   "peerDependencies": {
     "keycloak-js": ">=9.0.2",
-    "react": ">=16"
+    "react": ">=16",
+    "react-dom": ">=16"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.0",
     "@react-keycloak/core": "file:../core",
-    "hoist-non-react-statics": "^3.3.2",
-    "prop-types": "^15.7.2"
+    "hoist-non-react-statics": "^3.3.2"
+  },
+  "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
   }
 }
