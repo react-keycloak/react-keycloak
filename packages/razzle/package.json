@@ -5,13 +5,13 @@
   "description": "Razzle bindings for Keycloak javascript adapter",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/panz3r/react-keycloak.git"
+    "url": "git+https://github.com/react-keycloak/react-keycloak.git"
   },
   "author": "Mattia Panzeri <mattia.panzeri93@gmail.com>",
   "bugs": {
-    "url": "https://github.com/panz3r/react-keycloak/issues"
+    "url": "https://github.com/react-keycloak/react-keycloak/issues"
   },
-  "homepage": "https://github.com/panz3r/react-keycloak#readme",
+  "homepage": "https://github.com/react-keycloak/react-keycloak#readme",
   "keywords": [
     "react",
     "razzle",
