@@ -7,6 +7,7 @@
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/core?label=npm%20%7C%20core)](https://www.npmjs.com/package/@react-keycloak/core)
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/web?label=npm%20%7C%20web)](https://www.npmjs.com/package/@react-keycloak/web)
 [![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/ssr?label=npm%20%7C%20ssr)](https://www.npmjs.com/package/@react-keycloak/ssr)
+[![NPM (scoped)](https://img.shields.io/npm/v/@react-keycloak/native?label=npm%20%7C%20native)](https://www.npmjs.com/package/@react-keycloak/native)
 
 [![License](https://img.shields.io/github/license/react-keycloak/react-keycloak.svg)](https://github.com/react-keycloak/react-keycloak/blob/master/LICENSE.md)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
@@ -22,6 +23,7 @@
 - [Integrations](#integrations)
   - [React](#react)
   - [SSR](#ssr)
+  - [React Native](#react-native)
 - [Support](#support)
 - [Examples](#examples)
 - [Contributors](#contributors)
@@ -76,6 +78,24 @@ npm install --save @react-keycloak/ssr
 ```
 
 See `@react-keycloak/ssr` package [README](https://github.com/react-keycloak/react-keycloak/blob/master/packages/ssr/README.md) for complete documentation.
+
+### React Native
+
+React Keycloak for React Native requires React Native **61.0** or later
+
+To install run
+
+```shell
+yarn add @react-keycloak/native
+```
+
+or
+
+```shell
+npm install --save @react-keycloak/native
+```
+
+See `@react-keycloak/native` package [README](https://github.com/react-keycloak/react-native-keycloak/blob/master/README.md) for complete documentation.
 
 ## Support
 
