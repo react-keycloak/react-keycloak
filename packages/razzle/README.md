@@ -9,12 +9,9 @@
 [![License](https://img.shields.io/github/license/react-keycloak/react-keycloak.svg)](https://github.com/react-keycloak/react-keycloak/blob/master/LICENSE.md)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![Contributors](https://img.shields.io/badge/contributors-2-orange.svg)](#contributors)<!-- ALL-CONTRIBUTORS-BADGE:END -->
-[![Gitter](https://img.shields.io/gitter/room/react-keycloak/community)](https://gitter.im/react-keycloak/community)
-
-[![Dependencies](https://img.shields.io/david/react-keycloak/react-keycloak.svg)](https://github.com/react-keycloak/react-keycloak)
-[![Build Status](https://travis-ci.com/react-keycloak/react-keycloak.svg?branch=master)](https://travis-ci.com/react-keycloak/react-keycloak)
-[![Coverage Status](https://coveralls.io/repos/github/react-keycloak/react-keycloak/badge.svg?branch=master)](https://coveralls.io/github/react-keycloak/react-keycloak?branch=master)
 [![Github Issues](https://img.shields.io/github/issues/react-keycloak/react-keycloak.svg)](https://github.com/react-keycloak/react-keycloak/issues)
+
+[![Gitter](https://img.shields.io/gitter/room/react-keycloak/community)](https://gitter.im/react-keycloak/community)
 
 ---
 
