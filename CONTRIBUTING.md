@@ -16,6 +16,6 @@ These steps will guide you through contributing to this project:
 
 - Make and commit your changes.
 - Make sure the command `yarn build` is working.
-- Finally send a [GitHub Pull Request](https://github.com/panz3r/react-keycloak/compare?expand=1) with a clear list of what you've done (read more [about pull requests](https://help.github.com/articles/about-pull-requests/)).
+- Finally send a [GitHub Pull Request](https://github.com/react-keycloak/react-keycloak/compare?expand=1) with a clear list of what you've done (read more [about pull requests](https://help.github.com/articles/about-pull-requests/)).
 
 **N.B:** Make sure all of your commits are atomic (one feature per commit).
