@@ -1,7 +1,9 @@
 {
   "npmClient": "npm",
   "packages": [
-    "packages/*"
+    "packages/core",
+    "packages/web",
+    "packages/ssr"
   ],
   "version": "independent",
   "command": {
