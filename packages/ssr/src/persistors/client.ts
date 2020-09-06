@@ -1,33 +1,27 @@
-import Cookie from 'js-cookie'
+import type { AuthClientTokens } from '@react-keycloak/core'
 
-function setCookie(name, val) {
-  return Cookie.set(name, val)
-}
+import type { TokenPersistor } from './types'
+import { getCookie, removeCookie, setCookie } from './utils'
 
-function getCookie(name) {
-  return Cookie.get(name)
-}
-
-function removeCookie(name) {
-  Cookie.remove(name)
-}
-
-export const Cookies = {
-  setTokens: ({ idToken, token }) => {
+export class Cookies implements TokenPersistor {
+  setTokens({ idToken, token }: AuthClientTokens) {
     !!token && setCookie('kcToken', btoa(token))
     !!idToken && setCookie('kcIdToken', btoa(idToken))
-  },
-  getTokens: () => {
+  }
+
+  getTokens() {
     const tknStr = getCookie('kcToken')
     const idTknStr = getCookie('kcIdToken')
 
     return {
       idToken: idTknStr ? atob(idTknStr) : undefined,
+      refreshToken: '',
       token: tknStr ? atob(tknStr) : undefined,
     }
-  },
-  resetTokens: () => {
+  }
+
+  resetTokens() {
     removeCookie('kcToken')
     removeCookie('kcIdToken')
-  },
+  }
 }
