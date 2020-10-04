@@ -48,8 +48,8 @@
   },
   "peerDependencies": {
     "keycloak-js": ">=9.0.2",
-    "react": ">=16",
-    "react-dom": ">=16"
+    "react": ">=16.8",
+    "react-dom": ">=16.8"
   },
   "dependencies": {
     "@babel/runtime": "^7.9.0",
