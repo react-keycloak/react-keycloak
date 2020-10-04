@@ -18,12 +18,10 @@
 ## Table of Contents <!-- omit in toc -->
 
 - [Install](#install)
-- [Support](#support)
 - [Getting Started](#getting-started)
   - [Setup Keycloak instance](#setup-keycloak-instance)
   - [Setup KeycloakProvider](#setup-keycloakprovider)
-  - [HOC Usage](#hoc-usage)
-  - [Hook Usage (React >=16.8 required)](#hook-usage-react-168-required)
+  - [Hook Usage](#hook-usage)
   - [External Usage (Advanced)](#external-usage-advanced)
 - [Examples](#examples)
 - [Contributing](#contributing)
@@ -35,7 +33,7 @@
 
 React Keycloak requires:
 
-- React **16.0** or later
+- React **16.8** or later
 - `keycloak-js` **9.0.2** or later
 
 ```shell
@@ -47,13 +45,6 @@ or
 ```shell
 npm install --save @react-keycloak/web
 ```
-
-## Support
-
-| version | keycloak-js version |
-| ------- | ------------------- |
-| v2.0.0+ | 9.0.2+              |
-| v1.x    | >=8.0.2 <9.0.2      |
 
 ## Getting Started
 
@@ -141,39 +132,15 @@ const App = () => {
   }
   ```
 
-### HOC Usage
+### Hook Usage
 
-When a component requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
-
-```js
-import { withKeycloak } from '@react-keycloak/web'
-
-const LoginPage = ({ keycloak, keycloakInitialized }) => {
-  // Here you can access all of keycloak methods and variables.
-  // See https://www.keycloak.org/docs/latest/securing_apps/index.html#javascript-adapter-reference
-  return (
-    <div>
-      <button type="button" onClick={() => keycloak.login()}>
-        Login
-      </button>
-    </div>
-  )
-}
-
-export default withKeycloak(LoginPage)
-```
-
-### Hook Usage (React >=16.8 required)
-
-Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
+When a component requires access to `Keycloak`, you can use the `useKeycloak` Hook.
 
 ```js
 import { useKeycloak } from '@react-keycloak/web'
 
 export default () => {
-  // Using array destructuring
-  const [keycloak, initialized] = useKeycloak()
-  // or Object destructuring
+  // Using Object destructuring
   const { keycloak, initialized } = useKeycloak()
 
   // Here you can access all of keycloak methods and variables.
