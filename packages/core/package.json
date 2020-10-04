@@ -1,6 +1,6 @@
 {
   "name": "@react-keycloak/core",
-  "version": "3.0.0-alpha.3",
+  "version": "3.0.0",
   "license": "MIT",
   "description": "React bindings for Keycloak javascript adapter (core)",
   "repository": {
