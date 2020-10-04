@@ -45,7 +45,7 @@ describe('useKeycloak hook', () => {
       wrapper: createHookWrapper(),
     })
 
-    const [keycloak] = result.current
+    const { keycloak } = result.current
 
     expect(keycloak).toBeDefined()
     expect(keycloak).toBeInstanceOf(Object)
@@ -56,7 +56,7 @@ describe('useKeycloak hook', () => {
       wrapper: createHookWrapper(),
     })
 
-    const [, initialized] = result.current
+    const { initialized } = result.current
 
     expect(initialized).toBeDefined()
     expect(initialized).toBe(false)
