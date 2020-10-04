@@ -18,10 +18,8 @@
 ## Table of Contents <!-- omit in toc -->
 
 - [Install](#install)
-- [Support](#support)
 - [Getting Started](#getting-started)
   - [Setup](#setup)
-  - [HOC Usage](#hoc-usage)
   - [Hook Usage](#hook-usage)
 - [Examples](#examples)
 - [Other Resources](#other-resources)
@@ -36,7 +34,7 @@
 
 React Keycloak requires:
 
-- React **16.0** or later
+- React **16.8** or later
 - `keycloak-js` **9.0.2** or later
 
 ```shell
@@ -48,12 +46,6 @@ or
 ```shell
 npm install --save @react-keycloak/ssr
 ```
-
-## Support
-
-| version | keycloak-js version |
-| ------- | ------------------- |
-| v1.0.0+ | 9.0.2+              |
 
 ## Getting Started
 
@@ -79,8 +71,7 @@ import * as React from 'react'
 import type { IncomingMessage } from 'http'
 import type { AppProps, AppContext } from 'next/app'
 
-import { SSRKeycloakProvider, ServerPersistors } from '@react-keycloak/ssr'
-import type { KeycloakCookies } from  '@react-keycloak/ssr'
+import { SSRKeycloakProvider, SSRCookies } from '@react-keycloak/ssr';
 
 const keycloakCfg = {
   realm: '',
@@ -89,14 +80,14 @@ const keycloakCfg = {
 }
 
 interface InitialProps {
-  cookies: KeycloakCookies
+  cookies: unknown
 }
 
 function MyApp({ Component, pageProps, cookies }: AppProps & InitialProps) {
   return (
     <SSRKeycloakProvider
       keycloakConfig={keycloakCfg}
-      persistor={ServerPersistors.SSRCookies(cookies)}
+      persistor={SSRCookies(cookies)}
     >
       <Component {...pageProps} />
     </SSRKeycloakProvider>
@@ -131,7 +122,7 @@ Edit your app `server.js` as follow
 ```js
 ...
 
-import { ServerPersistors, SSRKeycloakProvider } from '@react-keycloak/ssr'
+import { ExpressCookies, SSRKeycloakProvider } from '@react-keycloak/ssr'
 
 // Create a function to retrieve Keycloak configuration parameters -- 'see examples/razzle-app'
 import { getKeycloakConfig } from './utils'
@@ -146,8 +137,8 @@ server
   .get('/*', (req, res) => {
     const context = {}
 
-    // 2. Create an instance of ServerPersistors.ExpressCookies passing the current request
-    const cookiePersistor = ServerPersistors.ExpressCookies(req)
+    // 2. Create an instance of ExpressCookies passing the current request
+    const cookiePersistor = ExpressCookies(req)
 
     // 3. Wrap the App inside SSRKeycloakProvider
     const markup = renderToString(
@@ -169,7 +160,7 @@ server
 Edit your `client.js` as follow
 
 ```js
-import { ClientPersistors, SSRKeycloakProvider } from '@react-keycloak/ssr'
+import { Cookies, SSRKeycloakProvider } from '@react-keycloak/ssr'
 
 // Create a function to retrieve Keycloak configuration parameters -- 'see examples/razzle-app'
 import { getKeycloakConfig } from './utils'
@@ -178,7 +169,7 @@ import { getKeycloakConfig } from './utils'
 hydrate(
   <SSRKeycloakProvider
     keycloakConfig={getKeycloakConfig()}
-    persistor={ClientPersistors.Cookies}
+    persistor={Cookies}
   >
     <BrowserRouter>
       <App />
@@ -189,45 +180,33 @@ hydrate(
 ...
 ```
 
-### HOC Usage
-
-When a page requires access to `Keycloak`, wrap it inside the `withKeycloak` HOC.
-
-**Note:** When running server-side not all properties and method of the `keycloak` instance might be available (`token`, `idToken` and `refreshToken` are available if persisted and `authenticated` is set accordingly).
-
-```tsx
-import { withKeycloak } from '@react-keycloak/ssr'
-
-const IndexPage: NextPage = ({ keycloak }) => {
-  const loggedinState = keycloak?.authenticated ? (
-    <span className="text-success">logged in</span>
-  ) : (
-    <span className="text-danger">not logged in</span>
-  )
-
-  const welcomeMessage = keycloak
-    ? `Welcome back user!`
-    : 'Welcome visitor. Please login to continue.'
-
-  return (
-    <Layout title="Home | Next.js + Keycloak Example">
-      <h1 className="mt-5">Hello Next.js + Keycloak 👋</h1>
-      <div className="mb-5 lead text-muted">
-        This is an example of a Next.js site using Keycloak.
-      </div>
-
-      <p>You are: {loggedinState}</p>
-      <p>{welcomeMessage}</p>
-    </Layout>
-  )
-}
-
-export default withKeycloak(IndexPage)
-```
-
 ### Hook Usage
 
-Alternately, when a component requires access to `Keycloak`, you can also use the `useKeycloak` Hook.
+When a component requires access to `Keycloak`, you can use the `useKeycloak` Hook.
+
+```js
+import { useKeycloak } from '@react-keycloak/ssr'
+
+export default () => {
+  const { keycloak, initialized } = useKeycloak()
+
+  // Here you can access the current keycloak instance methods and variables...
+
+  return (
+    <div>
+      <div>{`User is ${
+        !keycloak.authenticated ? 'NOT ' : ''
+      }authenticated`}</div>
+
+      {!!keycloak.authenticated && (
+        <button type="button" onClick={() => keycloak.logout()}>
+          Logout
+        </button>
+      )}
+    </div>
+  )
+}
+```
 
 ## Examples
 
