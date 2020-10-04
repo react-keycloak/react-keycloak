@@ -14,8 +14,10 @@ import type { TokenPersistor } from './persistors/types'
 import { getKeycloakInstance } from './internals/keycloak'
 import { KeycloakProvider } from './internals/KeycloakProvider'
 
-interface SSRKeycloakProviderProps<T extends AuthClient>
-  extends AuthProviderProps<T> {
+import type { SSRAuthClient } from './types'
+
+export interface SSRKeycloakProviderProps<T extends SSRAuthClient>
+  extends Omit<AuthProviderProps<T>, 'authClient'> {
   persistor: TokenPersistor
 
   keycloakConfig: KeycloakConfig
@@ -27,13 +29,11 @@ interface SSRKeycloakProviderState {
   keycloak: AuthClient
 }
 
-export class SSRKeycloakProvider<
-  T extends AuthClient
-> extends React.PureComponent<
-  SSRKeycloakProviderProps<T>,
+export class SSRKeycloakProvider extends React.PureComponent<
+  SSRKeycloakProviderProps<SSRAuthClient>,
   SSRKeycloakProviderState
 > {
-  constructor(props: SSRKeycloakProviderProps<T>) {
+  constructor(props: SSRKeycloakProviderProps<SSRAuthClient>) {
     super(props)
 
     const { initOptions, keycloakConfig, persistor } = props
