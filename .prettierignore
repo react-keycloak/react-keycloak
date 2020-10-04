@@ -2,5 +2,6 @@ node_modules
 dist
 es
 lib
+lib-commonjs
 build
 CHANGELOG.md
