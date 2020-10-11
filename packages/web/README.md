@@ -24,6 +24,7 @@
   - [Hook Usage](#hook-usage)
   - [External Usage (Advanced)](#external-usage-advanced)
 - [Examples](#examples)
+- [Guides and Articles](#guides-and-articles)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -171,6 +172,10 @@ The instance will be initialized by `react-keycloak` but you'll need to be caref
 ## Examples
 
 See inside `examples` folder of [`@react-keycloak/react-keycloak-examples`](https://github.com/react-keycloak/react-keycloak-examples) repository for various demo implementing this library main features.
+
+## Guides and Articles
+
+- Migration guide for `@react-keycloak/web` `v2.x to v3.x` can be found here [MIGRATION.md](https://github.com/react-keycloak/react-keycloak/blob/master/packages/web/MIGRATION.md).
 
 ## Contributing
 
