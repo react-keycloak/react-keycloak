@@ -20,7 +20,7 @@ The main `KeycloakProvider` was renamed to `ReactKeycloakProvider`.
 
 ### Rename ReactKeycloakProvider parameters
 
-The provider parameters have been renamed has follow
+The provider parameters have been renamed as follow
 
 | v2.x         | v3.x          |
 | ------------ | ------------- |
