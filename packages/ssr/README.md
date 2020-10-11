@@ -20,8 +20,11 @@
 - [Install](#install)
 - [Getting Started](#getting-started)
   - [Setup](#setup)
+    - [NextJS](#nextjs)
+    - [Razzle](#razzle)
   - [Hook Usage](#hook-usage)
 - [Examples](#examples)
+- [Guides and Articles](#guides-and-articles)
 - [Other Resources](#other-resources)
   - [Securing NextJS API](#securing-nextjs-api)
   - [External Usage (Advanced)](#external-usage-advanced)
@@ -211,6 +214,10 @@ export default () => {
 ## Examples
 
 See inside `examples/nextjs-app` and `examples/razzle-app` folders of [`@react-keycloak/react-keycloak-examples`](https://github.com/react-keycloak/react-keycloak-examples) repository for sample implementations.
+
+## Guides and Articles
+
+- Migration guide for `@react-keycloak/ssr` `v2.x to v3.x` can be found here [MIGRATION.md](https://github.com/react-keycloak/react-keycloak/blob/master/packages/ssr/MIGRATION.md).
 
 ## Other Resources
 
