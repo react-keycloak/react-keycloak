@@ -177,6 +177,8 @@ See inside `examples` folder of [`@react-keycloak/react-keycloak-examples`](http
 
 - Migration guide for `@react-keycloak/web` `v2.x to v3.x` can be found here [MIGRATION.md](https://github.com/react-keycloak/react-keycloak/blob/master/packages/web/MIGRATION.md).
 
+- [Secure React Routes & Component with Keycloak](https://medium.com/@cagline/authenticate-and-authorize-react-routes-component-with-keycloak-666e85662636), a (slightly outdated) guide on how to setup `Keycloak` and create secured contents in a `React` app, thanks to [@cagline](https://github.com/cagline) for the detailed article.
+
 ## Contributing
 
 See the [contributing guide](https://github.com/react-keycloak/react-keycloak/blob/master/CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
