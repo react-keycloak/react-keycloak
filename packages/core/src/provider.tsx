@@ -58,6 +58,13 @@ export type AuthProviderProps<T extends AuthClient> = {
    * @param {AuthClientTokens} tokens The current AuthClient tokens set.
    */
   onTokens?: (tokens: AuthClientTokens) => void
+
+  /**
+  * A flag to enable component rerender after token refresh. Defaults to true.
+  *
+  * @default true
+  */
+  rerenderOnTokenRefresh?: boolean
 }
 
 type AuthProviderState = {
@@ -148,7 +155,7 @@ export function createAuthProvider<T extends AuthClient>(
     }
 
     updateState = (event: AuthClientEvent) => () => {
-      const { authClient, onEvent, onTokens, isLoadingCheck } = this.props
+      const { authClient, onEvent, onTokens, isLoadingCheck, rerenderOnTokenRefresh } = this.props
       const {
         initialized: prevInitialized,
         isLoading: prevLoading,
@@ -166,7 +173,7 @@ export function createAuthProvider<T extends AuthClient>(
       if (
         !prevInitialized ||
         isLoading !== prevLoading ||
-        newToken !== prevToken
+        (newToken !== prevToken && rerenderOnTokenRefresh !== false)
       ) {
         this.setState({
           initialized: true,

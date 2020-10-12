@@ -663,4 +663,48 @@ describe('AuthProvider', () => {
       setStateSpy.mockRestore()
     })
   })
+
+  describe('onAuthRefreshSuccess', () => {
+    it('should not update state if token is refreshed', () => {
+      const keycloakStub = createKeycloakStub()
+      const onEventListener = jest.fn()
+      const AuthProvider = createAuthProvider(keycloakCtx)
+      const setStateSpy = jest.spyOn(AuthProvider.prototype, 'setState')
+
+      rtl.render(
+        <AuthProvider
+          authClient={keycloakStub}
+          onEvent={onEventListener}
+          rerenderOnTokenRefresh={false}
+        >
+          <div />
+        </AuthProvider>
+      )
+
+      rtl.act(() => {
+        keycloakStub.idToken = 'fakeIdToken'
+        keycloakStub.refreshToken = 'fakeRefreshToken'
+        keycloakStub.token = 'fakeToken'
+
+        keycloakStub.onReady!()
+      })
+
+      rtl.act(() => {
+        keycloakStub.idToken = 'newFakeIdToken'
+        keycloakStub.refreshToken = 'newFakeRefreshToken'
+        keycloakStub.token = 'newFakeToken'
+
+        keycloakStub.onAuthRefreshSuccess!()
+      })
+
+      expect(onEventListener).toHaveBeenCalledTimes(2)
+      expect(onEventListener).toHaveBeenNthCalledWith(1, 'onReady')
+      expect(onEventListener).toHaveBeenNthCalledWith(2, 'onAuthRefreshSuccess')
+
+      expect(setStateSpy).toHaveBeenCalledTimes(1)
+
+      // Remove setStateSpy mock
+      setStateSpy.mockRestore()
+    })
+  })
 })
