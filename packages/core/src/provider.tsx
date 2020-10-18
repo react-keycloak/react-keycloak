@@ -63,6 +63,8 @@ export type AuthProviderProps<T extends AuthClient> = {
 type AuthProviderState = {
   initialized: boolean
 
+  isAuthenticated: boolean
+
   isLoading: boolean
 }
 
@@ -83,6 +85,7 @@ export function createAuthProvider<T extends AuthClient>(
 
   const initialState: AuthProviderState = {
     initialized: false,
+    isAuthenticated: false,
     isLoading: true,
   }
 
@@ -150,6 +153,7 @@ export function createAuthProvider<T extends AuthClient>(
       const { authClient, onEvent, onTokens, isLoadingCheck } = this.props
       const {
         initialized: prevInitialized,
+        isAuthenticated: prevAuthenticated,
         isLoading: prevLoading,
       } = this.state
 
@@ -159,10 +163,18 @@ export function createAuthProvider<T extends AuthClient>(
       // Check Loading state
       const isLoading = isLoadingCheck ? isLoadingCheck(authClient) : false
 
+      // Check if user is authenticated
+      const isAuthenticated = isUserAuthenticated(authClient)
+
       // Avoid double-refresh if state hasn't changed
-      if (!prevInitialized || isLoading !== prevLoading) {
+      if (
+        !prevInitialized ||
+        isAuthenticated !== prevAuthenticated ||
+        isLoading !== prevLoading
+      ) {
         this.setState({
           initialized: true,
+          isAuthenticated,
           isLoading,
         })
       }
@@ -203,6 +215,10 @@ export function createAuthProvider<T extends AuthClient>(
       )
     }
   }
+}
+
+function isUserAuthenticated(authClient: AuthClient) {
+  return !!authClient.idToken && !!authClient.token
 }
 
 export default createAuthProvider

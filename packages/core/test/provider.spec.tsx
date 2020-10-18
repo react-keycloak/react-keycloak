@@ -561,6 +561,7 @@ describe('AuthProvider', () => {
       expect(setStateSpy).toHaveBeenCalledTimes(1)
       expect(setStateSpy).toHaveBeenNthCalledWith(1, {
         initialized: true,
+        isAuthenticated: true,
         isLoading: false,
       })
 
@@ -640,10 +641,18 @@ describe('AuthProvider', () => {
       )
 
       rtl.act(() => {
+        keycloakStub.idToken = 'fakeIdToken'
+        keycloakStub.refreshToken = 'fakeRefreshToken'
+        keycloakStub.token = 'fakeToken'
+
         keycloakStub.onReady!()
       })
 
       rtl.act(() => {
+        keycloakStub.idToken = 'fakeIdToken'
+        keycloakStub.refreshToken = 'fakeRefreshToken'
+        keycloakStub.token = 'fakeToken'
+
         keycloakStub.onAuthRefreshSuccess!()
       })
 
@@ -654,8 +663,8 @@ describe('AuthProvider', () => {
       expect(setStateSpy).toHaveBeenCalledTimes(1)
       expect(setStateSpy).toHaveBeenNthCalledWith(1, {
         initialized: true,
+        isAuthenticated: true,
         isLoading: true,
-        token: undefined,
       })
 
       // Remove setStateSpy mock
