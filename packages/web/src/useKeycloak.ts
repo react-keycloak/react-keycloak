@@ -1,18 +1,23 @@
-import type { AuthClient } from '@react-keycloak/core'
 import { useContext } from 'react'
 
 import { reactKeycloakWebContext } from './context'
 
-export type useKeycloakHookResults<T extends AuthClient> = {
-  initialized: boolean
+export function useKeycloak() {
+  const ctx = useContext(reactKeycloakWebContext)
 
-  keycloak?: T
-}
+  if (!ctx) {
+    throw new Error(
+      'useKeycloak hook must be used inside ReactKeycloakProvider context'
+    )
+  }
 
-export function useKeycloak<T extends AuthClient>(): useKeycloakHookResults<T> {
-  const { initialized, authClient } = useContext(reactKeycloakWebContext)
+  if (!ctx.authClient) {
+    throw new Error('authClient has not been assigned to ReactKeycloakProvider')
+  }
+
+  const { authClient, initialized } = ctx
   return {
     initialized,
-    keycloak: authClient as T | undefined,
+    keycloak: authClient,
   }
 }
