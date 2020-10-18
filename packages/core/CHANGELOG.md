@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/react-keycloak/react-keycloak/compare/@react-keycloak/core@3.0.0...@react-keycloak/core@3.1.0) (2020-10-18)
+
+
+### Features
+
+* **core:** remove 'token' from 'AuthProviderState' to avoid re-render on token refresh ([11f1024](https://github.com/react-keycloak/react-keycloak/commit/11f1024dfdabb62eac8d91cb9731722341c4f72c)), closes [#106](https://github.com/react-keycloak/react-keycloak/issues/106)
+
+
+
+
+
 # [3.0.0](https://github.com/react-keycloak/react-keycloak/compare/@react-keycloak/core@2.2.1...@react-keycloak/core@3.0.0) (2020-10-04)
 
 **Note:** Version bump only for package @react-keycloak/core
