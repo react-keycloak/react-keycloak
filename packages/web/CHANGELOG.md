@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/react-keycloak/react-keycloak/compare/@react-keycloak/web@3.0.0...@react-keycloak/web@3.1.0) (2020-10-18)
+
+
+### Features
+
+* **web:** update 'useKeycloak' implementation ([ef19e82](https://github.com/react-keycloak/react-keycloak/commit/ef19e823b33c03808de696f9e7cbac3478197e0e))
+
+
+
+
+
 # [3.0.0](https://github.com/react-keycloak/react-keycloak/compare/@react-keycloak/web@2.1.4...@react-keycloak/web@3.0.0) (2020-10-04)
 
 **Note:** Version bump only for package @react-keycloak/web
