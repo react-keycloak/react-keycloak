@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/react-keycloak/react-keycloak/compare/@react-keycloak/ssr@3.1.0...@react-keycloak/ssr@3.2.0) (2020-10-18)
+
+**Note:** Version bump only for package @react-keycloak/ssr
+
+
+
+
+
 # [3.1.0](https://github.com/react-keycloak/react-keycloak/compare/@react-keycloak/ssr@3.0.2...@react-keycloak/ssr@3.1.0) (2020-10-18)
 
 **Note:** Version bump only for package @react-keycloak/ssr
