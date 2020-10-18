@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "prepare": "lerna bootstrap --no-ci && lerna run build",
+    "prepare": "lerna bootstrap --no-ci",
     "build": "lerna run build",
     "test": "lerna run test",
     "test:coverage": "lerna run test:coverage",
