@@ -62,8 +62,8 @@ export type AuthProviderProps<T extends AuthClient> = {
 
 type AuthProviderState = {
   initialized: boolean
+
   isLoading: boolean
-  token?: string
 }
 
 /**
@@ -84,7 +84,6 @@ export function createAuthProvider<T extends AuthClient>(
   const initialState: AuthProviderState = {
     initialized: false,
     isLoading: true,
-    token: undefined,
   }
 
   return class KeycloakProvider extends React.PureComponent<
@@ -152,9 +151,7 @@ export function createAuthProvider<T extends AuthClient>(
       const {
         initialized: prevInitialized,
         isLoading: prevLoading,
-        token: prevToken,
       } = this.state
-      const { idToken, refreshToken, token: newToken } = authClient
 
       // Notify Events listener
       onEvent && onEvent(event)
@@ -163,27 +160,21 @@ export function createAuthProvider<T extends AuthClient>(
       const isLoading = isLoadingCheck ? isLoadingCheck(authClient) : false
 
       // Avoid double-refresh if state hasn't changed
-      if (
-        !prevInitialized ||
-        isLoading !== prevLoading ||
-        newToken !== prevToken
-      ) {
+      if (!prevInitialized || isLoading !== prevLoading) {
         this.setState({
           initialized: true,
           isLoading,
-          token: newToken,
         })
       }
 
       // Notify token listener, if any
-      if (newToken !== prevToken) {
-        onTokens &&
-          onTokens({
-            idToken,
-            refreshToken,
-            token: newToken,
-          })
-      }
+      const { idToken, refreshToken, token } = authClient
+      onTokens &&
+        onTokens({
+          idToken,
+          refreshToken,
+          token,
+        })
     }
 
     refreshToken = (event: AuthClientEvent) => () => {

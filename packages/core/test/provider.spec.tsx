@@ -562,7 +562,6 @@ describe('AuthProvider', () => {
       expect(setStateSpy).toHaveBeenNthCalledWith(1, {
         initialized: true,
         isLoading: false,
-        token: 'fakeToken',
       })
 
       // Remove setStateSpy mock
