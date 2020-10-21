@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/react-keycloak/react-keycloak/compare/@react-keycloak/ssr@3.2.0...@react-keycloak/ssr@3.3.0) (2020-10-21)
+
+
+### Features
+
+* **ssr:** re-implement withKeycloak HOC ([8dcdfd5](https://github.com/react-keycloak/react-keycloak/commit/8dcdfd50235a7f34871066b1efa088229aeacd24)), closes [#111](https://github.com/react-keycloak/react-keycloak/issues/111)
+
+
+
+
+
 # [3.2.0](https://github.com/react-keycloak/react-keycloak/compare/@react-keycloak/ssr@3.1.0...@react-keycloak/ssr@3.2.0) (2020-10-18)
 
 **Note:** Version bump only for package @react-keycloak/ssr
