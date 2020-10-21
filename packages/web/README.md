@@ -82,7 +82,7 @@ const App = () => {
 
 `ReactKeycloakProvider` automatically invokes `keycloak.init()` method when needed and supports the following props:
 
-- `initConfig`, contains the object to be passed to `keycloak.init()` method, by default the following is used
+- `initOptions`, contains the object to be passed to `keycloak.init()` method, by default the following is used
 
       {
         onLoad: 'check-sso',
