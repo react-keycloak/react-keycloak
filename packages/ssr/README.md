@@ -28,6 +28,7 @@
 - [Other Resources](#other-resources)
   - [Securing NextJS API](#securing-nextjs-api)
   - [External Usage (Advanced)](#external-usage-advanced)
+- [Alternatives](#alternatives)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -236,6 +237,14 @@ The instance will be initialized by `react-keycloak` but you'll need to be caref
 **Note:** This approach is NOT recommended on the server-side because can lead to `token leakage` issues (see [this issue](https://github.com/react-keycloak/react-keycloak/issues/65) for more details).
 
 Thanks to [@webdeb](https://github.com/webdeb) for requesting this feature and helping develop and test the solution.
+
+## Alternatives
+
+If you need to connect using a more generic OIDC client instead of `keycloak.js`, consider using one of the following libraries:
+
+- [bjerkio/oidc-react](https://github.com/bjerkio/oidc-react)
+- [thchia/react-oidc](https://github.com/thchia/react-oidc)
+- [@axa-fr/react-oidc](https://github.com/AxaGuilDEv/react-oidc)
 
 ## Contributing
 
