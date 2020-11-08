@@ -26,6 +26,7 @@
   - [React Native](#react-native)
 - [Support](#support)
 - [Examples](#examples)
+- [Alternatives](#alternatives)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -108,6 +109,14 @@ See `@react-keycloak/native` package [README](https://github.com/react-keycloak/
 ## Examples
 
 See [`@react-keycloak/react-keycloak-examples`](https://github.com/react-keycloak/react-keycloak-examples) repository for various demo implementing this library main features.
+
+## Alternatives
+
+If you need to connect using a more generic OIDC client instead of `keycloak.js`, consider using one of the following libraries:
+
+- [bjerkio/oidc-react](https://github.com/bjerkio/oidc-react)
+- [thchia/react-oidc](https://github.com/thchia/react-oidc)
+- [@axa-fr/react-oidc](https://github.com/AxaGuilDEv/react-oidc)
 
 ## Contributing
 
