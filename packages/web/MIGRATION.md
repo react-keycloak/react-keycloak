@@ -29,7 +29,9 @@ The provider parameters have been renamed as follow
 
 ### Remove `withKeycloak` HOC
 
-The `withKeycloak` HOC has been removed and the minimum required version of `react` has been increased to `v16.8` (because of React Hooks support).
+The `withKeycloak` HOC has been ~~removed~~ deprecated and re-implemented using hooks as of version `3.4.0`.
+
+The minimum required version of `react` has been increased to `v16.8` (because of React Hooks support).
 
 `withKeycloak` HOC usages should be ported to `useKeycloak` hook.
 
