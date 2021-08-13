@@ -24,7 +24,7 @@ export const getKeycloakStub = (persistor: TokenPersistor): AuthClient => {
     token: kcTokens.token,
     refreshToken: kcTokens.refreshToken,
     authenticated: !!kcTokens.idToken && !!kcTokens.token,
-  }
+  } as unknown as SSRAuthClient
 
   return keycloakStubInstance
 }
