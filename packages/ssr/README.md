@@ -75,12 +75,12 @@ import * as React from 'react'
 import type { IncomingMessage } from 'http'
 import type { AppProps, AppContext } from 'next/app'
 
-import { SSRKeycloakProvider, SSRCookies } from '@react-keycloak/ssr';
+import { SSRKeycloakProvider, SSRCookies } from '@react-keycloak/ssr'
 
 const keycloakCfg = {
   realm: '',
   url: '',
-  clientId: ''
+  clientId: '',
 }
 
 interface InitialProps {
@@ -108,7 +108,7 @@ function parseCookies(req?: IncomingMessage) {
 MyApp.getInitialProps = async (context: AppContext) => {
   // Extract cookies from AppContext
   return {
-    cookies: parseCookies(context?.ctx?.req)
+    cookies: parseCookies(context?.ctx?.req),
   }
 }
 
@@ -169,7 +169,7 @@ import { Cookies, SSRKeycloakProvider } from '@react-keycloak/ssr'
 // Create a function to retrieve Keycloak configuration parameters -- 'see examples/razzle-app'
 import { getKeycloakConfig } from './utils'
 
-// 1. Create an instance of Cookies 
+// 1. Create an instance of Cookies
 const cookiePersistor = new Cookies()
 
 // 2. Wrap the App inside SSRKeycloakProvider
