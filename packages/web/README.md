@@ -75,7 +75,9 @@ import keycloak from './keycloak'
 
 // Wrap everything inside KeycloakProvider
 const App = () => {
-  return <ReactKeycloakProvider authClient={keycloak}>...</ReactKeycloakProvider>
+  return (
+    <ReactKeycloakProvider authClient={keycloak}>...</ReactKeycloakProvider>
+  )
 }
 ```
 

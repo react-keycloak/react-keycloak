@@ -88,7 +88,10 @@ export interface AuthClient {
 /**
  * Set of tokens provided by AuthClient
  */
-export type AuthClientTokens = Pick<AuthClient, 'idToken' | 'refreshToken' | 'token'>
+export type AuthClientTokens = Pick<
+  AuthClient,
+  'idToken' | 'refreshToken' | 'token'
+>
 
 /**
  * ReactAuth event types
