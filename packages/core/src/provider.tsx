@@ -190,7 +190,7 @@ export function createAuthProvider<T extends AuthClient>(
     }
 
     refreshToken = (event: AuthClientEvent) => () => {
-      const { autoRefreshToken, authClient, onEvent } = this.props
+      const { autoRefreshToken = true, authClient, onEvent } = this.props
       // Notify Events listener
       onEvent && onEvent(event)
 
