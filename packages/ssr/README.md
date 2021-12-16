@@ -98,17 +98,14 @@ function MyApp({ Component, pageProps, cookies }: AppProps & InitialProps) {
   )
 }
 
-function parseCookies(req?: IncomingMessage) {
-  if (!req || !req.headers) {
-    return {}
-  }
+function parseCookies(req: IncomingMessage) {
   return cookie.parse(req.headers.cookie || '')
 }
 
 MyApp.getInitialProps = async (context: AppContext) => {
   // Extract cookies from AppContext
   return {
-    cookies: parseCookies(context?.ctx?.req),
+    cookies: context.ctx.req ? parseCookies(context.ctx.req) : {},
   }
 }
 
