@@ -1,3 +1,13 @@
+# :warning: DEPRECATED and UNMAINTAINED
+
+This library is deprecated and will no longer be maintained or updated.
+
+Instead, it is recommended to use:
+- [`react-oidc-context`](https://github.com/authts/react-oidc-context) for React SPA projects instead of `@react-keycloak/web`
+- [`NextAuth.js`](https://github.com/nextauthjs/next-auth) for Next.js projects instead of `@react-keycloak/ssr`
+
+---
+\
 ![React Keycloak](/art/react-keycloak-logo.png?raw=true 'React Keycloak Logo')
 
 # React Keycloak <!-- omit in toc -->
@@ -125,9 +135,3 @@ See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the 
 ## License
 
 MIT
-
----
-
-If you found this project to be helpful, please consider buying me a coffee.
-
-[![buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://buymeacoff.ee/4f18nT0Nk)
