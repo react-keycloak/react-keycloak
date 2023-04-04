@@ -8,6 +8,7 @@
       "dom"
     ],
     "sourceMap": true,
+    "inlineSources": true,
     "allowJs": false,
     "jsx": "react",
     "declaration": true,
